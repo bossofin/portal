@@ -1,0 +1,8 @@
+<mat-form-field>
+  <mat-label>Yıl Seç</mat-label>
+  <mat-select [(ngModel)]="selectedYear" (ngModelChange)="onModelChange()">
+    <mat-option *ngFor="let year of years" [value]="year">{{
+      year
+    }}</mat-option>
+  </mat-select>
+</mat-form-field>

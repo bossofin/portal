@@ -1,0 +1,9 @@
+export const netIsletmeSermayesi = {
+  title: 'Net İşletme Sermayesi Nedir?',
+  nedir:
+    'Bir işletmenin, net işletme sermayesi belli bir tarihteki dönen varlıklar toplamı ile kısa vadeli yabancı kaynaklar toplamı arasındaki farktır. İşletmenin finansal performansı için en kilit göstergelerin başında gelir. İşletmenin ticari alacak, ticari borç ve stok yönetimi konularında ki verimliliğinin sonucu oluşur.',
+  neden: `Net işletme sermayesinin yeterliliği, şirketlerin faaliyetleri süresince tam kapasitede, karlı ve verimli şekilde çalışabilmesi, üretimini devam ettirebilmesi, iş hacmini arttırabilmesi, yükümlülüklerini karşılayabilmesi açısından önemlidir. Bu gösterge, şirketin nakit yaratma yeteneğini gösterir.`,
+  below: `İşletmenin mevcut dönem için kullandığı işletme sermayesi optimum değerin altındadır. Söz konusu performans işletmenin faaliyetleri yürütmede sorunlar yaşadığını göstermektedir. İşletme ihtiyacı olandan daha az işletme sermayesine sahip olduğu için büyümesini finanse edememekte, sürekli nakit arayışı içerisinde olmaktadır. İşletme bilanço yapısını tekrar düzenlemeli ve nakit döngüsünü aşağı çekmelidir.`,
+  above: `İşletmenin mevcut dönem için kullandığı işletme sermayesi optimum değerin üstündedir. İşletme faaliyetlerini kesintisiz sürdürecek kaynağa sahiptir. Hızlı büyüyen işletmelerde işletme sermayesinin optimum seviyenin üzerinde olması önemlidir. İşletme yıllık %25+ büyümüyor ise optimum değerin üzerinde olan tutarın daha karlı şekilde büyümeyi desteleyecek adımlar için değerlendirilmesi gerekir.`,
+  compatible: `İşletmenin cari oranı optimum değer ile uyumludur. İşletmenin kısa vadeli borçlarını ödenmesinde mevcut dönem için sorun yaşamayacağı öngörülmektedir. İşletmenin kırılganlık riski düşüktür. Söz konusu performansın gelecek dönemlerde korunması önemlidir.`,
+};

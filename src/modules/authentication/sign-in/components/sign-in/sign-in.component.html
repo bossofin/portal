@@ -1,0 +1,51 @@
+<mat-card class="p-5">
+  <div class="text-center mb-5">
+    <img src="../../../../../assets/images/logo.svg" alt="" />
+  </div>
+  <mat-card-title class="text-center">Kullanıcı Girişi</mat-card-title>
+  <mat-card-subtitle class="text-center">
+    Hesabınız Yok Mu?
+    <button mat-button color="primary" routerLink="/auth/sign-up">
+      Hesap Oluştur
+    </button>
+  </mat-card-subtitle>
+  <mat-card-content class="mt-4">
+    <form [formGroup]="form">
+      <mat-form-field class="d-block mb-4">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="email" />
+        <mat-error>
+          {{ emailValidationError }}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="d-block">
+        <mat-label>Şifre</mat-label>
+        <input matInput type="password" formControlName="password" />
+        <mat-error>
+          {{ passwordValidationError }}
+        </mat-error>
+        <button
+          type="button"
+          mat-icon-button
+          color="accent"
+          matSuffix
+          matTooltip="Şifremi Unuttum"
+          routerLink="/auth/password-reset"
+        >
+          <mat-icon class="password-help-icon">help</mat-icon>
+        </button>
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button
+      mat-flat-button
+      color="primary"
+      class="w-100"
+      (click)="onSubmit()"
+      [disabled]="form.invalid"
+    >
+      Devam
+    </button>
+  </mat-card-actions>
+</mat-card>

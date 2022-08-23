@@ -1,0 +1,32 @@
+<ng-container *ngIf="(selectedReport$ | async) === 'cariOran'">
+  <div *ngIf="cariOran$ | async as cariOran">
+    <app-likidite-raporu-chart
+      [data]="cariOran"
+      chartType="cariOran"
+    ></app-likidite-raporu-chart>
+  </div>
+</ng-container>
+<ng-container *ngIf="(selectedReport$ | async) === 'likiditeOrani'">
+  <div *ngIf="likiditeOrani$ | async as likiditeOrani">
+    <app-likidite-raporu-chart
+      [data]="likiditeOrani"
+      chartType="likiditeOran"
+    ></app-likidite-raporu-chart>
+  </div>
+</ng-container>
+<ng-container *ngIf="(selectedReport$ | async) === 'nakitOran'">
+  <div *ngIf="nakitOran$ | async as nakitOran">
+    <app-likidite-raporu-chart
+      [data]="nakitOran"
+      chartType="nakitOran"
+    ></app-likidite-raporu-chart>
+  </div>
+</ng-container>
+<ng-container *ngIf="(selectedReport$ | async) === 'netIsletmeSermayesi'">
+  <div *ngIf="netIsletmeSermayesi$ | async as netIsletmeSermayesi">
+    <app-likidite-raporu-chart
+      [data]="netIsletmeSermayesi"
+      chartType="netIsletmeSermayesi"
+    ></app-likidite-raporu-chart>
+  </div>
+</ng-container>

@@ -1,0 +1,15 @@
+.auth {
+  background-image: url("../assets/images/body-bg.png");
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: 100%;
+  > .mat-card {
+    max-width: 600px;
+    .mat-checkbox-layout {
+      display: block;
+      .mat-checkbox-label {
+        white-space: normal;
+      }
+    }
+  }
+}

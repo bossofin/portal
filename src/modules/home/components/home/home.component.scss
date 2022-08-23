@@ -1,0 +1,10 @@
+@media screen and (max-width: 1024px) {
+  .main-menu {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 280px;
+    z-index: 1000;
+  }
+}

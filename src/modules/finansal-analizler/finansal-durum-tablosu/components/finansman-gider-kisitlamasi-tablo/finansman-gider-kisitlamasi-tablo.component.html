@@ -1,0 +1,77 @@
+<table class="table text-primary-dark">
+  <thead>
+    <tr>
+      <th rowspan="2">FİNANSMAN GİDER KISITLAMASI</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Özsermeye tutarı</td>
+      <td>
+        <app-currency
+          [value]="giderKisitlamaTabloData.ozSermayeTutari"
+        ></app-currency>
+      </td>
+    </tr>
+    <tr>
+      <td>Yabancı kaynak toplamı</td>
+      <td>
+        <app-currency
+          [value]="giderKisitlamaTabloData.yabanciKaynakToplami"
+        ></app-currency>
+      </td>
+    </tr>
+    <tr>
+      <td>Özsermayeyi aşan yabancı kaynak tutarı *</td>
+      <td>
+        <app-currency
+          [value]="giderKisitlamaTabloData.ozSermayeyiAsanYabanciKaynakTutari"
+        ></app-currency>
+      </td>
+    </tr>
+    <tr>
+      <td>Aşan kısmın yabancı kaynağa oranı</td>
+      <td>
+        <app-currency
+          [value]="
+            giderKisitlamaTabloData.ozSermayeyiAsanKisminYabanciKaynagaOrani
+          "
+        ></app-currency>
+      </td>
+    </tr>
+    <tr>
+      <td>Finansman gider tutarı</td>
+      <td>
+        <app-currency
+          [value]="giderKisitlamaTabloData.finansmanGiderTutari"
+        ></app-currency>
+      </td>
+    </tr>
+    <tr>
+      <td>Hesaplamada dikkate alınacak finansman gideri</td>
+      <td>
+        <app-currency
+          [value]="
+            giderKisitlamaTabloData.hesaplamadaDikkateAlinacakFinansmanGideri
+          "
+        ></app-currency>
+      </td>
+    </tr>
+    <tr>
+      <td>Aşan kısma isabet eden finansman gideri</td>
+      <td>
+        <app-currency
+          [value]="giderKisitlamaTabloData.asanKismaIsabetEdenFinansmanGideri"
+        ></app-currency>
+      </td>
+    </tr>
+    <tr>
+      <td>KKEG olacak finansman giderleri</td>
+      <td>
+        <app-currency
+          [value]="giderKisitlamaTabloData.kKEGOlacakFinansmanGiderleri"
+        ></app-currency>
+      </td>
+    </tr>
+  </tbody>
+</table>

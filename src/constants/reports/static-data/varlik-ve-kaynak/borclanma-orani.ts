@@ -1,0 +1,9 @@
+export const borclanmaOrani = {
+  title: `Borçlanma Oranı Nedir?`,
+  nedir: `Borçlanma Oranı işletmenin özkaynakları ile yabancı kaynakları arasında dengeyi gösterir. Bu oran, işletmenin borçlanma yoluyla sağladığı yabancı sermaye ile hissedar sermayesi arasındaki ilişkiyi göstermektedir. Hissedarların bağladıkları sermaye miktarı karşısında hangi ölçüde yabancı kaynağı kaldıraç olarak kullandıklarına işaret eder.`,
+  neden: `Şirket için risk göstergesi olarak da kullanılmaktadır. Büyüyen işletmelerde borç/öz sermaye oranının 2/1 olması kabul edilebilir. Bununla birlikte özellikle kriz dönemlerinde söz konusu oranın düşük olması sağlanmalıdır. Oranın yükselmesi işletmenin öz kaynak ihtiyacının arttığını göstermektedir. Fakat oranın özkaynak lehine olması borç kaldıracının yeteri kadar kullanmadığını göstermektedir.`,
+  below: `İşletmenin borçlanma oranı, optimum değerin altındadır. Söz konusu performans iki farklı şekilde yorumlanabilir. İşletme borcuna göre güçlü özkaynak yapısı ile kriz kırılganlığı taşımamaktadır. Bununla birlikte işletmeyi büyütmek için daha fazla finansal riskin alınabileceği değerlendirilmelidir.`,
+  above: `İşletmenin borçlanma oranı, optimum değerin üzerindedir. Söz konusu performans işletmenin idealin üzerinde kaldıraç kullandığı ve risk kırılganlığı taşıdığını göstermektedir. Hızlı büyüme dönemlerinde kısa süreli kabul edilebilir olmakla birlikte uzun dönemde iyileştirilmesi ve optimum değerlere çekilmesi gerekir. Sürdürülebilirliği önemlidir, Faiz karşılama oranı ile işletmenin durumunu değerlendiriniz.`,
+  compatible: `İşletmenin borçlanma oranı, optimum değer ile uyumludur. İşletme borç kaldıracını doğru oranda kullanmaktadır. Bununla birlikte toplam borcun içersinde hangi ölçüde mali borç olduğu önem taşımaktadır. Faiz karşılama oranı ile işletmenin durumunu değerlendiriniz.
+  `,
+};

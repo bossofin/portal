@@ -1,0 +1,1306 @@
+<div class="table-responsive">
+  <table class="w-100 table table-bordered">
+    <thead>
+      <tr class="table-dark">
+        <th>Pasif (Kaynaklar)</th>
+        <ng-container *ngFor="let period of periods">
+          <th class="text-end">
+            {{ period }}
+          </th>
+        </ng-container>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        class="text-primary-dark cursor-pointer"
+        (click)="
+          toggleKisaVadeliYabanciKaynaklar = !toggleKisaVadeliYabanciKaynaklar
+        "
+      >
+        <td>
+          <app-table-toggle-arrows
+            [condition]="toggleKisaVadeliYabanciKaynaklar"
+            text="I- KISA VADELİ YABANCI KAYNAKLAR"
+          ></app-table-toggle-arrows>
+        </td>
+        <ng-container
+          *ngFor="let kisavadeliYabanciKaynak of kisaVadeliYabanciKaynaklar"
+        >
+          <td>
+            <app-currency
+              [value]="kisavadeliYabanciKaynak.sumOfKisaVadeliYabanciKaynaklar"
+            ></app-currency>
+          </td>
+        </ng-container>
+      </tr>
+      <ng-container *ngIf="toggleKisaVadeliYabanciKaynaklar">
+        <tr
+          class="text-success cursor-pointer"
+          (click)="toggleMaliBorclar = !toggleMaliBorclar"
+        >
+          <td class="ps-3">
+            <app-table-toggle-arrows
+              [condition]="toggleMaliBorclar"
+              text="A-MALİ BORÇLAR"
+            ></app-table-toggle-arrows>
+          </td>
+          <ng-container
+            *ngFor="let kisavadeliYabanciKaynak of kisaVadeliYabanciKaynaklar"
+          >
+            <td>
+              <app-currency
+                [value]="kisavadeliYabanciKaynak.maliBorclar.sumOfMaliBorclar"
+              ></app-currency>
+            </td>
+          </ng-container>
+        </tr>
+        <ng-container *ngIf="toggleMaliBorclar">
+          <tr>
+            <td class="ps-5">300-BANKA KREDİLERİ</td>
+            <ng-container
+              *ngFor="let kisavadeliYabanciKaynak of kisaVadeliYabanciKaynaklar"
+            >
+              <td>
+                <app-currency
+                  [value]="kisavadeliYabanciKaynak.maliBorclar.kasa300"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">301-FİNANSAL KİRALAMA İŞLEMLERİNDEN BORÇLAR</td>
+            <ng-container
+              *ngFor="let kisavadeliYabanciKaynak of kisaVadeliYabanciKaynaklar"
+            >
+              <td>
+                <app-currency
+                  [value]="kisavadeliYabanciKaynak.maliBorclar.kasa301"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">
+              302-ERTELENMİŞ FİNANSAL KİRALAMA BORÇLANMA MALİYETLERİ (-)
+            </td>
+            <ng-container
+              *ngFor="let kisavadeliYabanciKaynak of kisaVadeliYabanciKaynaklar"
+            >
+              <td>
+                <app-currency
+                  [value]="kisavadeliYabanciKaynak.maliBorclar.kasa302"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">
+              303-UZUN VADELİ KREDİLERİN ANAPARA TAKSİTLERİ VE FAİZLERİ
+            </td>
+            <ng-container
+              *ngFor="let kisavadeliYabanciKaynak of kisaVadeliYabanciKaynaklar"
+            >
+              <td>
+                <app-currency
+                  [value]="kisavadeliYabanciKaynak.maliBorclar.kasa303"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">304-TAHVİL ANAPARA BORÇ, TAKSİT VE FAİZLERİ</td>
+            <ng-container
+              *ngFor="let kisavadeliYabanciKaynak of kisaVadeliYabanciKaynaklar"
+            >
+              <td>
+                <app-currency
+                  [value]="kisavadeliYabanciKaynak.maliBorclar.kasa304"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">305-ÇIKARILMIŞ BONOLAR VE SENETLER</td>
+            <ng-container
+              *ngFor="let kisavadeliYabanciKaynak of kisaVadeliYabanciKaynaklar"
+            >
+              <td>
+                <app-currency
+                  [value]="kisavadeliYabanciKaynak.maliBorclar.kasa305"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">306-ÇIKARILMIŞ DİĞER MENKUL KIYMETLER</td>
+            <ng-container
+              *ngFor="let kisavadeliYabanciKaynak of kisaVadeliYabanciKaynaklar"
+            >
+              <td>
+                <app-currency
+                  [value]="kisavadeliYabanciKaynak.maliBorclar.kasa306"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">308-MENKUL KIYMETLER İHRAÇ FARKI (-)</td>
+            <ng-container
+              *ngFor="let kisavadeliYabanciKaynak of kisaVadeliYabanciKaynaklar"
+            >
+              <td>
+                <app-currency
+                  [value]="kisavadeliYabanciKaynak.maliBorclar.kasa308"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">309-DİĞER MALİ BORÇLAR</td>
+            <ng-container
+              *ngFor="let kisavadeliYabanciKaynak of kisaVadeliYabanciKaynaklar"
+            >
+              <td>
+                <app-currency
+                  [value]="kisavadeliYabanciKaynak.maliBorclar.kasa309"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+        </ng-container>
+        <tr
+          class="text-success cursor-pointer"
+          (click)="toggleTicariBorclar = !toggleTicariBorclar"
+        >
+          <td class="ps-3">
+            <app-table-toggle-arrows
+              [condition]="toggleTicariBorclar"
+              text="B-TİCARİ BORÇLAR"
+            ></app-table-toggle-arrows>
+          </td>
+          <ng-container
+            *ngFor="let kisavadeliYabanciKaynak of kisaVadeliYabanciKaynaklar"
+          >
+            <td>
+              <app-currency
+                [value]="
+                  kisavadeliYabanciKaynak.ticariBorclar.sumOfTicariBorclar
+                "
+              ></app-currency>
+            </td>
+          </ng-container>
+        </tr>
+        <ng-container *ngIf="toggleTicariBorclar">
+          <tr>
+            <td class="ps-5">320-SATICILAR</td>
+            <ng-container
+              *ngFor="let kisavadeliYabanciKaynak of kisaVadeliYabanciKaynaklar"
+            >
+              <td>
+                <app-currency
+                  [value]="kisavadeliYabanciKaynak.ticariBorclar.kasa320"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">321-BORÇ SENETLERİ</td>
+            <ng-container
+              *ngFor="let kisavadeliYabanciKaynak of kisaVadeliYabanciKaynaklar"
+            >
+              <td>
+                <app-currency
+                  [value]="kisavadeliYabanciKaynak.ticariBorclar.kasa321"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">322-BORÇ SENETLERİ REESKONTU (-)</td>
+            <ng-container
+              *ngFor="let kisavadeliYabanciKaynak of kisaVadeliYabanciKaynaklar"
+            >
+              <td>
+                <app-currency
+                  [value]="kisavadeliYabanciKaynak.ticariBorclar.kasa322"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">326-ALINAN DEPOZİTO VE TEMİNATLAR</td>
+            <ng-container
+              *ngFor="let kisavadeliYabanciKaynak of kisaVadeliYabanciKaynaklar"
+            >
+              <td>
+                <app-currency
+                  [value]="kisavadeliYabanciKaynak.ticariBorclar.kasa326"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">329-DİĞER TİCARİ BORÇLAR</td>
+            <ng-container
+              *ngFor="let kisavadeliYabanciKaynak of kisaVadeliYabanciKaynaklar"
+            >
+              <td>
+                <app-currency
+                  [value]="kisavadeliYabanciKaynak.ticariBorclar.kasa329"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+        </ng-container>
+        <tr
+          class="text-success cursor-pointer"
+          (click)="toggleDigerBorclar = !toggleDigerBorclar"
+        >
+          <td class="ps-3">
+            <app-table-toggle-arrows
+              [condition]="toggleDigerBorclar"
+              text="C-DİĞER BORÇLAR"
+            ></app-table-toggle-arrows>
+          </td>
+          <ng-container
+            *ngFor="let kisavadeliYabanciKaynak of kisaVadeliYabanciKaynaklar"
+          >
+            <td>
+              <app-currency
+                [value]="kisavadeliYabanciKaynak.digerBorclar.sumOfDigerBorclar"
+              ></app-currency>
+            </td>
+          </ng-container>
+        </tr>
+        <ng-container *ngIf="toggleDigerBorclar">
+          <tr>
+            <td class="ps-5">331-ORTAKLARA BORÇLAR</td>
+            <ng-container
+              *ngFor="let kisavadeliYabanciKaynak of kisaVadeliYabanciKaynaklar"
+            >
+              <td>
+                <app-currency
+                  [value]="kisavadeliYabanciKaynak.digerBorclar.kasa331"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">332-İŞTİRAKLERE BORÇLAR</td>
+            <ng-container
+              *ngFor="let kisavadeliYabanciKaynak of kisaVadeliYabanciKaynaklar"
+            >
+              <td>
+                <app-currency
+                  [value]="kisavadeliYabanciKaynak.digerBorclar.kasa332"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">333-BAĞLI ORTAKLIKLARA BORÇLAR</td>
+            <ng-container
+              *ngFor="let kisavadeliYabanciKaynak of kisaVadeliYabanciKaynaklar"
+            >
+              <td>
+                <app-currency
+                  [value]="kisavadeliYabanciKaynak.digerBorclar.kasa333"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">335-PERSONELE BORÇLAR</td>
+            <ng-container
+              *ngFor="let kisavadeliYabanciKaynak of kisaVadeliYabanciKaynaklar"
+            >
+              <td>
+                <app-currency
+                  [value]="kisavadeliYabanciKaynak.digerBorclar.kasa335"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">336-DİĞER ÇEŞİTLİ BORÇLAR</td>
+            <ng-container
+              *ngFor="let kisavadeliYabanciKaynak of kisaVadeliYabanciKaynaklar"
+            >
+              <td>
+                <app-currency
+                  [value]="kisavadeliYabanciKaynak.digerBorclar.kasa336"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">337-DİĞER BORÇ SENETLERİ REESKONTU (-)</td>
+            <ng-container
+              *ngFor="let kisavadeliYabanciKaynak of kisaVadeliYabanciKaynaklar"
+            >
+              <td>
+                <app-currency
+                  [value]="kisavadeliYabanciKaynak.digerBorclar.kasa337"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+        </ng-container>
+        <tr
+          class="text-success cursor-pointer"
+          (click)="toggleAlinanAvanslar = !toggleAlinanAvanslar"
+        >
+          <td class="ps-3">
+            <app-table-toggle-arrows
+              [condition]="toggleAlinanAvanslar"
+              text="D-ALINAN AVANSLAR"
+            ></app-table-toggle-arrows>
+          </td>
+          <ng-container
+            *ngFor="let kisavadeliYabanciKaynak of kisaVadeliYabanciKaynaklar"
+          >
+            <td>
+              <app-currency
+                [value]="
+                  kisavadeliYabanciKaynak.alinanAvanslar.sumOfAlinanAvanslar
+                "
+              ></app-currency>
+            </td>
+          </ng-container>
+        </tr>
+        <ng-container *ngIf="toggleAlinanAvanslar">
+          <tr>
+            <td class="ps-5">340-ALINAN SİPARİŞ AVANSLARI</td>
+            <ng-container
+              *ngFor="let kisavadeliYabanciKaynak of kisaVadeliYabanciKaynaklar"
+            >
+              <td>
+                <app-currency
+                  [value]="kisavadeliYabanciKaynak.alinanAvanslar.kasa340"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">349-ALINAN DİĞER AVANSLAR</td>
+            <ng-container
+              *ngFor="let kisavadeliYabanciKaynak of kisaVadeliYabanciKaynaklar"
+            >
+              <td>
+                <app-currency
+                  [value]="kisavadeliYabanciKaynak.alinanAvanslar.kasa349"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+        </ng-container>
+        <tr
+          class="text-success cursor-pointer"
+          (click)="
+            toggleYillaraYayginInsaatVeOnarimHakedisBedelleri =
+              !toggleYillaraYayginInsaatVeOnarimHakedisBedelleri
+          "
+        >
+          <td class="ps-3">
+            <app-table-toggle-arrows
+              [condition]="toggleYillaraYayginInsaatVeOnarimHakedisBedelleri"
+              text="E-YILLARA YAYGIN İNŞAAT VE ONARIM HAKEDİŞ BEDELLERİ"
+            ></app-table-toggle-arrows>
+          </td>
+          <ng-container
+            *ngFor="let kisavadeliYabanciKaynak of kisaVadeliYabanciKaynaklar"
+          >
+            <td>
+              <app-currency
+                [value]="
+                  kisavadeliYabanciKaynak
+                    .yillaraYayginInsaatVeOnarimHakedisBedelleri
+                    .sumOfYillaraYayginInsaatVeOnarimHakedisBedelleri
+                "
+              ></app-currency>
+            </td>
+          </ng-container>
+        </tr>
+        <ng-container *ngIf="toggleYillaraYayginInsaatVeOnarimHakedisBedelleri">
+          <tr>
+            <td class="ps-5">
+              350-YILLARA YAYGIN İNŞAAT VE ONARIM HAKEDİŞ BEDELLERİ
+            </td>
+            <ng-container
+              *ngFor="let kisavadeliYabanciKaynak of kisaVadeliYabanciKaynaklar"
+            >
+              <td>
+                <app-currency
+                  [value]="
+                    kisavadeliYabanciKaynak
+                      .yillaraYayginInsaatVeOnarimHakedisBedelleri.kasa350
+                  "
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">
+              358-YILLARA YAYGIN İNŞAAT ENFLASYON DÜZELTME HESABI
+            </td>
+            <ng-container
+              *ngFor="let kisavadeliYabanciKaynak of kisaVadeliYabanciKaynaklar"
+            >
+              <td>
+                <app-currency
+                  [value]="
+                    kisavadeliYabanciKaynak
+                      .yillaraYayginInsaatVeOnarimHakedisBedelleri.kasa358
+                  "
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+        </ng-container>
+        <tr
+          class="text-success cursor-pointer"
+          (click)="
+            toggleOdenecekVergiVeDigerYukumlulukler =
+              !toggleOdenecekVergiVeDigerYukumlulukler
+          "
+        >
+          <td class="ps-3">
+            <app-table-toggle-arrows
+              [condition]="toggleOdenecekVergiVeDigerYukumlulukler"
+              text="F-ÖDENECEK VERGİ VE DİĞER YÜKÜMLÜLÜKLER"
+            ></app-table-toggle-arrows>
+          </td>
+          <ng-container
+            *ngFor="let kisavadeliYabanciKaynak of kisaVadeliYabanciKaynaklar"
+          >
+            <td>
+              <app-currency
+                [value]="
+                  kisavadeliYabanciKaynak.odenecekVergiVeDigerYukumlulukler
+                    .sumOfOdenecekVergiVeDigerYukumlulukler
+                "
+              ></app-currency>
+            </td>
+          </ng-container>
+        </tr>
+        <ng-container *ngIf="toggleOdenecekVergiVeDigerYukumlulukler">
+          <tr>
+            <td class="ps-5">360-ÖDENECEK VERGİ VE FONLAR</td>
+            <ng-container
+              *ngFor="let kisavadeliYabanciKaynak of kisaVadeliYabanciKaynaklar"
+            >
+              <td>
+                <app-currency
+                  [value]="
+                    kisavadeliYabanciKaynak.odenecekVergiVeDigerYukumlulukler
+                      .kasa360
+                  "
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">361-ÖDENECEK SGK PRİMLERİ</td>
+            <ng-container
+              *ngFor="let kisavadeliYabanciKaynak of kisaVadeliYabanciKaynaklar"
+            >
+              <td>
+                <app-currency
+                  [value]="
+                    kisavadeliYabanciKaynak.odenecekVergiVeDigerYukumlulukler
+                      .kasa361
+                  "
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">
+              368-VADESİ GEÇMİŞ ERT. VEYA TAK. VERGİ VE DİĞER YÜK.
+            </td>
+            <ng-container
+              *ngFor="let kisavadeliYabanciKaynak of kisaVadeliYabanciKaynaklar"
+            >
+              <td>
+                <app-currency
+                  [value]="
+                    kisavadeliYabanciKaynak.odenecekVergiVeDigerYukumlulukler
+                      .kasa368
+                  "
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">369-ÖDENECEK DİĞER YÜKÜMLÜLÜKLER</td>
+            <ng-container
+              *ngFor="let kisavadeliYabanciKaynak of kisaVadeliYabanciKaynaklar"
+            >
+              <td>
+                <app-currency
+                  [value]="
+                    kisavadeliYabanciKaynak.odenecekVergiVeDigerYukumlulukler
+                      .kasa369
+                  "
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+        </ng-container>
+        <tr
+          class="text-success cursor-pointer"
+          (click)="
+            toggleBorcVeGiderKarsiliklari = !toggleBorcVeGiderKarsiliklari
+          "
+        >
+          <td class="ps-3">
+            <app-table-toggle-arrows
+              [condition]="toggleBorcVeGiderKarsiliklari"
+              text="G-BORÇ VE GİDER KARŞILIKLARI"
+            ></app-table-toggle-arrows>
+          </td>
+          <ng-container
+            *ngFor="let kisavadeliYabanciKaynak of kisaVadeliYabanciKaynaklar"
+          >
+            <td>
+              <app-currency
+                [value]="
+                  kisavadeliYabanciKaynak.borcVeGiderKarsiliklari
+                    .sumOfBorcVeGiderKarsiliklari
+                "
+              ></app-currency>
+            </td>
+          </ng-container>
+        </tr>
+        <ng-container *ngIf="toggleBorcVeGiderKarsiliklari">
+          <tr>
+            <td class="ps-5">370-DÖNEM KARI VERGİ VE DİĞ. YASAL YÜK. KAR.</td>
+            <ng-container
+              *ngFor="let kisavadeliYabanciKaynak of kisaVadeliYabanciKaynaklar"
+            >
+              <td>
+                <app-currency
+                  [value]="
+                    kisavadeliYabanciKaynak.borcVeGiderKarsiliklari.kasa370
+                  "
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">
+              371-DÖNEM KARININ P. ÖD. VERGİ VE DİĞ. YÜK. (-)
+            </td>
+            <ng-container
+              *ngFor="let kisavadeliYabanciKaynak of kisaVadeliYabanciKaynaklar"
+            >
+              <td>
+                <app-currency
+                  [value]="
+                    kisavadeliYabanciKaynak.borcVeGiderKarsiliklari.kasa371
+                  "
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">372-KIDEM TAZMİNATI KARŞILIĞI</td>
+            <ng-container
+              *ngFor="let kisavadeliYabanciKaynak of kisaVadeliYabanciKaynaklar"
+            >
+              <td>
+                <app-currency
+                  [value]="
+                    kisavadeliYabanciKaynak.borcVeGiderKarsiliklari.kasa372
+                  "
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">373-MALİYET GİDERLERİ KARŞILIĞI</td>
+            <ng-container
+              *ngFor="let kisavadeliYabanciKaynak of kisaVadeliYabanciKaynaklar"
+            >
+              <td>
+                <app-currency
+                  [value]="
+                    kisavadeliYabanciKaynak.borcVeGiderKarsiliklari.kasa373
+                  "
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">379-DİĞER BORÇ VE GİDER KARŞILIKLARI</td>
+            <ng-container
+              *ngFor="let kisavadeliYabanciKaynak of kisaVadeliYabanciKaynaklar"
+            >
+              <td>
+                <app-currency
+                  [value]="
+                    kisavadeliYabanciKaynak.borcVeGiderKarsiliklari.kasa379
+                  "
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+        </ng-container>
+        <tr
+          class="text-success cursor-pointer"
+          (click)="
+            toggleGelecekAylaraAitGiderVeGelirTahakkuklari =
+              !toggleGelecekAylaraAitGiderVeGelirTahakkuklari
+          "
+        >
+          <td class="ps-3">
+            <app-table-toggle-arrows
+              [condition]="toggleGelecekAylaraAitGiderVeGelirTahakkuklari"
+              text="H-GEL.AYL. AİT GELİR. VE GİDER THK."
+            ></app-table-toggle-arrows>
+          </td>
+          <ng-container
+            *ngFor="let kisavadeliYabanciKaynak of kisaVadeliYabanciKaynaklar"
+          >
+            <td>
+              <app-currency
+                [value]="
+                  kisavadeliYabanciKaynak
+                    .gelecekAylaraAitGiderVeGelirTahakkuklari
+                    .sumOfkVYKGelecekAylaraAitGiderVeGelirTahakkuklari
+                "
+              ></app-currency>
+            </td>
+          </ng-container>
+        </tr>
+        <ng-container *ngIf="toggleGelecekAylaraAitGiderVeGelirTahakkuklari">
+          <tr>
+            <td class="ps-5">380-GELECEK AYLARA AİT GELİRLER</td>
+            <ng-container
+              *ngFor="let kisavadeliYabanciKaynak of kisaVadeliYabanciKaynaklar"
+            >
+              <td>
+                <app-currency
+                  [value]="
+                    kisavadeliYabanciKaynak
+                      .gelecekAylaraAitGiderVeGelirTahakkuklari.kasa380
+                  "
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">381-GİDER TAHAKKUKLARI</td>
+            <ng-container
+              *ngFor="let kisavadeliYabanciKaynak of kisaVadeliYabanciKaynaklar"
+            >
+              <td>
+                <app-currency
+                  [value]="
+                    kisavadeliYabanciKaynak
+                      .gelecekAylaraAitGiderVeGelirTahakkuklari.kasa381
+                  "
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+        </ng-container>
+        <tr
+          class="text-success cursor-pointer"
+          (click)="
+            toggleDigerKisaVadeliYabanciKaynaklar =
+              !toggleDigerKisaVadeliYabanciKaynaklar
+          "
+        >
+          <td class="ps-3">
+            <app-table-toggle-arrows
+              [condition]="toggleDigerKisaVadeliYabanciKaynaklar"
+              text="I-DİĞER KISA VADELİ YABANCI KAYNAKLAR"
+            ></app-table-toggle-arrows>
+          </td>
+          <ng-container
+            *ngFor="let kisavadeliYabanciKaynak of kisaVadeliYabanciKaynaklar"
+          >
+            <td>
+              <app-currency
+                [value]="
+                  kisavadeliYabanciKaynak.digerKisaVadeliYabanciKaynaklar
+                    .sumOfDigerKisaVadeliYabanciKaynaklar
+                "
+              ></app-currency>
+            </td>
+          </ng-container>
+        </tr>
+        <ng-container *ngIf="toggleDigerKisaVadeliYabanciKaynaklar">
+          <tr>
+            <td class="ps-5">391-HESAPLANAN KDV</td>
+            <ng-container
+              *ngFor="let kisavadeliYabanciKaynak of kisaVadeliYabanciKaynaklar"
+            >
+              <td>
+                <app-currency
+                  [value]="
+                    kisavadeliYabanciKaynak.digerKisaVadeliYabanciKaynaklar
+                      .kasa391
+                  "
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">392-DİĞER KDV</td>
+            <ng-container
+              *ngFor="let kisavadeliYabanciKaynak of kisaVadeliYabanciKaynaklar"
+            >
+              <td>
+                <app-currency
+                  [value]="
+                    kisavadeliYabanciKaynak.digerKisaVadeliYabanciKaynaklar
+                      .kasa392
+                  "
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">393-MERKEZ VE ŞUBELER CARİ HESABI</td>
+            <ng-container
+              *ngFor="let kisavadeliYabanciKaynak of kisaVadeliYabanciKaynaklar"
+            >
+              <td>
+                <app-currency
+                  [value]="
+                    kisavadeliYabanciKaynak.digerKisaVadeliYabanciKaynaklar
+                      .kasa393
+                  "
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">397-SAYIM VE TESELLÜM FAZLALARI</td>
+            <ng-container
+              *ngFor="let kisavadeliYabanciKaynak of kisaVadeliYabanciKaynaklar"
+            >
+              <td>
+                <app-currency
+                  [value]="
+                    kisavadeliYabanciKaynak.digerKisaVadeliYabanciKaynaklar
+                      .kasa397
+                  "
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">399-DİĞER ÇEŞİTLİ YABANCI KAYNAKLAR</td>
+            <ng-container
+              *ngFor="let kisavadeliYabanciKaynak of kisaVadeliYabanciKaynaklar"
+            >
+              <td>
+                <app-currency
+                  [value]="
+                    kisavadeliYabanciKaynak.digerKisaVadeliYabanciKaynaklar
+                      .kasa399
+                  "
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+        </ng-container>
+      </ng-container>
+      <tr
+        class="text-primary-dark cursor-pointer"
+        (click)="
+          toggleUzunVadeliYabanciKaynaklar = !toggleUzunVadeliYabanciKaynaklar
+        "
+      >
+        <td>
+          <app-table-toggle-arrows
+            [condition]="toggleUzunVadeliYabanciKaynaklar"
+            text="II- UZUN VADELİ YABANCI KAYNAKLAR"
+          ></app-table-toggle-arrows>
+        </td>
+        <ng-container
+          *ngFor="let uzunVadeliYabanciKaynak of uzunVadeliYabanciKaynaklar"
+        >
+          <td>
+            <app-currency
+              [value]="uzunVadeliYabanciKaynak.sumOfUzunVadeliYabanciKaynaklar"
+            ></app-currency>
+          </td>
+        </ng-container>
+      </tr>
+      <ng-container *ngIf="toggleUzunVadeliYabanciKaynaklar">
+        <tr
+          class="text-success cursor-pointer"
+          (click)="toggleUzunVadeliMaliBorclar = !toggleUzunVadeliMaliBorclar"
+        >
+          <td class="ps-3">
+            <app-table-toggle-arrows
+              [condition]="toggleUzunVadeliMaliBorclar"
+              text="A-MALİ BORÇLAR"
+            ></app-table-toggle-arrows>
+          </td>
+          <ng-container
+            *ngFor="let uzunVadeliYabanciKaynak of uzunVadeliYabanciKaynaklar"
+          >
+            <td>
+              <app-currency
+                [value]="
+                  uzunVadeliYabanciKaynak.maliBorclar.sumOfUzunVadeliMaliBorclar
+                "
+              ></app-currency>
+            </td>
+          </ng-container>
+        </tr>
+        <ng-container *ngIf="toggleUzunVadeliMaliBorclar">
+          <ng-container
+            *ngFor="let item of uzunVadeliYabanciKaynakCodes.maliBorclar"
+          >
+            <app-table-repeatable-row
+              [text]="item.text"
+              [data]="uzunVadeliYabanciKaynaklar"
+              pathKey="maliBorclar"
+              [valueKey]="item.valueKey"
+            ></app-table-repeatable-row>
+          </ng-container>
+        </ng-container>
+        <tr
+          class="text-success cursor-pointer"
+          (click)="
+            toggleUzunVadeliTicariBorclar = !toggleUzunVadeliTicariBorclar
+          "
+        >
+          <td class="ps-3">
+            <app-table-toggle-arrows
+              [condition]="toggleUzunVadeliTicariBorclar"
+              text="B-TİCARİ BORÇLAR"
+            ></app-table-toggle-arrows>
+          </td>
+          <ng-container
+            *ngFor="let uzunVadeliYabanciKaynak of uzunVadeliYabanciKaynaklar"
+          >
+            <td>
+              <app-currency
+                [value]="
+                  uzunVadeliYabanciKaynak.ticariBorclar
+                    .sumOfUzunVadeliTicariBorclar
+                "
+              ></app-currency>
+            </td>
+          </ng-container>
+        </tr>
+        <ng-container *ngIf="toggleUzunVadeliTicariBorclar">
+          <ng-container
+            *ngFor="let item of uzunVadeliYabanciKaynakCodes.ticariBorclar"
+          >
+            <app-table-repeatable-row
+              [text]="item.text"
+              [data]="uzunVadeliYabanciKaynaklar"
+              pathKey="ticariBorclar"
+              [valueKey]="item.valueKey"
+            ></app-table-repeatable-row>
+          </ng-container>
+        </ng-container>
+        <tr
+          class="text-success cursor-pointer"
+          (click)="toggleUzunVadeliDigerBorclar = !toggleUzunVadeliDigerBorclar"
+        >
+          <td class="ps-3">
+            <app-table-toggle-arrows
+              [condition]="toggleUzunVadeliDigerBorclar"
+              text="C-DİĞER BORÇLAR"
+            ></app-table-toggle-arrows>
+          </td>
+          <ng-container
+            *ngFor="let uzunVadeliYabanciKaynak of uzunVadeliYabanciKaynaklar"
+          >
+            <td>
+              <app-currency
+                [value]="
+                  uzunVadeliYabanciKaynak.digerBorclar
+                    .sumOfUzunVadeliDigerBorclar
+                "
+              ></app-currency>
+            </td>
+          </ng-container>
+        </tr>
+        <ng-container *ngIf="toggleUzunVadeliDigerBorclar">
+          <ng-container
+            *ngFor="let item of uzunVadeliYabanciKaynakCodes.digerBorclar"
+          >
+            <app-table-repeatable-row
+              [text]="item.text"
+              [data]="uzunVadeliYabanciKaynaklar"
+              pathKey="digerBorclar"
+              [valueKey]="item.valueKey"
+            ></app-table-repeatable-row>
+          </ng-container>
+        </ng-container>
+        <tr
+          class="text-success cursor-pointer"
+          (click)="
+            toggleUzunVadeliAlinanAvanslar = !toggleUzunVadeliAlinanAvanslar
+          "
+        >
+          <td class="ps-3">
+            <app-table-toggle-arrows
+              [condition]="toggleUzunVadeliAlinanAvanslar"
+              text="D-ALINAN AVANSLAR"
+            ></app-table-toggle-arrows>
+          </td>
+          <ng-container
+            *ngFor="let uzunVadeliYabanciKaynak of uzunVadeliYabanciKaynaklar"
+          >
+            <td>
+              <app-currency
+                [value]="
+                  uzunVadeliYabanciKaynak.alinanAvanslar
+                    .sumOfUzunVadeliAlinanAvanslar
+                "
+              ></app-currency>
+            </td>
+          </ng-container>
+        </tr>
+        <ng-container *ngIf="toggleUzunVadeliAlinanAvanslar">
+          <ng-container
+            *ngFor="let item of uzunVadeliYabanciKaynakCodes.alinanAvanslar"
+          >
+            <app-table-repeatable-row
+              [text]="item.text"
+              [data]="uzunVadeliYabanciKaynaklar"
+              pathKey="alinanAvanslar"
+              [valueKey]="item.valueKey"
+            ></app-table-repeatable-row>
+          </ng-container>
+        </ng-container>
+        <tr
+          class="text-success cursor-pointer"
+          (click)="
+            toggleUzunVadeliBorcVeGiderKarsiliklari =
+              !toggleUzunVadeliBorcVeGiderKarsiliklari
+          "
+        >
+          <td class="ps-3">
+            <app-table-toggle-arrows
+              [condition]="toggleUzunVadeliBorcVeGiderKarsiliklari"
+              text="E-BORÇ VE GİDER KARŞILIKLAR"
+            ></app-table-toggle-arrows>
+          </td>
+          <ng-container
+            *ngFor="let uzunVadeliYabanciKaynak of uzunVadeliYabanciKaynaklar"
+          >
+            <td>
+              <app-currency
+                [value]="
+                  uzunVadeliYabanciKaynak.borcVeGiderKarsiliklari
+                    .sumOfUzunVadeliBorcVeGiderKarsiliklari
+                "
+              ></app-currency>
+            </td>
+          </ng-container>
+        </tr>
+        <ng-container *ngIf="toggleUzunVadeliBorcVeGiderKarsiliklari">
+          <ng-container
+            *ngFor="
+              let item of uzunVadeliYabanciKaynakCodes.borcVeGiderKarsiliklari
+            "
+          >
+            <app-table-repeatable-row
+              [text]="item.text"
+              [data]="uzunVadeliYabanciKaynaklar"
+              pathKey="borcVeGiderKarsiliklari"
+              [valueKey]="item.valueKey"
+            ></app-table-repeatable-row>
+          </ng-container>
+        </ng-container>
+        <tr
+          class="text-success cursor-pointer"
+          (click)="
+            toggleGelecekYillaraAitGiderVeGelirTahakkuklari =
+              !toggleGelecekYillaraAitGiderVeGelirTahakkuklari
+          "
+        >
+          <td class="ps-3">
+            <app-table-toggle-arrows
+              [condition]="toggleGelecekYillaraAitGiderVeGelirTahakkuklari"
+              text="F-GEL.YIL. AİT GELİR. VE GİDER THK."
+            ></app-table-toggle-arrows>
+          </td>
+          <ng-container
+            *ngFor="let uzunVadeliYabanciKaynak of uzunVadeliYabanciKaynaklar"
+          >
+            <td>
+              <app-currency
+                [value]="
+                  uzunVadeliYabanciKaynak
+                    .gelecekYillaraAitGiderVeGelirTahakkuklari
+                    .sumOfGelecekYillaraAitGiderVeGelirTahakkuklari
+                "
+              ></app-currency>
+            </td>
+          </ng-container>
+        </tr>
+        <ng-container *ngIf="toggleGelecekYillaraAitGiderVeGelirTahakkuklari">
+          <ng-container
+            *ngFor="
+              let item of uzunVadeliYabanciKaynakCodes.gelecekYillaraAitGiderVeGelirTahakkuklari
+            "
+          >
+            <app-table-repeatable-row
+              [text]="item.text"
+              [data]="uzunVadeliYabanciKaynaklar"
+              pathKey="gelecekYillaraAitGiderVeGelirTahakkuklari"
+              [valueKey]="item.valueKey"
+            ></app-table-repeatable-row>
+          </ng-container>
+        </ng-container>
+        <tr
+          class="text-success cursor-pointer"
+          (click)="
+            toggleDigerUzunVadeliYabanciKaynaklar =
+              !toggleDigerUzunVadeliYabanciKaynaklar
+          "
+        >
+          <td class="ps-3">
+            <app-table-toggle-arrows
+              [condition]="toggleDigerUzunVadeliYabanciKaynaklar"
+              text="G-DİĞER UZUN VADELİ YABANCI KAYNAKLAR"
+            ></app-table-toggle-arrows>
+          </td>
+          <ng-container
+            *ngFor="let uzunVadeliYabanciKaynak of uzunVadeliYabanciKaynaklar"
+          >
+            <td>
+              <app-currency
+                [value]="
+                  uzunVadeliYabanciKaynak.digerUzunVadeliYabanciKaynaklar
+                    .sumOfDigerUzunVadeliYabanciKaynaklar
+                "
+              ></app-currency>
+            </td>
+          </ng-container>
+        </tr>
+        <ng-container *ngIf="toggleDigerUzunVadeliYabanciKaynaklar">
+          <ng-container
+            *ngFor="
+              let item of uzunVadeliYabanciKaynakCodes.digerUzunVadeliYabanciKaynaklar
+            "
+          >
+            <app-table-repeatable-row
+              [text]="item.text"
+              [data]="uzunVadeliYabanciKaynaklar"
+              pathKey="digerUzunVadeliYabanciKaynaklar"
+              [valueKey]="item.valueKey"
+            ></app-table-repeatable-row>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+      <tr
+        class="text-primary-dark cursor-pointer"
+        (click)="toggleOzKaynaklar = !toggleOzKaynaklar"
+      >
+        <td>
+          <app-table-toggle-arrows
+            [condition]="toggleOzKaynaklar"
+            text="III- ÖZ KAYNAKLAR"
+          ></app-table-toggle-arrows>
+        </td>
+        <ng-container *ngFor="let ozKaynak of ozKaynaklar">
+          <td>
+            <app-currency [value]="ozKaynak.sumOfOzKaynaklar"></app-currency>
+          </td>
+        </ng-container>
+      </tr>
+      <ng-container *ngIf="toggleOzKaynaklar">
+        <tr
+          class="text-success cursor-pointer"
+          (click)="toggleOdenmisSermaye = !toggleOdenmisSermaye"
+        >
+          <td class="ps-3">
+            <app-table-toggle-arrows
+              [condition]="toggleOdenmisSermaye"
+              text="A-ÖDENMİŞ SERMAYE"
+            ></app-table-toggle-arrows>
+          </td>
+          <ng-container *ngFor="let ozKaynak of ozKaynaklar">
+            <td>
+              <app-currency
+                [value]="ozKaynak.odenmisSermaye.sumOfOdenmisSermaye"
+              ></app-currency>
+            </td>
+          </ng-container>
+        </tr>
+        <ng-container *ngIf="toggleOdenmisSermaye">
+          <ng-container *ngFor="let item of ozkaynaklarCodes.odenmisSermaye">
+            <app-table-repeatable-row
+              [text]="item.text"
+              [data]="ozKaynaklar"
+              pathKey="odenmisSermaye"
+              [valueKey]="item.valueKey"
+            ></app-table-repeatable-row>
+          </ng-container>
+        </ng-container>
+        <tr
+          class="text-success cursor-pointer"
+          (click)="toggleSermayeYedekleri = !toggleSermayeYedekleri"
+        >
+          <td class="ps-3">
+            <app-table-toggle-arrows
+              [condition]="toggleSermayeYedekleri"
+              text="B-SERMAYE YEDEKLERİ"
+            ></app-table-toggle-arrows>
+          </td>
+          <ng-container *ngFor="let ozKaynak of ozKaynaklar">
+            <td>
+              <app-currency
+                [value]="ozKaynak.sermayeYedekleri.sumOfSermayeYedekleri"
+              ></app-currency>
+            </td>
+          </ng-container>
+        </tr>
+        <ng-container *ngIf="toggleSermayeYedekleri">
+          <ng-container *ngFor="let item of ozkaynaklarCodes.sermayeYedekleri">
+            <app-table-repeatable-row
+              [text]="item.text"
+              [data]="ozKaynaklar"
+              pathKey="sermayeYedekleri"
+              [valueKey]="item.valueKey"
+            ></app-table-repeatable-row>
+          </ng-container>
+        </ng-container>
+        <tr
+          class="text-success cursor-pointer"
+          (click)="toggleKarYedekleri = !toggleKarYedekleri"
+        >
+          <td class="ps-3">
+            <app-table-toggle-arrows
+              [condition]="toggleKarYedekleri"
+              text="C-KAR YEDEKLERİ"
+            ></app-table-toggle-arrows>
+          </td>
+          <ng-container *ngFor="let ozKaynak of ozKaynaklar">
+            <td>
+              <app-currency
+                [value]="ozKaynak.karYedekleri.sumOfKarYedekleri"
+              ></app-currency>
+            </td>
+          </ng-container>
+        </tr>
+        <ng-container *ngIf="toggleKarYedekleri">
+          <ng-container *ngFor="let item of ozkaynaklarCodes.karYedekleri">
+            <app-table-repeatable-row
+              [text]="item.text"
+              [data]="ozKaynaklar"
+              pathKey="karYedekleri"
+              [valueKey]="item.valueKey"
+            ></app-table-repeatable-row>
+          </ng-container>
+        </ng-container>
+        <tr
+          class="text-success cursor-pointer"
+          (click)="toggleGecmisYillarKarlari = !toggleGecmisYillarKarlari"
+        >
+          <td class="ps-3">
+            <app-table-toggle-arrows
+              [condition]="toggleGecmisYillarKarlari"
+              text="D-GEÇMİŞ YILLAR KARLARI"
+            ></app-table-toggle-arrows>
+          </td>
+          <ng-container *ngFor="let ozKaynak of ozKaynaklar">
+            <td>
+              <app-currency
+                [value]="ozKaynak.gecmisYillarKarlari.sumOfGecmisYillarKarlari"
+              ></app-currency>
+            </td>
+          </ng-container>
+        </tr>
+        <ng-container *ngIf="toggleGecmisYillarKarlari">
+          <ng-container
+            *ngFor="let item of ozkaynaklarCodes.gecmisYillarKarlari"
+          >
+            <app-table-repeatable-row
+              [text]="item.text"
+              [data]="ozKaynaklar"
+              pathKey="gecmisYillarKarlari"
+              [valueKey]="item.valueKey"
+            ></app-table-repeatable-row>
+          </ng-container>
+        </ng-container>
+        <tr
+          class="text-success cursor-pointer"
+          (click)="toggleGgecmisYillarZararlari = !toggleGgecmisYillarZararlari"
+        >
+          <td class="ps-3">
+            <app-table-toggle-arrows
+              [condition]="toggleGgecmisYillarZararlari"
+              text="E-GEÇMİŞ YILLAR ZARARLARI (-)"
+            ></app-table-toggle-arrows>
+          </td>
+          <ng-container *ngFor="let ozKaynak of ozKaynaklar">
+            <td>
+              <app-currency
+                [value]="
+                  ozKaynak.gecmisYillarZararlari.sumOfGgecmisYillarZararlari
+                "
+              ></app-currency>
+            </td>
+          </ng-container>
+        </tr>
+        <ng-container *ngIf="toggleGgecmisYillarZararlari">
+          <ng-container
+            *ngFor="let item of ozkaynaklarCodes.gecmisYillarZararlari"
+          >
+            <app-table-repeatable-row
+              [text]="item.text"
+              [data]="ozKaynaklar"
+              pathKey="gecmisYillarZararlari"
+              [valueKey]="item.valueKey"
+            ></app-table-repeatable-row>
+          </ng-container>
+        </ng-container>
+        <tr
+          class="text-success cursor-pointer"
+          (click)="toggleDonemNetKarZarari = !toggleDonemNetKarZarari"
+        >
+          <td class="ps-3">
+            <app-table-toggle-arrows
+              [condition]="toggleDonemNetKarZarari"
+              text="F-DÖNEM NET KARI (ZARARI)"
+            ></app-table-toggle-arrows>
+          </td>
+          <ng-container *ngFor="let ozKaynak of ozKaynaklar">
+            <td>
+              <app-currency
+                [value]="ozKaynak.donemNetKarZarari.sumOfDonemNetKarZarari"
+              ></app-currency>
+            </td>
+          </ng-container>
+        </tr>
+        <ng-container *ngIf="toggleDonemNetKarZarari">
+          <ng-container *ngFor="let item of ozkaynaklarCodes.donemNetKarZarari">
+            <app-table-repeatable-row
+              [text]="item.text"
+              [data]="ozKaynaklar"
+              pathKey="donemNetKarZarari"
+              [valueKey]="item.valueKey"
+            ></app-table-repeatable-row>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+    </tbody>
+    <tfoot>
+      <tr class="table-dark">
+        <td>Pasif Kaynaklar Toplamı</td>
+        <ng-container *ngFor="let passiveItem of passiveItems">
+          <td>
+            <app-currency
+              [value]="passiveItem.sumOfPasifKaynaklar"
+            ></app-currency>
+          </td>
+        </ng-container>
+      </tr>
+    </tfoot>
+  </table>
+</div>

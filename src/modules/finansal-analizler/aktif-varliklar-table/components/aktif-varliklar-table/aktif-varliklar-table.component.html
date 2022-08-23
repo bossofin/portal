@@ -1,0 +1,1665 @@
+<div class="table-responsive">
+  <table class="w-100 table table-bordered">
+    <thead>
+      <tr class="table-dark">
+        <th>Aktif (Varlıklar)</th>
+        <ng-container *ngFor="let period of periods">
+          <th class="text-end">
+            {{ period }}
+          </th>
+        </ng-container>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        class="text-primary-dark cursor-pointer"
+        (click)="toggleDonenVarliklar = !toggleDonenVarliklar"
+      >
+        <td>
+          <div class="d-flex">
+            <mat-icon
+              class="align-self-center me-3"
+              *ngIf="toggleDonenVarliklar"
+              >expand_more</mat-icon
+            >
+            <mat-icon
+              class="align-self-center me-3"
+              *ngIf="!toggleDonenVarliklar"
+              >expand_less</mat-icon
+            >
+            <span class="align-self-center">I- DÖNEN VARLIKLAR</span>
+          </div>
+        </td>
+        <ng-container *ngFor="let donenVarlik of donenVarliklar">
+          <td>
+            <app-currency
+              [value]="donenVarlik.sumOfDonenVarliklar"
+            ></app-currency>
+          </td>
+        </ng-container>
+      </tr>
+      <ng-container *ngIf="toggleDonenVarliklar">
+        <tr
+          class="text-success cursor-pointer"
+          (click)="toggleHazirDegerler = !toggleHazirDegerler"
+        >
+          <td class="ps-3">
+            <div class="d-flex">
+              <mat-icon
+                class="align-self-center me-3"
+                *ngIf="toggleHazirDegerler"
+                >expand_more</mat-icon
+              >
+              <mat-icon
+                class="align-self-center me-3"
+                *ngIf="!toggleHazirDegerler"
+                >expand_less</mat-icon
+              >
+              <span class="align-self-center">A-HAZIR DEĞERLER</span>
+            </div>
+          </td>
+          <ng-container *ngFor="let donenVarlik of donenVarliklar">
+            <td>
+              <app-currency
+                [value]="donenVarlik.hazirDegerler.sumOfHazirDegerler"
+              ></app-currency>
+            </td>
+          </ng-container>
+        </tr>
+        <ng-container *ngIf="toggleHazirDegerler">
+          <tr>
+            <td class="ps-5">100-KASA</td>
+            <ng-container *ngFor="let donenVarlik of donenVarliklar">
+              <td>
+                <app-currency
+                  [value]="donenVarlik.hazirDegerler.kasa100"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">101-ALINAN ÇEKLER</td>
+            <ng-container *ngFor="let donenVarlik of donenVarliklar">
+              <td>
+                <app-currency
+                  [value]="donenVarlik.hazirDegerler.kasa101"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">102-BANKALAR</td>
+            <ng-container *ngFor="let donenVarlik of donenVarliklar">
+              <td>
+                <app-currency
+                  [value]="donenVarlik.hazirDegerler.kasa102"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">103-VERİLEN ÇEKLER VE ÖDEME EMİRLERİ (-)</td>
+            <ng-container *ngFor="let donenVarlik of donenVarliklar">
+              <td>
+                <app-currency
+                  [value]="donenVarlik.hazirDegerler.kasa103"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">108-DİĞER HAZIR DEĞERLER</td>
+            <ng-container *ngFor="let donenVarlik of donenVarliklar">
+              <td>
+                <app-currency
+                  [value]="donenVarlik.hazirDegerler.kasa108"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+        </ng-container>
+        <tr
+          class="text-success cursor-pointer"
+          (click)="toggleMenkulKiymetler = !toggleMenkulKiymetler"
+        >
+          <td class="ps-3">
+            <div class="d-flex">
+              <mat-icon
+                class="align-self-center me-3"
+                *ngIf="toggleMenkulKiymetler"
+                >expand_more</mat-icon
+              >
+              <mat-icon
+                class="align-self-center me-3"
+                *ngIf="!toggleMenkulKiymetler"
+                >expand_less</mat-icon
+              >
+              <span class="align-self-center">B-MENKUL KIYMETLER</span>
+            </div>
+          </td>
+          <ng-container *ngFor="let donenVarlik of donenVarliklar">
+            <td>
+              <app-currency
+                [value]="donenVarlik.menkulKiymetler.sumOfMenkulKiymetler"
+              ></app-currency>
+            </td>
+          </ng-container>
+        </tr>
+        <ng-container *ngIf="toggleMenkulKiymetler">
+          <tr>
+            <td class="ps-5">110-HİSSE SENETLERİ</td>
+            <ng-container *ngFor="let donenVarlik of donenVarliklar">
+              <td>
+                <app-currency
+                  [value]="donenVarlik.menkulKiymetler.kasa110"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">111-ÖZEL KESİM TAHVİL, SENET VE BONOLARI</td>
+            <ng-container *ngFor="let donenVarlik of donenVarliklar">
+              <td>
+                <app-currency
+                  [value]="donenVarlik.menkulKiymetler.kasa111"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">112-KAMU KESİMİ TAHVİL, SENET VE BONOLARI</td>
+            <ng-container *ngFor="let donenVarlik of donenVarliklar">
+              <td>
+                <app-currency
+                  [value]="donenVarlik.menkulKiymetler.kasa112"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">118-DİĞER MENKUL KIYMETLER</td>
+            <ng-container *ngFor="let donenVarlik of donenVarliklar">
+              <td>
+                <app-currency
+                  [value]="donenVarlik.menkulKiymetler.kasa118"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">
+              119-MENKUL KIYMETLER DEĞER DÜŞÜKLÜĞÜ KARŞILIĞI (-)
+            </td>
+            <ng-container *ngFor="let donenVarlik of donenVarliklar">
+              <td>
+                <app-currency
+                  [value]="donenVarlik.menkulKiymetler.kasa119"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+        </ng-container>
+        <tr
+          class="text-success cursor-pointer"
+          (click)="toggleTicariAlacaklar = !toggleTicariAlacaklar"
+        >
+          <td class="ps-3">
+            <div class="d-flex">
+              <mat-icon
+                class="align-self-center me-3"
+                *ngIf="toggleTicariAlacaklar"
+                >expand_more</mat-icon
+              >
+              <mat-icon
+                class="align-self-center me-3"
+                *ngIf="!toggleTicariAlacaklar"
+                >expand_less</mat-icon
+              >
+              <span class="align-self-center">C-TİCARİ ALACAKLAR</span>
+            </div>
+          </td>
+          <ng-container *ngFor="let donenVarlik of donenVarliklar">
+            <td>
+              <app-currency
+                [value]="donenVarlik.ticariAlacaklar.sumOfTicariAlacaklar"
+              ></app-currency>
+            </td>
+          </ng-container>
+        </tr>
+        <ng-container *ngIf="toggleTicariAlacaklar">
+          <tr>
+            <td class="ps-5">120-ALICILAR</td>
+            <ng-container *ngFor="let donenVarlik of donenVarliklar">
+              <td>
+                <app-currency
+                  [value]="donenVarlik.ticariAlacaklar.kasa120"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">121-ALACAK SENETLERİ</td>
+            <ng-container *ngFor="let donenVarlik of donenVarliklar">
+              <td>
+                <app-currency
+                  [value]="donenVarlik.ticariAlacaklar.kasa121"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">122-ALACAK SENETLERİ REESKONTU (-)</td>
+            <ng-container *ngFor="let donenVarlik of donenVarliklar">
+              <td>
+                <app-currency
+                  [value]="donenVarlik.ticariAlacaklar.kasa122"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">
+              124-KAZANILMAMIŞ FİNANSAL KİRALAMA FAİZ GELİRLERİ (-)
+            </td>
+            <ng-container *ngFor="let donenVarlik of donenVarliklar">
+              <td>
+                <app-currency
+                  [value]="donenVarlik.ticariAlacaklar.kasa124"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">126-VERİLEN DEPOZİTO VE TEMİNATLAR</td>
+            <ng-container *ngFor="let donenVarlik of donenVarliklar">
+              <td>
+                <app-currency
+                  [value]="donenVarlik.ticariAlacaklar.kasa126"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">127-DİĞER TİCARİ ALACAKLAR</td>
+            <ng-container *ngFor="let donenVarlik of donenVarliklar">
+              <td>
+                <app-currency
+                  [value]="donenVarlik.ticariAlacaklar.kasa127"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">128-ŞÜPHELİ TİCARİ ALACAKLAR</td>
+            <ng-container *ngFor="let donenVarlik of donenVarliklar">
+              <td>
+                <app-currency
+                  [value]="donenVarlik.ticariAlacaklar.kasa128"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">129-ŞÜPHELİ TİCARİ ALACAKLAR KARŞILIĞI (-)</td>
+            <ng-container *ngFor="let donenVarlik of donenVarliklar">
+              <td>
+                <app-currency
+                  [value]="donenVarlik.ticariAlacaklar.kasa129"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+        </ng-container>
+        <tr
+          class="text-success cursor-pointer"
+          (click)="toggleDigerAlacaklar = !toggleDigerAlacaklar"
+        >
+          <td class="ps-3">
+            <div class="d-flex">
+              <mat-icon
+                class="align-self-center me-3"
+                *ngIf="toggleDigerAlacaklar"
+                >expand_more</mat-icon
+              >
+              <mat-icon
+                class="align-self-center me-3"
+                *ngIf="!toggleDigerAlacaklar"
+                >expand_less</mat-icon
+              >
+              <span class="align-self-center">D-DİĞER ALACAKLAR</span>
+            </div>
+          </td>
+          <ng-container *ngFor="let donenVarlik of donenVarliklar">
+            <td>
+              <app-currency
+                [value]="donenVarlik.digerAlacaklar.sumOfDigerAlacaklar"
+              ></app-currency>
+            </td>
+          </ng-container>
+        </tr>
+        <ng-container *ngIf="toggleDigerAlacaklar">
+          <tr>
+            <td class="ps-5">131-ORTAKLARDAN ALACAKLAR</td>
+            <ng-container *ngFor="let donenVarlik of donenVarliklar">
+              <td>
+                <app-currency
+                  [value]="donenVarlik.digerAlacaklar.kasa131"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">132-İŞTİRAKLERDEN ALACAKLAR</td>
+            <ng-container *ngFor="let donenVarlik of donenVarliklar">
+              <td>
+                <app-currency
+                  [value]="donenVarlik.digerAlacaklar.kasa132"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">133-BAĞLI ORTAKLIKLARDAN ALACAKLAR</td>
+            <ng-container *ngFor="let donenVarlik of donenVarliklar">
+              <td>
+                <app-currency
+                  [value]="donenVarlik.digerAlacaklar.kasa133"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">135-PERSONELDEN ALACAKLAR</td>
+            <ng-container *ngFor="let donenVarlik of donenVarliklar">
+              <td>
+                <app-currency
+                  [value]="donenVarlik.digerAlacaklar.kasa135"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">136-DİĞER ÇEŞİTLİ ALACAKLAR</td>
+            <ng-container *ngFor="let donenVarlik of donenVarliklar">
+              <td>
+                <app-currency
+                  [value]="donenVarlik.digerAlacaklar.kasa136"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">137-DİĞER ALACAK SENETLERİ REESKONTU (-)</td>
+            <ng-container *ngFor="let donenVarlik of donenVarliklar">
+              <td>
+                <app-currency
+                  [value]="donenVarlik.digerAlacaklar.kasa137"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">138-ŞÜPHELİ DİĞER ALACAKLAR</td>
+            <ng-container *ngFor="let donenVarlik of donenVarliklar">
+              <td>
+                <app-currency
+                  [value]="donenVarlik.digerAlacaklar.kasa138"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">139-ŞÜPHELİ DİĞER ALACAKLAR KARŞILIĞI (-)</td>
+            <ng-container *ngFor="let donenVarlik of donenVarliklar">
+              <td>
+                <app-currency
+                  [value]="donenVarlik.digerAlacaklar.kasa139"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+        </ng-container>
+        <tr
+          class="text-success cursor-pointer"
+          (click)="toggleStoklar = !toggleStoklar"
+        >
+          <td class="ps-3">
+            <div class="d-flex">
+              <mat-icon class="align-self-center me-3" *ngIf="toggleStoklar"
+                >expand_more</mat-icon
+              >
+              <mat-icon class="align-self-center me-3" *ngIf="!toggleStoklar"
+                >expand_less</mat-icon
+              >
+              <span class="align-self-center">E-STOKLAR</span>
+            </div>
+          </td>
+          <ng-container *ngFor="let donenVarlik of donenVarliklar">
+            <td>
+              <app-currency
+                [value]="donenVarlik.stoklar.sumOfStoklar"
+              ></app-currency>
+            </td>
+          </ng-container>
+        </tr>
+        <ng-container *ngIf="toggleStoklar">
+          <tr>
+            <td class="ps-5">150-İLK MADDE VE MALZEME</td>
+            <ng-container *ngFor="let donenVarlik of donenVarliklar">
+              <td>
+                <app-currency
+                  [value]="donenVarlik.stoklar.kasa150"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">151-YARI MAMULLER - ÜRETİM</td>
+            <ng-container *ngFor="let donenVarlik of donenVarliklar">
+              <td>
+                <app-currency
+                  [value]="donenVarlik.stoklar.kasa151"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">152-MAMÜLLER</td>
+            <ng-container *ngFor="let donenVarlik of donenVarliklar">
+              <td>
+                <app-currency
+                  [value]="donenVarlik.stoklar.kasa152"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">153-TİCARİ MALLAR</td>
+            <ng-container *ngFor="let donenVarlik of donenVarliklar">
+              <td>
+                <app-currency
+                  [value]="donenVarlik.stoklar.kasa153"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">157-DİĞER STOKLAR</td>
+            <ng-container *ngFor="let donenVarlik of donenVarliklar">
+              <td>
+                <app-currency
+                  [value]="donenVarlik.stoklar.kasa157"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">158-STOK DEĞER DÜŞÜKLÜĞÜ KARŞILIĞI (-)</td>
+            <ng-container *ngFor="let donenVarlik of donenVarliklar">
+              <td>
+                <app-currency
+                  [value]="donenVarlik.stoklar.kasa158"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">159-VERİLEN SİPARİŞ AVANSLARI</td>
+            <ng-container *ngFor="let donenVarlik of donenVarliklar">
+              <td>
+                <app-currency
+                  [value]="donenVarlik.stoklar.kasa159"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+        </ng-container>
+        <tr
+          class="text-success cursor-pointer"
+          (click)="
+            toggleYillaraYayginInsaatVeOnarimMaliyetleri =
+              !toggleYillaraYayginInsaatVeOnarimMaliyetleri
+          "
+        >
+          <td class="ps-3">
+            <div class="d-flex">
+              <mat-icon
+                class="align-self-center me-3"
+                *ngIf="toggleYillaraYayginInsaatVeOnarimMaliyetleri"
+                >expand_more</mat-icon
+              >
+              <mat-icon
+                class="align-self-center me-3"
+                *ngIf="!toggleYillaraYayginInsaatVeOnarimMaliyetleri"
+                >expand_less</mat-icon
+              >
+              <span class="align-self-center"
+                >F-YILLARA YAYGIN İNŞAAT VE ONARIM MALİYETLERİ</span
+              >
+            </div>
+          </td>
+          <ng-container *ngFor="let donenVarlik of donenVarliklar">
+            <td>
+              <app-currency
+                [value]="
+                  donenVarlik.yillaraYayginInsaatVeOnarimMaliyetleri
+                    .sumOfYillaraYayginInsaatVeOnarimMaliyetleri
+                "
+              ></app-currency>
+            </td>
+          </ng-container>
+        </tr>
+        <ng-container *ngIf="toggleYillaraYayginInsaatVeOnarimMaliyetleri">
+          <tr>
+            <td class="ps-5">
+              170-YILLARA YAYGIN İNŞAAT VE ONARIM MALİYETLERİ
+            </td>
+            <ng-container *ngFor="let donenVarlik of donenVarliklar">
+              <td>
+                <app-currency
+                  [value]="
+                    donenVarlik.yillaraYayginInsaatVeOnarimMaliyetleri.kasa170
+                  "
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">
+              178-YILLARA YAYGIN İNŞAAT ENFLASYON DÜZELTME HESABI
+            </td>
+            <ng-container *ngFor="let donenVarlik of donenVarliklar">
+              <td>
+                <app-currency
+                  [value]="
+                    donenVarlik.yillaraYayginInsaatVeOnarimMaliyetleri.kasa178
+                  "
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">179-TAŞERONLARA VERİLEN AVANSLAR</td>
+            <ng-container *ngFor="let donenVarlik of donenVarliklar">
+              <td>
+                <app-currency
+                  [value]="
+                    donenVarlik.yillaraYayginInsaatVeOnarimMaliyetleri.kasa179
+                  "
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+        </ng-container>
+        <tr
+          class="text-success cursor-pointer"
+          (click)="
+            toggleGelecekAylaraAitGiderlerVeGelirTahakkuklari =
+              !toggleGelecekAylaraAitGiderlerVeGelirTahakkuklari
+          "
+        >
+          <td class="ps-3">
+            <div class="d-flex">
+              <mat-icon
+                class="align-self-center me-3"
+                *ngIf="toggleGelecekAylaraAitGiderlerVeGelirTahakkuklari"
+                >expand_more</mat-icon
+              >
+              <mat-icon
+                class="align-self-center me-3"
+                *ngIf="!toggleGelecekAylaraAitGiderlerVeGelirTahakkuklari"
+                >expand_less</mat-icon
+              >
+              <span class="align-self-center"
+                >G-GELECEK AYLARA AİT GİDERLER VE GELİR TAHAKKUKLARI</span
+              >
+            </div>
+          </td>
+          <ng-container *ngFor="let donenVarlik of donenVarliklar">
+            <td>
+              <app-currency
+                [value]="
+                  donenVarlik.gelecekAylaraAitGiderVeGelirTahakkuklari
+                    .sumOfGelecekAylaraAitGiderVeGelirTahakkuklari
+                "
+              ></app-currency>
+            </td>
+          </ng-container>
+        </tr>
+        <ng-container *ngIf="toggleGelecekAylaraAitGiderlerVeGelirTahakkuklari">
+          <tr>
+            <td class="ps-5">180-GELECEK AYLARA AİT GİDERLER</td>
+            <ng-container *ngFor="let donenVarlik of donenVarliklar">
+              <td>
+                <app-currency
+                  [value]="
+                    donenVarlik.gelecekAylaraAitGiderVeGelirTahakkuklari.kasa180
+                  "
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">181-GELİR TAHAKKUKLARI</td>
+            <ng-container *ngFor="let donenVarlik of donenVarliklar">
+              <td>
+                <app-currency
+                  [value]="
+                    donenVarlik.gelecekAylaraAitGiderVeGelirTahakkuklari.kasa181
+                  "
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+        </ng-container>
+        <tr
+          class="text-success cursor-pointer"
+          (click)="toggleDigerDonenVarliklar = !toggleDigerDonenVarliklar"
+        >
+          <td class="ps-3">
+            <div class="d-flex">
+              <mat-icon
+                class="align-self-center me-3"
+                *ngIf="toggleDigerDonenVarliklar"
+                >expand_more</mat-icon
+              >
+              <mat-icon
+                class="align-self-center me-3"
+                *ngIf="!toggleDigerDonenVarliklar"
+                >expand_less</mat-icon
+              >
+              <span class="align-self-center">H-DİĞER DÖNEN VARLIKLAR</span>
+            </div>
+          </td>
+          <ng-container *ngFor="let donenVarlik of donenVarliklar">
+            <td>
+              <app-currency
+                [value]="
+                  donenVarlik.digerDonenVarliklar.sumOfDigerDonenVarliklar
+                "
+              ></app-currency>
+            </td>
+          </ng-container>
+        </tr>
+        <ng-container *ngIf="toggleDigerDonenVarliklar">
+          <tr>
+            <td class="ps-5">190-DEVREDEN KATMA DEĞER VERGİSİ</td>
+            <ng-container *ngFor="let donenVarlik of donenVarliklar">
+              <td>
+                <app-currency
+                  [value]="donenVarlik.digerDonenVarliklar.kasa190"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">191-İNDİRİLECEK KATMA DEĞER VERGİSİ</td>
+            <ng-container *ngFor="let donenVarlik of donenVarliklar">
+              <td>
+                <app-currency
+                  [value]="donenVarlik.digerDonenVarliklar.kasa191"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">192-DİĞER KATMA DEĞER VERGİSİ</td>
+            <ng-container *ngFor="let donenVarlik of donenVarliklar">
+              <td>
+                <app-currency
+                  [value]="donenVarlik.digerDonenVarliklar.kasa192"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">193-PEŞİN ÖDENEN VERGİLER VE FONLAR</td>
+            <ng-container *ngFor="let donenVarlik of donenVarliklar">
+              <td>
+                <app-currency
+                  [value]="donenVarlik.digerDonenVarliklar.kasa193"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">195-İŞ AVANSLARI</td>
+            <ng-container *ngFor="let donenVarlik of donenVarliklar">
+              <td>
+                <app-currency
+                  [value]="donenVarlik.digerDonenVarliklar.kasa195"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">196-PERSONEL AVANSLARI</td>
+            <ng-container *ngFor="let donenVarlik of donenVarliklar">
+              <td>
+                <app-currency
+                  [value]="donenVarlik.digerDonenVarliklar.kasa196"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">197-SAYIM VE TESELLÜM NOKSANLARI</td>
+            <ng-container *ngFor="let donenVarlik of donenVarliklar">
+              <td>
+                <app-currency
+                  [value]="donenVarlik.digerDonenVarliklar.kasa197"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">198-DİĞER ÇEŞİTLİ DÖNEN VARLIKLAR</td>
+            <ng-container *ngFor="let donenVarlik of donenVarliklar">
+              <td>
+                <app-currency
+                  [value]="donenVarlik.digerDonenVarliklar.kasa198"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">199-DİĞER DÖNEN VARLIKLAR KARŞILIĞI (-)</td>
+            <ng-container *ngFor="let donenVarlik of donenVarliklar">
+              <td>
+                <app-currency
+                  [value]="donenVarlik.digerDonenVarliklar.kasa199"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+        </ng-container>
+      </ng-container>
+      <tr
+        class="text-primary-dark cursor-pointer"
+        (click)="toggleDuranVarliklar = !toggleDuranVarliklar"
+      >
+        <td>
+          <div class="d-flex">
+            <mat-icon
+              class="align-self-center me-3"
+              *ngIf="toggleDuranVarliklar"
+              >expand_more</mat-icon
+            >
+            <mat-icon
+              class="align-self-center me-3"
+              *ngIf="!toggleDuranVarliklar"
+              >expand_less</mat-icon
+            >
+            <span class="align-self-center">II- DURAN VARLIKLAR</span>
+          </div>
+        </td>
+        <ng-container *ngFor="let duranVarlik of duranVarliklar">
+          <td>
+            <app-currency
+              [value]="duranVarlik.sumOfDuranVarliklar"
+            ></app-currency>
+          </td>
+        </ng-container>
+      </tr>
+      <ng-container *ngIf="toggleDuranVarliklar">
+        <tr
+          class="text-success cursor-pointer"
+          (click)="toggleTicariAlacaklarDuran = !toggleTicariAlacaklarDuran"
+        >
+          <td class="ps-3">
+            <div class="d-flex">
+              <mat-icon
+                class="align-self-center me-3"
+                *ngIf="toggleTicariAlacaklarDuran"
+                >expand_more</mat-icon
+              >
+              <mat-icon
+                class="align-self-center me-3"
+                *ngIf="!toggleTicariAlacaklarDuran"
+                >expand_less</mat-icon
+              >
+              <span class="align-self-center">A-TİCARİ ALACAKLAR</span>
+            </div>
+          </td>
+          <ng-container *ngFor="let duranVarlik of duranVarliklar">
+            <td>
+              <app-currency
+                [value]="duranVarlik.ticariAlacaklar.sumOfTicariAlacaklar"
+              ></app-currency>
+            </td>
+          </ng-container>
+        </tr>
+        <ng-container *ngIf="toggleTicariAlacaklarDuran">
+          <tr>
+            <td class="ps-5">220-ALICILAR</td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="duranVarlik.ticariAlacaklar.kasa220"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">221-ALACAK SENETLERİ</td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="duranVarlik.ticariAlacaklar.kasa221"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">222-ALACAK SENETLERİ REESKONTU (-)</td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="duranVarlik.ticariAlacaklar.kasa222"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">
+              224-KAZANILMAMIŞ FİNANSAL KİRALAMA FAİZ GELİRLERİ (-)
+            </td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="duranVarlik.ticariAlacaklar.kasa224"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">226-VERİLEN DEPOZİTO VE TEMİNATLAR</td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="duranVarlik.ticariAlacaklar.kasa226"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">229-ŞÜPHELİ ALACAKLAR KARŞILIĞI (-)</td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="duranVarlik.ticariAlacaklar.kasa229"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+        </ng-container>
+        <tr
+          class="text-success cursor-pointer"
+          (click)="toggleDigerAlacaklarDuran = !toggleDigerAlacaklarDuran"
+        >
+          <td class="ps-3">
+            <div class="d-flex">
+              <mat-icon
+                class="align-self-center me-3"
+                *ngIf="toggleDigerAlacaklarDuran"
+                >expand_more</mat-icon
+              >
+              <mat-icon
+                class="align-self-center me-3"
+                *ngIf="!toggleDigerAlacaklarDuran"
+                >expand_less</mat-icon
+              >
+              <span class="align-self-center">B-DİĞER ALACAKLAR (1) </span>
+            </div>
+          </td>
+          <ng-container *ngFor="let duranVarlik of duranVarliklar">
+            <td>
+              <app-currency
+                [value]="duranVarlik.digerAlacaklar.sumOfigerAlacaklar"
+              ></app-currency>
+            </td>
+          </ng-container>
+        </tr>
+        <ng-container *ngIf="toggleDigerAlacaklarDuran">
+          <tr>
+            <td class="ps-5">231-ORTAKLARDAN ALACAKLAR</td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="duranVarlik.digerAlacaklar.kasa231"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">232-İŞTİRAKLERDEN ALACAKLAR</td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="duranVarlik.digerAlacaklar.kasa232"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">233-BAĞLI ORTAKLIKLARDAN ALACAKLAR</td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="duranVarlik.digerAlacaklar.kasa233"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">235-PERSONELDEN ALACAKLAR</td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="duranVarlik.digerAlacaklar.kasa235"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">236-DİĞER ÇEŞİTLİ ALACAKLAR</td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="duranVarlik.digerAlacaklar.kasa236"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">237-DİĞER ALACAK SENETLERİ REESKONTU (-)</td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="duranVarlik.digerAlacaklar.kasa237"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">239-ŞÜPHELİ DİĞER ALACAKLAR KARŞILIĞI (-)</td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="duranVarlik.digerAlacaklar.kasa239"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+        </ng-container>
+        <tr
+          class="text-success cursor-pointer"
+          (click)="toggleMaliDuranVarliklar = !toggleMaliDuranVarliklar"
+        >
+          <td class="ps-3">
+            <div class="d-flex">
+              <mat-icon
+                class="align-self-center me-3"
+                *ngIf="toggleMaliDuranVarliklar"
+                >expand_more</mat-icon
+              >
+              <mat-icon
+                class="align-self-center me-3"
+                *ngIf="!toggleMaliDuranVarliklar"
+                >expand_less</mat-icon
+              >
+              <span class="align-self-center">C-MALİ DURAN VARLIKLAR</span>
+            </div>
+          </td>
+          <ng-container *ngFor="let duranVarlik of duranVarliklar">
+            <td>
+              <app-currency
+                [value]="duranVarlik.maliDuranVarliklar.sumOfMaliDuranVarliklar"
+              ></app-currency>
+            </td>
+          </ng-container>
+        </tr>
+        <ng-container *ngIf="toggleMaliDuranVarliklar">
+          <tr>
+            <td class="ps-5">240-BAĞLI MENKUL KIYMETLER</td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="duranVarlik.maliDuranVarliklar.kasa240"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">
+              241-BAĞLI MENKUL KIYMETLER DEĞER DÜŞÜKLÜĞÜ KARŞILIĞI (-)
+            </td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="duranVarlik.maliDuranVarliklar.kasa241"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">242-İŞTİRAKLER</td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="duranVarlik.maliDuranVarliklar.kasa242"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">243-İŞTİRAKLERE SERMAYE TAAHHÜTLERİ (-)</td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="duranVarlik.maliDuranVarliklar.kasa243"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">
+              244-İŞTİRAKLER SERMAYE PAYLARI DEĞER DÜŞÜKLÜĞÜ KARŞILIĞI (-))
+            </td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="duranVarlik.maliDuranVarliklar.kasa244"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">245-BAĞLI ORTAKLIKLAR</td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="duranVarlik.maliDuranVarliklar.kasa245"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">246-BAĞLI ORTAKLIKLARA SERMAYE TAAHHÜTLERİ (-)</td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="duranVarlik.maliDuranVarliklar.kasa246"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">
+              247-BAĞLI ORTAKLIKLAR SERMAYE PAYLARI DEĞER DÜŞÜKLÜGÜ KARŞILIĞI
+              (-)
+            </td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="duranVarlik.maliDuranVarliklar.kasa247"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">248-DİĞER MALİ DURAN VARLIKLAR</td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="duranVarlik.maliDuranVarliklar.kasa248"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">249-DİĞER MALİ DURAN VARLIKLAR KARŞILIĞI (-)</td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="duranVarlik.maliDuranVarliklar.kasa249"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+        </ng-container>
+        <tr
+          class="text-success cursor-pointer"
+          (click)="toggleMaddiDuranVarliklar = !toggleMaddiDuranVarliklar"
+        >
+          <td class="ps-3">
+            <div class="d-flex">
+              <mat-icon
+                class="align-self-center me-3"
+                *ngIf="toggleMaddiDuranVarliklar"
+                >expand_more</mat-icon
+              >
+              <mat-icon
+                class="align-self-center me-3"
+                *ngIf="!toggleMaddiDuranVarliklar"
+                >expand_less</mat-icon
+              >
+              <span class="align-self-center">D-MADDİ DURAN VARLIKLAR</span>
+            </div>
+          </td>
+          <ng-container *ngFor="let duranVarlik of duranVarliklar">
+            <td>
+              <app-currency
+                [value]="
+                  duranVarlik.maddiDuranVarliklar.sumOfMaddiDuranVarliklar
+                "
+              ></app-currency>
+            </td>
+          </ng-container>
+        </tr>
+        <ng-container *ngIf="toggleMaddiDuranVarliklar">
+          <tr>
+            <td class="ps-5">250-ARAZİ VE ARSALAR</td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="duranVarlik.maddiDuranVarliklar.kasa250"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">251-YER ALTI VE YER ÜSTÜ DÜZENLERİ</td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="duranVarlik.maddiDuranVarliklar.kasa251"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">252-BİNALAR</td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="duranVarlik.maddiDuranVarliklar.kasa252"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">253-TESİS, MAKİNE VE CİHAZLAR</td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="duranVarlik.maddiDuranVarliklar.kasa253"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">254-TAŞITLAR</td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="duranVarlik.maddiDuranVarliklar.kasa254"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">255-DEMİRBAŞLAR</td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="duranVarlik.maddiDuranVarliklar.kasa255"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">256-DİĞER MADDİ DURAN VARLIKLAR</td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="duranVarlik.maddiDuranVarliklar.kasa256"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">257-BİRİKMİŞ AMORTİSMANLAR (-)</td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="duranVarlik.maddiDuranVarliklar.kasa257"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">258-YAPILMAKTA OLAN YATIRIMLAR</td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="duranVarlik.maddiDuranVarliklar.kasa258"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">259-VERİLEN AVANSLAR</td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="duranVarlik.maddiDuranVarliklar.kasa259"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+        </ng-container>
+        <tr
+          class="text-success cursor-pointer"
+          (click)="
+            toggleMaddiOlmayanDuranVarliklar = !toggleMaddiOlmayanDuranVarliklar
+          "
+        >
+          <td class="ps-3">
+            <div class="d-flex">
+              <mat-icon
+                class="align-self-center me-3"
+                *ngIf="toggleMaddiOlmayanDuranVarliklar"
+                >expand_more</mat-icon
+              >
+              <mat-icon
+                class="align-self-center me-3"
+                *ngIf="!toggleMaddiOlmayanDuranVarliklar"
+                >expand_less</mat-icon
+              >
+              <span class="align-self-center"
+                >E-MADDİ OLMAYAN DURAN VARLIKLAR</span
+              >
+            </div>
+          </td>
+          <ng-container *ngFor="let duranVarlik of duranVarliklar">
+            <td>
+              <app-currency
+                [value]="
+                  duranVarlik.maddiOlmayanDuranVarliklar
+                    .sumOfMaddiOlmayanDuranVarliklar
+                "
+              ></app-currency>
+            </td>
+          </ng-container>
+        </tr>
+        <ng-container *ngIf="toggleMaddiOlmayanDuranVarliklar">
+          <tr>
+            <td class="ps-5">260-HAKLAR</td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="duranVarlik.maddiOlmayanDuranVarliklar.kasa260"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">261-ŞEREFİYE</td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="duranVarlik.maddiOlmayanDuranVarliklar.kasa261"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">262-KURULUŞ VE ÖRGÜTLENME GİDERLERİ</td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="duranVarlik.maddiOlmayanDuranVarliklar.kasa262"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">263-ARAŞTIRMA VE GELİŞTİRME GİDERLERİ</td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="duranVarlik.maddiOlmayanDuranVarliklar.kasa263"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">264-ÖZEL MALİYETLER</td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="duranVarlik.maddiOlmayanDuranVarliklar.kasa264"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">267-DİĞER MADDİ OLMAYAN DURAN VARLIKLAR</td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="duranVarlik.maddiOlmayanDuranVarliklar.kasa267"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">268-BİRİKMİŞ AMORTİSMANLAR (-)</td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="duranVarlik.maddiOlmayanDuranVarliklar.kasa268"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">269-VERİLEN AVANSLAR</td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="duranVarlik.maddiOlmayanDuranVarliklar.kasa269"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+        </ng-container>
+        <tr
+          class="text-success cursor-pointer"
+          (click)="
+            toggleOzelTukenmeyeTabiVarliklar = !toggleOzelTukenmeyeTabiVarliklar
+          "
+        >
+          <td class="ps-3">
+            <div class="d-flex">
+              <mat-icon
+                class="align-self-center me-3"
+                *ngIf="toggleOzelTukenmeyeTabiVarliklar"
+                >expand_more</mat-icon
+              >
+              <mat-icon
+                class="align-self-center me-3"
+                *ngIf="!toggleOzelTukenmeyeTabiVarliklar"
+                >expand_less</mat-icon
+              >
+              <span class="align-self-center"
+                >F-ÖZEL TÜKENMEYE TABİ VARLIKLAR</span
+              >
+            </div>
+          </td>
+          <ng-container *ngFor="let duranVarlik of duranVarliklar">
+            <td>
+              <app-currency
+                [value]="
+                  duranVarlik.ozelTukenmeyeTabiVarliklar
+                    .sumOfOzelTukenmeyeTabiVarliklar
+                "
+              ></app-currency>
+            </td>
+          </ng-container>
+        </tr>
+        <ng-container *ngIf="toggleOzelTukenmeyeTabiVarliklar">
+          <tr>
+            <td class="ps-5">271-ARAMA GİDERLERİ</td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="duranVarlik.ozelTukenmeyeTabiVarliklar.kasa271"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">272-HAZIRLIK VE GELİŞTİRME GİDERLERİ</td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="duranVarlik.ozelTukenmeyeTabiVarliklar.kasa272"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">277-DİĞER ÖZEL TÜKENMEYE TABİ VARLIKLAR</td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="duranVarlik.ozelTukenmeyeTabiVarliklar.kasa277"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">278-BİRİKMİŞ TÜKENME PAYLARI (-)</td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="duranVarlik.ozelTukenmeyeTabiVarliklar.kasa278"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">279-VERİLEN AVANSLAR</td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="duranVarlik.ozelTukenmeyeTabiVarliklar.kasa279"
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+        </ng-container>
+        <tr
+          class="text-success cursor-pointer"
+          (click)="
+            toggleGelecekYillaraAitGiderlerVeGelirlerTahakkuklari =
+              !toggleGelecekYillaraAitGiderlerVeGelirlerTahakkuklari
+          "
+        >
+          <td class="ps-3">
+            <div class="d-flex">
+              <mat-icon
+                class="align-self-center me-3"
+                *ngIf="toggleGelecekYillaraAitGiderlerVeGelirlerTahakkuklari"
+                >expand_more</mat-icon
+              >
+              <mat-icon
+                class="align-self-center me-3"
+                *ngIf="!toggleGelecekYillaraAitGiderlerVeGelirlerTahakkuklari"
+                >expand_less</mat-icon
+              >
+              <span class="align-self-center"
+                >G-GELECEK YILLARA AİT GİDERLER VE GELİR TAHAKKUKLARI</span
+              >
+            </div>
+          </td>
+          <ng-container *ngFor="let duranVarlik of duranVarliklar">
+            <td>
+              <app-currency
+                [value]="
+                  duranVarlik.gelecekYillaraAitGiderlerVeGelirlerTahakkuklari
+                    .sumOfGelecekYillaraAitGiderlerVeGelirlerTahakkuklari
+                "
+              ></app-currency>
+            </td>
+          </ng-container>
+        </tr>
+        <ng-container
+          *ngIf="toggleGelecekYillaraAitGiderlerVeGelirlerTahakkuklari"
+        >
+          <tr>
+            <td class="ps-5">280-GELECEK YILLARA AİT GİDERLER</td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="
+                    duranVarlik.gelecekYillaraAitGiderlerVeGelirlerTahakkuklari
+                      .kasa280
+                  "
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">281-GELİR TAHAKKUKLARI</td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="
+                    duranVarlik.gelecekYillaraAitGiderlerVeGelirlerTahakkuklari
+                      .kasa281
+                  "
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">
+              291-GELECEK YILLARDA İNDİRİLECEK KATMA DEĞER VERGİSİ
+            </td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="
+                    duranVarlik.gelecekYillaraAitGiderlerVeGelirlerTahakkuklari
+                      .kasa291
+                  "
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">292-DİĞER KATMA DEĞER VERGİSİ</td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="
+                    duranVarlik.gelecekYillaraAitGiderlerVeGelirlerTahakkuklari
+                      .kasa292
+                  "
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">293-GELECEK YILLAR İHTİYACI STOKLAR</td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="
+                    duranVarlik.gelecekYillaraAitGiderlerVeGelirlerTahakkuklari
+                      .kasa293
+                  "
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">
+              294-ELDEN ÇIKARILACAK STOKLAR VE MADDİ DURAN VARLIKLAR
+            </td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="
+                    duranVarlik.gelecekYillaraAitGiderlerVeGelirlerTahakkuklari
+                      .kasa294
+                  "
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">295-PEŞİN ÖDENEN VERGİLER VE FONLAR</td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="
+                    duranVarlik.gelecekYillaraAitGiderlerVeGelirlerTahakkuklari
+                      .kasa295
+                  "
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">296-GEÇİCİ HESAP</td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="
+                    duranVarlik.gelecekYillaraAitGiderlerVeGelirlerTahakkuklari
+                      .kasa296
+                  "
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">297-DİĞER ÇEŞİTLİ DURAN VARLIKLAR</td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="
+                    duranVarlik.gelecekYillaraAitGiderlerVeGelirlerTahakkuklari
+                      .kasa297
+                  "
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">298-STOK DEĞER DÜŞÜKLÜĞÜ KARŞILIĞI (-)</td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="
+                    duranVarlik.gelecekYillaraAitGiderlerVeGelirlerTahakkuklari
+                      .kasa298
+                  "
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <td class="ps-5">299-BİRİKMİŞ AMORTİSMANLAR (-)</td>
+            <ng-container *ngFor="let duranVarlik of duranVarliklar">
+              <td>
+                <app-currency
+                  [value]="
+                    duranVarlik.gelecekYillaraAitGiderlerVeGelirlerTahakkuklari
+                      .kasa299
+                  "
+                ></app-currency>
+              </td>
+            </ng-container>
+          </tr>
+        </ng-container>
+      </ng-container>
+    </tbody>
+    <tfoot>
+      <tr class="table-dark">
+        <td>Aktif Kaynaklar Toplamı</td>
+        <ng-container *ngFor="let activeItem of activeItems">
+          <td>
+            <app-currency
+              [value]="activeItem.sumOfAktifVarliklar"
+            ></app-currency>
+          </td>
+        </ng-container>
+      </tr>
+    </tfoot>
+  </table>
+</div>

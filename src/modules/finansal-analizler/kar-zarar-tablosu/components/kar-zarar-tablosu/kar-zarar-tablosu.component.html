@@ -1,0 +1,1034 @@
+<app-select-period
+  [multiple]="true"
+  (onSearch)="onSearch($event)"
+></app-select-period>
+
+<ng-container *ngIf="response">
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr class="table-dark">
+          <th>Hesap Adı</th>
+          <ng-container *ngFor="let period of selectedPeriods">
+            <th>
+              {{ period }}
+            </th>
+            <th>%</th>
+          </ng-container>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngIf="{ show: false } as toggle">
+          <tr
+            class="text-success cursor-pointer"
+            (click)="toggle.show = !toggle.show"
+          >
+            <td class="ps-3">
+              <div class="d-flex">
+                <mat-icon class="align-self-center me-3" *ngIf="toggle.show"
+                  >expand_more</mat-icon
+                >
+                <mat-icon class="align-self-center me-3" *ngIf="!toggle.show"
+                  >expand_less</mat-icon
+                >
+                <span class="align-self-center">A. BRÜT SATIŞLAR</span>
+              </div>
+            </td>
+            <ng-container *ngFor="let brutSatis of brutSatislar">
+              <td>
+                <app-currency
+                  [value]="brutSatis.sumOfBrutSatislar"
+                ></app-currency>
+              </td>
+              <td></td>
+            </ng-container>
+          </tr>
+          <ng-container *ngIf="toggle.show">
+            <tr>
+              <td class="ps-4">600- Yurt içi Satışlar</td>
+              <ng-container *ngFor="let brutSatis of brutSatislar">
+                <td>
+                  <app-currency [value]="brutSatis.kasa600"></app-currency>
+                </td>
+                <td></td>
+              </ng-container>
+            </tr>
+            <tr>
+              <td class="ps-4">601- Yurt dışı Satışlar</td>
+              <ng-container *ngFor="let brutSatis of brutSatislar">
+                <td>
+                  <app-currency [value]="brutSatis.kasa601"></app-currency>
+                </td>
+                <td></td>
+              </ng-container>
+            </tr>
+            <tr>
+              <td class="ps-4">602- Diğer Gelirler</td>
+              <ng-container *ngFor="let brutSatis of brutSatislar">
+                <td>
+                  <app-currency [value]="brutSatis.kasa602"></app-currency>
+                </td>
+                <td></td>
+              </ng-container>
+            </tr>
+          </ng-container>
+        </ng-container>
+        <ng-container *ngIf="{ show: false } as toggle">
+          <tr
+            class="text-success cursor-pointer"
+            (click)="toggle.show = !toggle.show"
+          >
+            <td class="ps-3">
+              <div class="d-flex">
+                <mat-icon class="align-self-center me-3" *ngIf="toggle.show"
+                  >expand_more</mat-icon
+                >
+                <mat-icon class="align-self-center me-3" *ngIf="!toggle.show"
+                  >expand_less</mat-icon
+                >
+                <span class="align-self-center">B. SATIŞ İNDİRİMLERİ (-)</span>
+              </div>
+            </td>
+            <ng-container *ngFor="let satisIndirimi of satisIndirimleri">
+              <td>
+                <app-currency
+                  [value]="satisIndirimi.sumOfSatisIndirimleri"
+                ></app-currency>
+              </td>
+              <td></td>
+            </ng-container>
+          </tr>
+          <ng-container *ngIf="toggle.show">
+            <tr>
+              <td class="ps-4">610- Satıştan İadeler (-)</td>
+              <ng-container *ngFor="let satisIndirimi of satisIndirimleri">
+                <td>
+                  <app-currency [value]="satisIndirimi.kasa610"></app-currency>
+                </td>
+                <td></td>
+              </ng-container>
+            </tr>
+            <tr>
+              <td class="ps-4">611- Satış İskontolari (-)</td>
+              <ng-container *ngFor="let satisIndirimi of satisIndirimleri">
+                <td>
+                  <app-currency [value]="satisIndirimi.kasa611"></app-currency>
+                </td>
+                <td></td>
+              </ng-container>
+            </tr>
+            <tr>
+              <td class="ps-4">612- Diğer İndirimler (-)</td>
+              <ng-container *ngFor="let satisIndirimi of satisIndirimleri">
+                <td>
+                  <app-currency [value]="satisIndirimi.kasa612"></app-currency>
+                </td>
+                <td></td>
+              </ng-container>
+            </tr>
+          </ng-container>
+        </ng-container>
+        <ng-container *ngIf="{ show: false } as toggle">
+          <tr
+            class="text-primary cursor-pointer"
+            (click)="toggle.show = !toggle.show"
+          >
+            <td>
+              <div class="d-flex">
+                <mat-icon class="align-self-center me-3" *ngIf="toggle.show"
+                  >expand_more</mat-icon
+                >
+                <mat-icon class="align-self-center me-3" *ngIf="!toggle.show"
+                  >expand_less</mat-icon
+                >
+                <span class="align-self-center">C. Net Satışlar</span>
+              </div>
+            </td>
+            <ng-container *ngFor="let totalOfNetSatis of totalOfNetSatislar">
+              <td>
+                <app-currency [value]="totalOfNetSatis"></app-currency>
+              </td>
+              <td></td>
+            </ng-container>
+          </tr>
+          <ng-container *ngIf="toggle.show">
+            <tr class="text-success">
+              <td class="ps-3">D. SATIŞLARIN MALİYETİ (-)</td>
+              <ng-container *ngFor="let satisMaliyeti of satislarinMaliyeti">
+                <td>
+                  <app-currency
+                    [value]="satisMaliyeti.sumOfSatislarinMaliyeti"
+                  ></app-currency>
+                </td>
+                <td></td>
+              </ng-container>
+            </tr>
+            <tr>
+              <td class="ps-4">620- Satılan Mamüller Maliyeti (-)</td>
+              <ng-container *ngFor="let satisMaliyeti of satislarinMaliyeti">
+                <td>
+                  <app-currency [value]="satisMaliyeti.kasa620"></app-currency>
+                </td>
+                <td></td>
+              </ng-container>
+            </tr>
+            <tr>
+              <td class="ps-4">621- Satılan Ticari Mallar Maliyeti (-)</td>
+              <ng-container *ngFor="let satisMaliyeti of satislarinMaliyeti">
+                <td>
+                  <app-currency [value]="satisMaliyeti.kasa621"></app-currency>
+                </td>
+                <td></td>
+              </ng-container>
+            </tr>
+            <tr>
+              <td class="ps-4">622- Satılan Hizmet Maliyeti (-)</td>
+              <ng-container *ngFor="let satisMaliyeti of satislarinMaliyeti">
+                <td>
+                  <app-currency [value]="satisMaliyeti.kasa622"></app-currency>
+                </td>
+                <td></td>
+              </ng-container>
+            </tr>
+            <tr>
+              <td class="ps-4">623- Diğer Satışlarin Maliyeti (-)</td>
+              <ng-container *ngFor="let satisMaliyeti of satislarinMaliyeti">
+                <td>
+                  <app-currency [value]="satisMaliyeti.kasa623"></app-currency>
+                </td>
+                <td></td>
+              </ng-container>
+            </tr>
+          </ng-container>
+        </ng-container>
+        <ng-container *ngIf="{ show: false } as toggle">
+          <tr
+            class="text-primary cursor-pointer"
+            (click)="toggle.show = !toggle.show"
+          >
+            <td>
+              <div class="d-flex">
+                <mat-icon class="align-self-center me-3" *ngIf="toggle.show"
+                  >expand_more</mat-icon
+                >
+                <mat-icon class="align-self-center me-3" *ngIf="!toggle.show"
+                  >expand_less</mat-icon
+                >
+                <span class="align-self-center">Brüt Satış Kar veya Zarar</span>
+              </div>
+            </td>
+            <ng-container
+              *ngFor="
+                let totalOfBrutSatisKariVeyaZarar of totalOfBrutSatisKariVeyaZarari;
+                let i = index
+              "
+            >
+              <td>
+                <app-currency
+                  [value]="totalOfBrutSatisKariVeyaZarar"
+                ></app-currency>
+              </td>
+              <td>{{ percentageOfBrutSatisKariVeyaZarari[i] }}%</td>
+            </ng-container>
+          </tr>
+          <ng-container *ngIf="toggle.show">
+            <tr class="text-success">
+              <td class="ps-3">E. FAALİYET GİDERLERİ</td>
+              <ng-container *ngFor="let faliyetGideri of faliyetGiderleri">
+                <td>
+                  <app-currency
+                    [value]="faliyetGideri.sumOfFaliyetGiderleri"
+                  ></app-currency>
+                </td>
+                <td></td>
+              </ng-container>
+            </tr>
+            <tr>
+              <td class="ps-4">630- Araştırma Ve Geliştirme Gid (-)</td>
+              <ng-container *ngFor="let faliyetGideri of faliyetGiderleri">
+                <td>
+                  <app-currency [value]="faliyetGideri.kasa630"></app-currency>
+                </td>
+                <td></td>
+              </ng-container>
+            </tr>
+            <tr>
+              <td class="ps-4">631- Pazarlama Satış ve Dağ. Gid. (-)</td>
+              <ng-container *ngFor="let faliyetGideri of faliyetGiderleri">
+                <td>
+                  <app-currency [value]="faliyetGideri.kasa631"></app-currency>
+                </td>
+                <td></td>
+              </ng-container>
+            </tr>
+            <tr>
+              <td class="ps-4">632- Genel Yönetim Giderleri (-)</td>
+              <ng-container *ngFor="let faliyetGideri of faliyetGiderleri">
+                <td>
+                  <app-currency [value]="faliyetGideri.kasa632"></app-currency>
+                </td>
+                <td></td>
+              </ng-container>
+            </tr>
+          </ng-container>
+        </ng-container>
+        <ng-container *ngIf="{ show: false } as toggle">
+          <tr
+            class="text-primary cursor-pointer"
+            (click)="toggle.show = !toggle.show"
+          >
+            <td>
+              <div class="d-flex">
+                <mat-icon class="align-self-center me-3" *ngIf="toggle.show"
+                  >expand_more</mat-icon
+                >
+                <mat-icon class="align-self-center me-3" *ngIf="!toggle.show"
+                  >expand_less</mat-icon
+                >
+                <span class="align-self-center">Faaliyet Kar veya Zarar</span>
+              </div>
+            </td>
+            <ng-container
+              *ngFor="
+                let totalOfFaliyetKariVeyaZarar of totalOfFaliyetKariVeyaZarari;
+                let i = index
+              "
+            >
+              <td>
+                <app-currency
+                  [value]="totalOfFaliyetKariVeyaZarar"
+                ></app-currency>
+              </td>
+              <td>{{ percentageOfFaliyetKariVeyaZarari[i] }}%</td>
+            </ng-container>
+          </tr>
+          <ng-container *ngIf="toggle.show">
+            <ng-container
+              *ngIf="{ show: false } as toggleDigerFaalOlanGelirVeKarlar"
+            >
+              <tr
+                class="text-success cursor-pointer"
+                (click)="
+                  toggleDigerFaalOlanGelirVeKarlar.show =
+                    !toggleDigerFaalOlanGelirVeKarlar.show
+                "
+              >
+                <td class="ps-3">
+                  <div class="d-flex">
+                    <mat-icon
+                      class="align-self-center me-3"
+                      *ngIf="toggleDigerFaalOlanGelirVeKarlar.show"
+                      >expand_more</mat-icon
+                    >
+                    <mat-icon
+                      class="align-self-center me-3"
+                      *ngIf="!toggleDigerFaalOlanGelirVeKarlar.show"
+                      >expand_less</mat-icon
+                    >
+                    <span class="align-self-center"
+                      >F. DİĞER FAAL. OLAĞAN GELİR VE KARLAR</span
+                    >
+                  </div>
+                </td>
+                <ng-container
+                  *ngFor="
+                    let digerFaalOlaganGiderVeKar of digerFaalOlaganGiderVeKarlar
+                  "
+                >
+                  <td>
+                    <app-currency
+                      [value]="
+                        digerFaalOlaganGiderVeKar.sumOfDigerFaalOlaganGelirVeKarlar
+                      "
+                    ></app-currency>
+                  </td>
+                  <td></td>
+                </ng-container>
+              </tr>
+              <ng-container *ngIf="toggleDigerFaalOlanGelirVeKarlar.show">
+                <tr>
+                  <td class="ps-4">640- İştiraklerden Temettü Gelirleri</td>
+                  <ng-container
+                    *ngFor="
+                      let digerFaalOlaganGiderVeKar of digerFaalOlaganGiderVeKarlar
+                    "
+                  >
+                    <td>
+                      <app-currency
+                        [value]="digerFaalOlaganGiderVeKar.kasa640"
+                      ></app-currency>
+                    </td>
+                    <td></td>
+                  </ng-container>
+                </tr>
+                <tr>
+                  <td class="ps-4">641- Bağlı Ortaklık Temettü Gelirleri</td>
+                  <ng-container
+                    *ngFor="
+                      let digerFaalOlaganGiderVeKar of digerFaalOlaganGiderVeKarlar
+                    "
+                  >
+                    <td>
+                      <app-currency
+                        [value]="digerFaalOlaganGiderVeKar.kasa641"
+                      ></app-currency>
+                    </td>
+                    <td></td>
+                  </ng-container>
+                </tr>
+                <tr>
+                  <td class="ps-4">642- Faiz Gelirleri</td>
+                  <ng-container
+                    *ngFor="
+                      let digerFaalOlaganGiderVeKar of digerFaalOlaganGiderVeKarlar
+                    "
+                  >
+                    <td>
+                      <app-currency
+                        [value]="digerFaalOlaganGiderVeKar.kasa642"
+                      ></app-currency>
+                    </td>
+                    <td></td>
+                  </ng-container>
+                </tr>
+                <tr>
+                  <td class="ps-4">643- Komisyon Gelirleri</td>
+                  <ng-container
+                    *ngFor="
+                      let digerFaalOlaganGiderVeKar of digerFaalOlaganGiderVeKarlar
+                    "
+                  >
+                    <td>
+                      <app-currency
+                        [value]="digerFaalOlaganGiderVeKar.kasa643"
+                      ></app-currency>
+                    </td>
+                    <td></td>
+                  </ng-container>
+                </tr>
+                <tr>
+                  <td class="ps-4">644- Konusu Kalmayan Karşılıklar</td>
+                  <ng-container
+                    *ngFor="
+                      let digerFaalOlaganGiderVeKar of digerFaalOlaganGiderVeKarlar
+                    "
+                  >
+                    <td>
+                      <app-currency
+                        [value]="digerFaalOlaganGiderVeKar.kasa644"
+                      ></app-currency>
+                    </td>
+                    <td></td>
+                  </ng-container>
+                </tr>
+                <tr>
+                  <td class="ps-4">645- Menkul Kıymetler Satış Karları</td>
+                  <ng-container
+                    *ngFor="
+                      let digerFaalOlaganGiderVeKar of digerFaalOlaganGiderVeKarlar
+                    "
+                  >
+                    <td>
+                      <app-currency
+                        [value]="digerFaalOlaganGiderVeKar.kasa645"
+                      ></app-currency>
+                    </td>
+                    <td></td>
+                  </ng-container>
+                </tr>
+                <tr>
+                  <td class="ps-4">646- Kambiyo Karları</td>
+                  <ng-container
+                    *ngFor="
+                      let digerFaalOlaganGiderVeKar of digerFaalOlaganGiderVeKarlar
+                    "
+                  >
+                    <td>
+                      <app-currency
+                        [value]="digerFaalOlaganGiderVeKar.kasa646"
+                      ></app-currency>
+                    </td>
+                    <td></td>
+                  </ng-container>
+                </tr>
+                <tr>
+                  <td class="ps-4">647- Reeskont Faiz Gelirleri</td>
+                  <ng-container
+                    *ngFor="
+                      let digerFaalOlaganGiderVeKar of digerFaalOlaganGiderVeKarlar
+                    "
+                  >
+                    <td>
+                      <app-currency
+                        [value]="digerFaalOlaganGiderVeKar.kasa647"
+                      ></app-currency>
+                    </td>
+                    <td></td>
+                  </ng-container>
+                </tr>
+                <tr>
+                  <td class="ps-4">648- Enflasyon Düzeltmesi Karları</td>
+                  <ng-container
+                    *ngFor="
+                      let digerFaalOlaganGiderVeKar of digerFaalOlaganGiderVeKarlar
+                    "
+                  >
+                    <td>
+                      <app-currency
+                        [value]="digerFaalOlaganGiderVeKar.kasa648"
+                      ></app-currency>
+                    </td>
+                    <td></td>
+                  </ng-container>
+                </tr>
+                <tr>
+                  <td class="ps-4">649- Diğer Olağan Gelir Ve Karlar</td>
+                  <ng-container
+                    *ngFor="
+                      let digerFaalOlaganGiderVeKar of digerFaalOlaganGiderVeKarlar
+                    "
+                  >
+                    <td>
+                      <app-currency
+                        [value]="digerFaalOlaganGiderVeKar.kasa649"
+                      ></app-currency>
+                    </td>
+                    <td></td>
+                  </ng-container>
+                </tr>
+              </ng-container>
+            </ng-container>
+            <ng-container
+              *ngIf="{ show: false } as toggleDigerFaalGiderVeZararlar"
+            >
+              <tr
+                class="text-success cursor-pointer"
+                (click)="
+                  toggleDigerFaalGiderVeZararlar.show =
+                    !toggleDigerFaalGiderVeZararlar.show
+                "
+              >
+                <td class="ps-3">
+                  <div class="d-flex">
+                    <mat-icon
+                      class="align-self-center me-3"
+                      *ngIf="toggleDigerFaalGiderVeZararlar.show"
+                      >expand_more</mat-icon
+                    >
+                    <mat-icon
+                      class="align-self-center me-3"
+                      *ngIf="!toggleDigerFaalGiderVeZararlar.show"
+                      >expand_less</mat-icon
+                    >
+                    <span class="align-self-center"
+                      >G. DİĞER FAAL. GİDER VE ZARARLARI</span
+                    >
+                  </div>
+                </td>
+                <ng-container
+                  *ngFor="let digerFaalGiderVeZarar of digerFaalGiderVeZararlar"
+                >
+                  <td>
+                    <app-currency
+                      [value]="
+                        digerFaalGiderVeZarar.sumOfDigerFaalOlaganGiderVeZararlar
+                      "
+                    ></app-currency>
+                  </td>
+                  <td></td>
+                </ng-container>
+              </tr>
+              <ng-container *ngIf="toggleDigerFaalGiderVeZararlar.show">
+                <tr>
+                  <td class="ps-4">653- Komisyon Giderleri (-)</td>
+                  <ng-container
+                    *ngFor="
+                      let digerFaalGiderVeZarar of digerFaalGiderVeZararlar
+                    "
+                  >
+                    <td>
+                      <app-currency
+                        [value]="digerFaalGiderVeZarar.kasa653"
+                      ></app-currency>
+                    </td>
+                    <td></td>
+                  </ng-container>
+                </tr>
+                <tr>
+                  <td class="ps-4">654- Karşılık Giderleri (-)</td>
+                  <ng-container
+                    *ngFor="
+                      let digerFaalGiderVeZarar of digerFaalGiderVeZararlar
+                    "
+                  >
+                    <td>
+                      <app-currency
+                        [value]="digerFaalGiderVeZarar.kasa654"
+                      ></app-currency>
+                    </td>
+                    <td></td>
+                  </ng-container>
+                </tr>
+                <tr>
+                  <td class="ps-4">655- Menkul Kıymet Satış Zararı (-)</td>
+                  <ng-container
+                    *ngFor="
+                      let digerFaalGiderVeZarar of digerFaalGiderVeZararlar
+                    "
+                  >
+                    <td>
+                      <app-currency
+                        [value]="digerFaalGiderVeZarar.kasa655"
+                      ></app-currency>
+                    </td>
+                    <td></td>
+                  </ng-container>
+                </tr>
+                <tr>
+                  <td class="ps-4">656- Kambiyo Zararları</td>
+                  <ng-container
+                    *ngFor="
+                      let digerFaalGiderVeZarar of digerFaalGiderVeZararlar
+                    "
+                  >
+                    <td>
+                      <app-currency
+                        [value]="digerFaalGiderVeZarar.kasa656"
+                      ></app-currency>
+                    </td>
+                    <td></td>
+                  </ng-container>
+                </tr>
+                <tr>
+                  <td class="ps-4">657- Reeskont Faiz Giderleri (-)</td>
+                  <ng-container
+                    *ngFor="
+                      let digerFaalGiderVeZarar of digerFaalGiderVeZararlar
+                    "
+                  >
+                    <td>
+                      <app-currency
+                        [value]="digerFaalGiderVeZarar.kasa657"
+                      ></app-currency>
+                    </td>
+                    <td></td>
+                  </ng-container>
+                </tr>
+                <tr>
+                  <td class="ps-4">658- Enflasyon Düzeltmesi Zararları (-)</td>
+                  <ng-container
+                    *ngFor="
+                      let digerFaalGiderVeZarar of digerFaalGiderVeZararlar
+                    "
+                  >
+                    <td>
+                      <app-currency
+                        [value]="digerFaalGiderVeZarar.kasa658"
+                      ></app-currency>
+                    </td>
+                    <td></td>
+                  </ng-container>
+                </tr>
+                <tr>
+                  <td class="ps-4">659- Diğer Gider Ve Zararlar (-)</td>
+                  <ng-container
+                    *ngFor="
+                      let digerFaalGiderVeZarar of digerFaalGiderVeZararlar
+                    "
+                  >
+                    <td>
+                      <app-currency
+                        [value]="digerFaalGiderVeZarar.kasa659"
+                      ></app-currency>
+                    </td>
+                    <td></td>
+                  </ng-container>
+                </tr>
+              </ng-container>
+            </ng-container>
+            <ng-container *ngIf="{ show: false } as toggleFinansmanGiderleri">
+              <tr
+                class="text-success cursor-pointer"
+                (click)="
+                  toggleFinansmanGiderleri.show = !toggleFinansmanGiderleri.show
+                "
+              >
+                <td class="ps-3">
+                  <div class="d-flex">
+                    <mat-icon
+                      class="align-self-center me-3"
+                      *ngIf="toggleFinansmanGiderleri.show"
+                      >expand_more</mat-icon
+                    >
+                    <mat-icon
+                      class="align-self-center me-3"
+                      *ngIf="!toggleFinansmanGiderleri.show"
+                      >expand_less</mat-icon
+                    >
+                    <span class="align-self-center"
+                      >H. FİNANSMAN GİDERLERİ (-)</span
+                    >
+                  </div>
+                </td>
+                <ng-container
+                  *ngFor="let finansmanGideri of finansmanGiderleri"
+                >
+                  <td>
+                    <app-currency
+                      [value]="finansmanGideri.sumOfFinansmanGiderleri"
+                    ></app-currency>
+                  </td>
+                  <td></td>
+                </ng-container>
+              </tr>
+              <ng-container *ngIf="toggleFinansmanGiderleri.show">
+                <tr>
+                  <td class="ps-4">660- Kısa Vadeli Borçlanma Gid. (-)</td>
+                  <ng-container
+                    *ngFor="let finansmanGideri of finansmanGiderleri"
+                  >
+                    <td>
+                      <app-currency
+                        [value]="finansmanGideri.kasa660"
+                      ></app-currency>
+                    </td>
+                    <td></td>
+                  </ng-container>
+                </tr>
+                <tr>
+                  <td class="ps-4">661- Uzun Vadeli Borçlanma Gid. (-)</td>
+                  <ng-container
+                    *ngFor="let finansmanGideri of finansmanGiderleri"
+                  >
+                    <td>
+                      <app-currency
+                        [value]="finansmanGideri.kasa661"
+                      ></app-currency>
+                    </td>
+                    <td></td>
+                  </ng-container>
+                </tr>
+              </ng-container>
+            </ng-container>
+            <tr class="text-success">
+              <td class="ps-3">
+                <div class="d-flex">
+                  <mat-icon class="align-self-center me-3"
+                    >chevron_right</mat-icon
+                  >
+                  <span class="align-self-center">OLAĞAN KAR VEYA ZARAR</span>
+                </div>
+              </td>
+              <ng-container
+                *ngFor="let olaganKarVeyaZarar of totalOfOlaganKarVeyaZarar"
+              >
+                <td>
+                  <app-currency [value]="olaganKarVeyaZarar"></app-currency>
+                </td>
+                <td></td>
+              </ng-container>
+            </tr>
+            <ng-container
+              *ngIf="{ show: false } as toggleOlaganDisiGelirVeKarlar"
+            >
+              <tr
+                class="text-success cursor-pointer"
+                (click)="
+                  toggleOlaganDisiGelirVeKarlar.show =
+                    !toggleOlaganDisiGelirVeKarlar.show
+                "
+              >
+                <td class="ps-3">
+                  <div class="d-flex">
+                    <mat-icon
+                      class="align-self-center me-3"
+                      *ngIf="toggleOlaganDisiGelirVeKarlar.show"
+                      >expand_more</mat-icon
+                    >
+                    <mat-icon
+                      class="align-self-center me-3"
+                      *ngIf="!toggleOlaganDisiGelirVeKarlar.show"
+                      >expand_less</mat-icon
+                    >
+                    <span class="align-self-center"
+                      >I. OLAĞANDIŞI GELiR VE KARLAR</span
+                    >
+                  </div>
+                </td>
+                <ng-container
+                  *ngFor="let olagandisiGelirVeKar of olagandisiGelirVeKarlar"
+                >
+                  <td>
+                    <app-currency
+                      [value]="
+                        olagandisiGelirVeKar.sumOfOlagandisiGelirVeKarlar
+                      "
+                    ></app-currency>
+                  </td>
+                  <td></td>
+                </ng-container>
+              </tr>
+              <ng-container *ngIf="toggleOlaganDisiGelirVeKarlar.show">
+                <tr>
+                  <td class="ps-4">671- Önceki Dönem Gelir Ve Karları</td>
+                  <ng-container
+                    *ngFor="let olagandisiGelirVeKar of olagandisiGelirVeKarlar"
+                  >
+                    <td>
+                      <app-currency
+                        [value]="olagandisiGelirVeKar.kasa671"
+                      ></app-currency>
+                    </td>
+                    <td></td>
+                  </ng-container>
+                </tr>
+                <tr>
+                  <td class="ps-4">679- Diğer Olağandışı Gelir Ve Karlar</td>
+                  <ng-container
+                    *ngFor="let olagandisiGelirVeKar of olagandisiGelirVeKarlar"
+                  >
+                    <td>
+                      <app-currency
+                        [value]="olagandisiGelirVeKar.kasa679"
+                      ></app-currency>
+                    </td>
+                    <td></td>
+                  </ng-container>
+                </tr>
+              </ng-container>
+            </ng-container>
+            <ng-container
+              *ngIf="{ show: false } as toggleOlaganDisiGiderVeZararlar"
+            >
+              <tr
+                class="text-success cursor-pointer"
+                (click)="
+                  toggleOlaganDisiGiderVeZararlar.show =
+                    !toggleOlaganDisiGiderVeZararlar.show
+                "
+              >
+                <td class="ps-3">
+                  <div class="d-flex">
+                    <mat-icon
+                      class="align-self-center me-3"
+                      *ngIf="toggleOlaganDisiGiderVeZararlar.show"
+                      >expand_more</mat-icon
+                    >
+                    <mat-icon
+                      class="align-self-center me-3"
+                      *ngIf="!toggleOlaganDisiGiderVeZararlar.show"
+                      >expand_less</mat-icon
+                    >
+                    <span class="align-self-center"
+                      >J. OLAĞANDIŞI GiDER VE ZARARLAR (-)</span
+                    >
+                  </div>
+                </td>
+                <ng-container
+                  *ngFor="
+                    let olagandisiGiderVeZarar of olagandisiGiderVeZararlar
+                  "
+                >
+                  <td>
+                    <app-currency
+                      [value]="
+                        olagandisiGiderVeZarar.sumOfOlagandisiGiderVeZararlar
+                      "
+                    ></app-currency>
+                  </td>
+                  <td></td>
+                </ng-container>
+              </tr>
+              <ng-container *ngIf="toggleOlaganDisiGiderVeZararlar.show">
+                <tr>
+                  <td class="ps-4">
+                    680- Çalışmayan Kısım Gider ve Zararları (-)
+                  </td>
+                  <ng-container
+                    *ngFor="
+                      let olagandisiGiderVeZarar of olagandisiGiderVeZararlar
+                    "
+                  >
+                    <td>
+                      <app-currency
+                        [value]="olagandisiGiderVeZarar.kasa680"
+                      ></app-currency>
+                    </td>
+                    <td></td>
+                  </ng-container>
+                </tr>
+                <tr>
+                  <td class="ps-4">681- Önceki Dönem Gider ve Zararları (-)</td>
+                  <ng-container
+                    *ngFor="
+                      let olagandisiGiderVeZarar of olagandisiGiderVeZararlar
+                    "
+                  >
+                    <td>
+                      <app-currency
+                        [value]="olagandisiGiderVeZarar.kasa681"
+                      ></app-currency>
+                    </td>
+                    <td></td>
+                  </ng-container>
+                </tr>
+                <tr>
+                  <td class="ps-4">
+                    689- Diğer Olağandışı Gider ve Zararlar (-)
+                  </td>
+                  <ng-container
+                    *ngFor="
+                      let olagandisiGiderVeZarar of olagandisiGiderVeZararlar
+                    "
+                  >
+                    <td>
+                      <app-currency
+                        [value]="olagandisiGiderVeZarar.kasa689"
+                      ></app-currency>
+                    </td>
+                    <td></td>
+                  </ng-container>
+                </tr>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+        <ng-container *ngIf="{ show: false } as toggle">
+          <tr
+            class="text-primary cursor-pointer"
+            (click)="toggle.show = !toggle.show"
+          >
+            <td>
+              <div class="d-flex">
+                <mat-icon class="align-self-center me-3" *ngIf="toggle.show"
+                  >expand_more</mat-icon
+                >
+                <mat-icon class="align-self-center me-3" *ngIf="!toggle.show"
+                  >expand_less</mat-icon
+                >
+                <span class="align-self-center">Dönem Kar veya Zarar</span>
+              </div>
+            </td>
+            <ng-container
+              *ngFor="
+                let totalOfDonemKariVeyaZarar of totalOfDonemKariVeyaZarari;
+                let i = index
+              "
+            >
+              <td>
+                <app-currency
+                  [value]="totalOfDonemKariVeyaZarar"
+                ></app-currency>
+              </td>
+              <td>{{ percentageOfDonemKariVeyaZarari[i] }}%</td>
+            </ng-container>
+          </tr>
+          <tr *ngIf="toggle.show">
+            <td class="ps-4">691- DÖNEM KARI VER.VE DiĞER KAR.(-)</td>
+            <ng-container
+              *ngFor="
+                let donemKariVergiVeDigerYasalYukumlulukKarsiligi of donemKariVergiVeDigerYasalYukumlulukKarsiliklari
+              "
+            >
+              <td>
+                <app-currency
+                  [value]="
+                    donemKariVergiVeDigerYasalYukumlulukKarsiligi.kasa691
+                  "
+                ></app-currency>
+              </td>
+              <td></td>
+            </ng-container>
+          </tr>
+        </ng-container>
+        <ng-container *ngIf="{ show: false } as toggle">
+          <tr
+            class="text-primary cursor-pointer"
+            (click)="toggle.show = !toggle.show"
+          >
+            <td>
+              <div class="d-flex">
+                <mat-icon class="align-self-center me-3" *ngIf="toggle.show"
+                  >expand_more</mat-icon
+                >
+                <mat-icon class="align-self-center me-3" *ngIf="!toggle.show"
+                  >expand_less</mat-icon
+                >
+                <span class="align-self-center">Dönem Net Kar veya Zarar</span>
+              </div>
+            </td>
+            <ng-container
+              *ngFor="
+                let totalOfDonemNetKariVeyaZarar of totalOfDonemNetKariVeyaZarari;
+                let i = index
+              "
+            >
+              <td>
+                <app-currency
+                  [value]="totalOfDonemNetKariVeyaZarar"
+                ></app-currency>
+              </td>
+              <td>{{ percentageOfDonemNetKariVeyaZarari[i] }}%</td>
+            </ng-container>
+          </tr>
+          <tr *ngIf="toggle.show">
+            <td class="ps-4">900- AMORTİSMAN GİDERLERİ(-)</td>
+            <ng-container *ngFor="let amortismanGideri of amortismanGiderleri">
+              <td>
+                <app-currency [value]="amortismanGideri.kasa900"></app-currency>
+              </td>
+              <td></td>
+            </ng-container>
+          </tr>
+        </ng-container>
+        <tr class="table-primary">
+          <td>FAVÖK - EBİTDA</td>
+          <ng-container *ngFor="let favok of totalOfFAVOK">
+            <td>
+              <app-currency [value]="favok"></app-currency>
+            </td>
+            <td></td>
+          </ng-container>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</ng-container>
+<div class="row mt-5" *ngIf="response">
+  <app-kar-zarar-tablosu-bar-chart
+    legendTitle="NET SATIŞLAR"
+    [periods]="selectedPeriods"
+    [inputData]="totalOfNetSatislar"
+    class="col-lg-6"
+  ></app-kar-zarar-tablosu-bar-chart>
+  <app-kar-zarar-tablosu-bar-chart
+    legendTitle="BRÜT SATIŞ KARI VEYA ZARARI"
+    [periods]="selectedPeriods"
+    [inputData]="totalOfBrutSatisKariVeyaZarari"
+    class="col-lg-6"
+  ></app-kar-zarar-tablosu-bar-chart>
+  <app-kar-zarar-tablosu-bar-chart
+    legendTitle="FAALİYET KARI VEYA ZARARI"
+    [periods]="selectedPeriods"
+    [inputData]="totalOfFaliyetKariVeyaZarari"
+    class="col-lg-6"
+  ></app-kar-zarar-tablosu-bar-chart>
+  <app-kar-zarar-tablosu-bar-chart
+    legendTitle="DÖNEM KARI VEYA ZARARI"
+    [periods]="selectedPeriods"
+    [inputData]="totalOfDonemKariVeyaZarari"
+    class="col-lg-6"
+  ></app-kar-zarar-tablosu-bar-chart>
+  <app-kar-zarar-tablosu-bar-chart
+    legendTitle="DÖNEM NET KARI VEYA ZARARI"
+    [periods]="selectedPeriods"
+    [inputData]="totalOfDonemNetKariVeyaZarari"
+    class="col-lg-6"
+  ></app-kar-zarar-tablosu-bar-chart>
+  <app-kar-zarar-tablosu-bar-chart
+    legendTitle="FAVÖK - EBİTDA"
+    [periods]="selectedPeriods"
+    [inputData]="totalOfFAVOK"
+    class="col-lg-6"
+  ></app-kar-zarar-tablosu-bar-chart>
+</div>

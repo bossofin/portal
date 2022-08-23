@@ -1,0 +1,16 @@
+<ng-container *ngIf="(selectedReport$ | async) === 'ozkaynakKarliligi'">
+  <div *ngIf="ozkaynakKarliligi$ | async as ozkaynakKarliligi">
+    <app-varlik-ve-kaynak-karlilik-raporu-bar-chart
+      chartType="ozkaynakKarlilik"
+      [data]="ozkaynakKarliligi"
+    ></app-varlik-ve-kaynak-karlilik-raporu-bar-chart>
+  </div>
+</ng-container>
+<ng-container *ngIf="(selectedReport$ | async) === 'aktifKarlilik'">
+  <div *ngIf="aktifKarlilik$ | async as aktifKarlilik">
+    <app-varlik-ve-kaynak-karlilik-raporu-bar-chart
+      chartType="aktifKarlilik"
+      [data]="aktifKarlilik"
+    ></app-varlik-ve-kaynak-karlilik-raporu-bar-chart>
+  </div>
+</ng-container>

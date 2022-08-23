@@ -1,0 +1,31 @@
+@import "../../../../scss/variables.scss";
+.main-menu {
+  background-color: $main-color;
+  .close-menu-button {
+    right: 0;
+  }
+  .logo {
+    width: 64px;
+    display: block;
+    margin: auto;
+  }
+  .mat-button {
+    &:not(.header-button) {
+      font-weight: 400;
+      opacity: 0.7;
+      &:hover {
+        opacity: 1;
+        .mat-icon {
+          color: $main-color-light;
+        }
+      }
+      &.active {
+        opacity: 1;
+        color: $main-color-lighteen;
+      }
+    }
+  }
+  .header-button {
+    pointer-events: none;
+  }
+}

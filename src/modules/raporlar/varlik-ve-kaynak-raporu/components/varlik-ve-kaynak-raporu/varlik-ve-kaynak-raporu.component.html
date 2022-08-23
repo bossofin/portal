@@ -1,0 +1,52 @@
+<ng-container *ngIf="(selectedReport$ | async) === 'borclanmaOrani'">
+  <div *ngIf="borclanmaOrani$ | async as borclanmaOrani">
+    <app-varlik-ve-kaynak-raporu-bar-chart
+      chartType="borclanmaOrani"
+      [data]="borclanmaOrani"
+    ></app-varlik-ve-kaynak-raporu-bar-chart>
+  </div>
+</ng-container>
+<ng-container *ngIf="(selectedReport$ | async) === 'kaldiracOrani'">
+  <div *ngIf="kaldiracOrani$ | async as kaldiracOrani">
+    <app-varlik-ve-kaynak-raporu-bar-chart
+      chartType="kaldiracOrani"
+      [data]="kaldiracOrani"
+    ></app-varlik-ve-kaynak-raporu-bar-chart>
+  </div>
+</ng-container>
+<ng-container *ngIf="(selectedReport$ | async) === 'faizKarsilamaGucu'">
+  <div *ngIf="faizKarsilamaGucu$ | async as faizKarsilamaGucu">
+    <app-varlik-ve-kaynak-raporu-bar-chart
+      chartType="faizKarsilamaGucu"
+      [data]="faizKarsilamaGucu"
+    ></app-varlik-ve-kaynak-raporu-bar-chart>
+  </div>
+</ng-container>
+<ng-container
+  *ngIf="(selectedReport$ | async) === 'finansalBorcKarsilamaOrani'"
+>
+  <div
+    *ngIf="finansalBorcKarsilamaOrani$ | async as finansalBorcKarsilamaOrani"
+  >
+    <app-varlik-ve-kaynak-raporu-bar-chart
+      chartType="finansalBorcKarsilamaOrani"
+      [data]="finansalBorcKarsilamaOrani"
+    ></app-varlik-ve-kaynak-raporu-bar-chart>
+  </div>
+</ng-container>
+<ng-container *ngIf="(selectedReport$ | async) === 'sabitKiymetOrani'">
+  <div *ngIf="sabitKiymetOrani$ | async as sabitKiymetOrani">
+    <app-varlik-ve-kaynak-raporu-bar-chart
+      chartType="sabitKiymetOrani"
+      [data]="sabitKiymetOrani"
+    ></app-varlik-ve-kaynak-raporu-bar-chart>
+  </div>
+</ng-container>
+<ng-container *ngIf="(selectedReport$ | async) === 'aktifDevirHizi'">
+  <div *ngIf="aktifDevirHizi$ | async as aktifDevirHizi">
+    <app-varlik-ve-kaynak-raporu-bar-chart
+      chartType="aktifDevirHizi"
+      [data]="aktifDevirHizi"
+    ></app-varlik-ve-kaynak-raporu-bar-chart>
+  </div>
+</ng-container>

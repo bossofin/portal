@@ -1,0 +1,28 @@
+<app-select-period
+  [multiple]="true"
+  (onSearch)="onSearch($event)"
+  [selectedPeriods]="selectedPeriods"
+  #selectPeriod
+></app-select-period>
+<div *ngIf="reportsResponse$ | async">
+  <mat-form-field>
+    <mat-label>Başlık Seç</mat-label>
+    <mat-select #report [(ngModel)]="selectedReportTitle">
+      <mat-option *ngFor="let report of reportList" [value]="report">
+        {{ report.title }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field *ngIf="selectedReportTitle" class="ms-3">
+    <mat-label>Rapor Seç</mat-label>
+    <mat-select [(ngModel)]="selectedReport">
+      <mat-option
+        *ngFor="let report of selectedReportTitle?.children"
+        [value]="report.value"
+      >
+        {{ report.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<router-outlet></router-outlet>

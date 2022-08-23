@@ -1,0 +1,58 @@
+<app-select-period-type
+  [selectedPeriodType]="selectedPeriodType"
+  (onChange)="onPeriodTypeChnage($event)"
+></app-select-period-type>
+<app-select-year
+  *ngIf="selectedPeriodType === 'yillik' || selectedPeriodType === 'aylik'"
+  class="ms-2 d-inline-block"
+  (onChange)="onYearChange($event)"
+></app-select-year>
+<app-select-month
+  *ngIf="selectedPeriodType === 'aylik'"
+  class="ms-2 d-inline-block"
+  (onChange)="onMonthChange($event)"
+></app-select-month>
+
+<mat-form-field *ngIf="selectedPeriodType === 'ucAylik'" class="ms-2">
+  <mat-label>Dönem Seç</mat-label>
+  <mat-select [multiple]="true" [(ngModel)]="selectedPeriods">
+    <ng-container *ngFor="let period of periodsThreeMonth; let i = index">
+      <mat-option [value]="period" [disabled]="disablePeriod(period)">{{
+        period
+      }}</mat-option>
+    </ng-container>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field *ngIf="selectedPeriodType === 'altiAylik'" class="ms-2">
+  <mat-label>Dönem Seç</mat-label>
+  <mat-select [multiple]="true" [(ngModel)]="selectedPeriods">
+    <ng-container *ngFor="let period of periodsSixMonth; let i = index">
+      <mat-option [value]="period" [disabled]="disablePeriod(period)">{{
+        period
+      }}</mat-option>
+    </ng-container>
+  </mat-select>
+</mat-form-field>
+<button
+  *ngIf="selectedPeriodType !== 'yillik'"
+  mat-icon-button
+  matSuffix
+  class="align-self-center"
+  color="primary"
+  (click)="onSearchHandle()"
+  [disabled]="!selectedPeriods || selectedPeriods?.length === 0"
+>
+  <mat-icon>search</mat-icon>
+</button>
+<button
+  *ngIf="selectedPeriodType === 'yillik'"
+  mat-icon-button
+  matSuffix
+  class="align-self-center"
+  color="primary"
+  (click)="onSearchHandle()"
+  [disabled]="!selectedYear"
+>
+  <mat-icon>search</mat-icon>
+</button>

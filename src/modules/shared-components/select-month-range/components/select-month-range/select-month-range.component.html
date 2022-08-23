@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="col-xl-2 col-lg-3 col-md-4">
+    <mat-form-field>
+      <mat-label>Başlangıç</mat-label>
+      <mat-select>
+        <mat-option
+          *ngFor="let month of months; let i = index"
+          [value]="month"
+          (onSelectionChange)="onStartMonthChange($event, i)"
+        >
+          {{ month }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="col d-flex">
+    <mat-form-field>
+      <mat-label>Bitiş</mat-label>
+      <mat-select [disabled]="!endMonths">
+        <mat-option
+          *ngFor="let month of endMonths"
+          [value]="month"
+          (onSelectionChange)="onEndMonthChange($event)"
+        >
+          {{ month }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button
+      mat-icon-button
+      class="align-self-center ms-1"
+      [disabled]="!selectedStartMonth || !selectedEndMonth"
+      (click)="onSearchHandle()"
+    >
+      <mat-icon>search</mat-icon>
+    </button>
+  </div>
+</div>

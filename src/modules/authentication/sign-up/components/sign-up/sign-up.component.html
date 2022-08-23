@@ -1,0 +1,90 @@
+<mat-card class="p-5">
+  <div class="text-center mb-5">
+    <img src="../../../../../assets/images/logo.svg" alt="" />
+  </div>
+  <mat-card-title class="text-center">Kullanıcı Oluşturma</mat-card-title>
+  <mat-card-subtitle class="text-center">
+    Zaten Hesabınız Var Mı?
+    <button mat-button color="primary" routerLink="/auth/sign-in">
+      Giriş Yap
+    </button>
+  </mat-card-subtitle>
+  <mat-card-content class="mt-4">
+    <form [formGroup]="form" class="row row-cols-2">
+      <div class="col">
+        <mat-form-field class="d-block mb-4">
+          <mat-label>Ad</mat-label>
+          <input matInput type="text" formControlName="name" />
+          <mat-error>
+            {{ nameValidationError }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="d-block mb-4">
+          <mat-label>Soyad</mat-label>
+          <input matInput type="text" formControlName="surname" />
+          <mat-error>
+            {{ surnameValidationError }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="d-block mb-4">
+          <mat-label>E-Posta</mat-label>
+          <input matInput type="text" formControlName="email" />
+          <mat-error>
+            {{ emailValidationError }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="d-block mb-4">
+          <mat-label>Cep Telefonu</mat-label>
+          <input
+            matInput
+            type="tel"
+            formControlName="phone"
+            mask="000 000 00 00"
+          />
+          <mat-error>
+            {{ phoneValidationError }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="d-block mb-4">
+          <mat-label>Şifre</mat-label>
+          <input matInput type="password" formControlName="password" />
+          <mat-error>
+            {{ passwordValidationError }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="d-block mb-4">
+          <mat-label>Şifre Tekrar</mat-label>
+          <input matInput type="password" formControlName="rePassword" />
+          <mat-error>
+            {{ rePasswordValidationError }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="w-100">
+        <mat-form-field class="d-block mb-4">
+          <mat-label>NACE Kodu</mat-label>
+          <input matInput type="text" formControlName="nace" mask="00.00.00" />
+          <mat-error>
+            {{ naceValidationError }}
+          </mat-error>
+        </mat-form-field>
+        <mat-checkbox formControlName="kvkk">
+          <a mat-button>
+            KVKK bilgilendirme metinlerini okudum ve kabul ediyorum *
+          </a>
+        </mat-checkbox>
+        <mat-checkbox>
+          Bossofin'nin tarafıma eposta ve bilgilendirme mesajları göndermesini
+          kabul ediyorum
+        </mat-checkbox>
+      </div>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-flat-button color="primary" class="w-100" (click)="onSubmit()">
+      Oluştur
+    </button>
+  </mat-card-actions>
+</mat-card>

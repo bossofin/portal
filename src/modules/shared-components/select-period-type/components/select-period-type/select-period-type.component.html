@@ -1,0 +1,14 @@
+<mat-form-field>
+  <mat-label>Dönem Tipi Seç</mat-label>
+  <mat-select
+    #periodType
+    [(ngModel)]="selectedPeriodType"
+    (ngModelChange)="onModelChange()"
+  >
+    <mat-option
+      *ngFor="let periodType of periodTypes"
+      [value]="periodType.value"
+      >{{ periodType.name }}</mat-option
+    >
+  </mat-select></mat-form-field
+>

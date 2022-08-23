@@ -1,0 +1,8 @@
+<span class="ps-5">
+  {{ text }}
+</span>
+<ng-container *ngFor="let dataItem of data">
+  <span>
+    <app-currency [value]="dataItem[pathKey][valueKey]"></app-currency>
+  </span>
+</ng-container>

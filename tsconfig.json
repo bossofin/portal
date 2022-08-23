@@ -1,0 +1,55 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@app/*":["src/app/*"],
+      "@environment/*":["src/environments/*"],
+      "@authentication/*":["src/modules/authentication/*"],
+      "@home/*":["src/modules/home/*"],
+      "@custom-validation/*":["src/modules/validation/*"],
+      "@constants/*":["src/constants/*"],
+      "@global-services/*":["src/modules/global-services/*"],
+      "@main-menu/*":["src/modules/main-menu/*"],
+      "@analiz/*":["src/modules/analiz/*"],
+      "@finanaslAnalizler/*":["src/modules/finansal-analizler/*"],
+      "@raporlar/*":["src/modules/raporlar/*"],
+      "@buyumeRaporu/*":["src/modules/buyume-raporu/*"],
+      "@shared-components/*":["src/modules/shared-components/*"],
+      "@pre-loader/*":["src/modules/pre-loader/*"],
+      "@store/*":["src/store/*"],
+      "@custom-utils/*":["src/modules/custom-utils/*"],
+      "@header/*":["src/modules/header/*"],
+      "@raporlarModel/*":["src/modules/raporlar/model/*"],
+    },
+    "outDir": "./dist/out-tsc",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "strictFunctionTypes": false,
+    "strictPropertyInitialization": false,
+    "strictNullChecks": false,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2020",
+    "module": "es2020",
+    "lib": [
+      "es2020",
+      "dom"
+    ]
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
+}

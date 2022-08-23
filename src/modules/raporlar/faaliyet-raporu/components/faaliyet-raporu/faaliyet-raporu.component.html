@@ -1,0 +1,56 @@
+<ng-container *ngIf="(selectedReport$ | async) === 'stokDevirHizi'">
+  <div *ngIf="stokDevirHizi$ | async as stokDevirHizi">
+    <app-faaliyet-raporu-bar-chart
+      chartType="stokDevirHizi"
+      [data]="stokDevirHizi"
+    ></app-faaliyet-raporu-bar-chart>
+  </div>
+</ng-container>
+<ng-container *ngIf="(selectedReport$ | async) === 'stokDevirSuresi'">
+  <div *ngIf="stokDevirSuresi$ | async as stokDevirSuresi">
+    <app-faaliyet-raporu-bar-chart
+      chartType="stokDevirSuresi"
+      [data]="stokDevirSuresi"
+    ></app-faaliyet-raporu-bar-chart>
+  </div>
+</ng-container>
+<ng-container *ngIf="(selectedReport$ | async) === 'alacakDevirHizi'">
+  <div *ngIf="alacakDevirHizi$ | async as alacakDevirHizi">
+    <app-faaliyet-raporu-bar-chart
+      chartType="alacakDevirHizi"
+      [data]="alacakDevirHizi"
+    ></app-faaliyet-raporu-bar-chart>
+  </div>
+</ng-container>
+<ng-container *ngIf="(selectedReport$ | async) === 'alacakTahsilSuresi'">
+  <div *ngIf="alacakTahsilSuresi$ | async as alacakTahsilSuresi">
+    <app-faaliyet-raporu-bar-chart
+      chartType="alacakTahsilSuresi"
+      [data]="alacakTahsilSuresi"
+    ></app-faaliyet-raporu-bar-chart>
+  </div>
+</ng-container>
+<ng-container *ngIf="(selectedReport$ | async) === 'borcOdemeSuresi'">
+  <div *ngIf="borcOdemeSuresi$ | async as borcOdemeSuresi">
+    <app-faaliyet-raporu-bar-chart
+      chartType="borcOdemeSuresi"
+      [data]="borcOdemeSuresi"
+    ></app-faaliyet-raporu-bar-chart>
+  </div>
+</ng-container>
+<ng-container *ngIf="(selectedReport$ | async) === 'borcDevirHizi'">
+  <div *ngIf="borcDevirHizi$ | async as borcDevirHizi">
+    <app-faaliyet-raporu-bar-chart
+      chartType="borcDevirHizi"
+      [data]="borcDevirHizi"
+    ></app-faaliyet-raporu-bar-chart>
+  </div>
+</ng-container>
+<ng-container *ngIf="(selectedReport$ | async) === 'isletmeSermayeDongusu'">
+  <div *ngIf="isletmeSermayeDongusu$ | async as isletmeSermayeDongusu">
+    <app-faaliyet-raporu-bar-chart
+      chartType="isletmeSermayesiDongusu"
+      [data]="isletmeSermayeDongusu"
+    ></app-faaliyet-raporu-bar-chart>
+  </div>
+</ng-container>

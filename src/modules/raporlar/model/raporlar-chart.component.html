@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="col-lg-6 mb-md-4">
+    <canvas
+      class="w-100"
+      baseChart
+      [data]="barChartData"
+      [options]="barChartOptions"
+      [plugins]="barChartPlugins"
+      [legend]="false"
+      [type]="'bar'"
+    >
+    </canvas>
+  </div>
+  <div class="col-lg-6">
+    <h5>
+      {{ staticData[chartType].title }}
+    </h5>
+    <p>
+      {{ staticData[chartType].nedir }}
+    </p>
+
+    <ng-container *ngIf="staticData[chartType].neden">
+      <h5>Neden Önemlidir ?</h5>
+      <p>
+        {{ staticData[chartType].neden }}
+      </p>
+    </ng-container>
+    <h5>İşletmenin Performansı Nedir?</h5>
+    <app-star-rate [grade]="starRate"></app-star-rate>
+    <p *ngIf="below">
+      {{ staticData[chartType].below }}
+    </p>
+    <p *ngIf="above">
+      {{ staticData[chartType].above }}
+    </p>
+    <p *ngIf="compatible">
+      {{ staticData[chartType].compatible }}
+    </p>
+  </div>
+</div>

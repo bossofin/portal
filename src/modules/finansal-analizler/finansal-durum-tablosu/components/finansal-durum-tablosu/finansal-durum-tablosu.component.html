@@ -1,0 +1,25 @@
+<app-select-period
+  [multiple]="true"
+  (onSearch)="onSearch($event)"
+></app-select-period>
+<ng-container *ngIf="activeItems || passiveItems">
+  <div class="row">
+    <app-aktif-varliklar-table
+      class="col-lg-6"
+      [activeItems]="activeItems"
+      [periods]="selectedPeriods"
+    ></app-aktif-varliklar-table>
+    <app-pasif-varliklar-table
+      class="col-lg-6"
+      [passiveItems]="passiveItems"
+      [periods]="selectedPeriods"
+    ></app-pasif-varliklar-table>
+  </div>
+  <hr />
+  <div class="row">
+    <app-finansman-gider-kisitlamasi-tablo
+      [giderKisitlamaTabloData]="giderKisitlamaTabloData"
+    ></app-finansman-gider-kisitlamasi-tablo>
+    <app-finansman-gider-kisitlamasi-detay-tablo></app-finansman-gider-kisitlamasi-detay-tablo>
+  </div>
+</ng-container>

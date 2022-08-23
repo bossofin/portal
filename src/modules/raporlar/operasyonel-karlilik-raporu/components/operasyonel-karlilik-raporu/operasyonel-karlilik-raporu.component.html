@@ -1,0 +1,39 @@
+<ng-container *ngIf="(selectedReport$ | async) === 'brutKarMarji'">
+  <div *ngIf="brutKarMarji$ | async as brutKarMarji">
+    <app-operasyonel-karlilik-raporu-bar-chart
+      chartType="brutKarMarji"
+      [data]="brutKarMarji"
+    ></app-operasyonel-karlilik-raporu-bar-chart>
+  </div>
+</ng-container>
+<ng-container
+  *ngIf="(selectedReport$ | async) === 'faaliyetGiderlerininNetSatislaraOrani'"
+>
+  <div
+    *ngIf="
+      faaliyetGiderlerininNetSatislaraOrani$
+        | async as faaliyetGiderlerininNetSatislaraOrani
+    "
+  >
+    <app-operasyonel-karlilik-raporu-bar-chart
+      chartType="faaliyetGiderlerininNetSatislaraOrani"
+      [data]="faaliyetGiderlerininNetSatislaraOrani"
+    ></app-operasyonel-karlilik-raporu-bar-chart>
+  </div>
+</ng-container>
+<ng-container *ngIf="(selectedReport$ | async) === 'faaliyetKarMarji'">
+  <div *ngIf="faaliyetKarMarji$ | async as faaliyetKarMarji">
+    <app-operasyonel-karlilik-raporu-bar-chart
+      chartType="faaliyetKarMarji"
+      [data]="faaliyetKarMarji"
+    ></app-operasyonel-karlilik-raporu-bar-chart>
+  </div>
+</ng-container>
+<ng-container *ngIf="(selectedReport$ | async) === 'netKarMarji'">
+  <div *ngIf="netKarMarji$ | async as netKarMarji">
+    <app-operasyonel-karlilik-raporu-bar-chart
+      chartType="netKarMarji"
+      [data]="netKarMarji"
+    ></app-operasyonel-karlilik-raporu-bar-chart>
+  </div>
+</ng-container>
