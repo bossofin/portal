@@ -1,7 +1,7 @@
 export interface SelectPeriodData {
   periods: string[];
   periodType: PeriodType;
-  selectedYear?: string;
+  selectedYear?: number;
 }
 
 export type PeriodType = 'aylik' | 'ucAylik' | 'altiAylik' | 'yillik';

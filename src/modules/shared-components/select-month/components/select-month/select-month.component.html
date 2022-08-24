@@ -1,5 +1,7 @@
 <mat-form-field>
-  <mat-label>Ay Seç</mat-label>
+  <mat-label>
+    {{ label }}
+  </mat-label>
   <mat-select
     [value]="selectedPeriods"
     [(ngModel)]="selectedPeriods"

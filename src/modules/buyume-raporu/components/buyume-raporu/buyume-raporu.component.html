@@ -1,8 +1,21 @@
-<!-- <mat-form-field>
-  <mat-label>Rapor Seç</mat-label>
-  <mat-select [(ngModel)]="selectedRapor">
-    <mat-option *ngFor="let item of dropwDownData" [value]="item.value">
-      {{ item.name }}
-    </mat-option>
-  </mat-select>
-</mat-form-field> -->
+<app-select-period-type
+  (onChange)="onPeriodTypeChange($event)"
+></app-select-period-type>
+<hr />
+<app-select-year (onChange)="onStartYearChange($event)"></app-select-year>
+<app-select-month
+  label="Başlangıç"
+  (onChange)="onStartMonthChange($event)"
+></app-select-month>
+<hr />
+<app-select-year
+  [startYear]="selectedStartYear + 1"
+  (onChange)="onEndYearChange($event)"
+></app-select-year>
+<app-select-month
+  label="Bitiş"
+  (onChange)="onEndMonthChange($event)"
+></app-select-month>
+<button mat-icon-button (click)="onSearch()">
+  <mat-icon color="primary">search</mat-icon>
+</button>

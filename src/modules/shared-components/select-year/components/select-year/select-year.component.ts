@@ -5,13 +5,21 @@ import { getYears } from '@constants/get-years';
   selector: 'app-select-year',
   templateUrl: './select-year.component.html',
   styleUrls: ['./select-year.component.scss'],
-  inputs: ['selectedYear'],
+  inputs: ['selectedYear', 'startYear'],
   outputs: ['onChange'],
 })
 export class SelectYearComponent implements OnInit {
-  onChange = new EventEmitter<string>();
-  selectedYear: string;
-  years = getYears();
+  onChange = new EventEmitter<number>();
+  private _startYear: number = 2010;
+  public get startYear(): number {
+    return this._startYear;
+  }
+  public set startYear(value: number) {
+    this._startYear = value;
+    this.years = getYears(this.startYear || 2010);
+  }
+  selectedYear: number;
+  years: number[] = getYears();
   constructor() {}
   ngOnInit(): void {}
   onModelChange() {

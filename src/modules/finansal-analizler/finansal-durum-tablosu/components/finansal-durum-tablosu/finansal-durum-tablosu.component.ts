@@ -42,7 +42,7 @@ export class FinansalDurumTablosuComponent implements OnInit {
         ];
         break;
       case 'yillik':
-        this.selectedPeriods = [selectedPeriodsData.selectedYear];
+        this.selectedPeriods = [String(selectedPeriodsData.selectedYear)];
         break;
       default:
         this.selectedPeriods = selectedPeriodsData.periods;

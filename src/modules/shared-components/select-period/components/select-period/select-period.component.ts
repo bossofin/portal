@@ -1,6 +1,4 @@
 import { Component, EventEmitter, OnInit } from '@angular/core';
-import { months } from '@constants/months';
-import { getYears } from '@constants/get-years';
 import {
   PeriodType,
   SelectPeriodData,
@@ -23,7 +21,7 @@ export class SelectPeriodComponent implements OnInit {
   periodsThreeMonth = getThreeMonthPeriod();
   periodsSixMonth = getSixMonthPeriod();
 
-  selectedYear: string;
+  selectedYear: number;
   selectedPeriods: string[] | string = [];
   private _selectedPeriodType: PeriodType;
   public get selectedPeriodType(): PeriodType {
@@ -86,7 +84,7 @@ export class SelectPeriodComponent implements OnInit {
     this.selectedPeriodType = periodType;
   }
 
-  onYearChange(selectedYear: string) {
+  onYearChange(selectedYear: number) {
     this.selectedYear = selectedYear;
   }
 
