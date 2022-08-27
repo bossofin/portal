@@ -1,3 +1,6 @@
+import { karBuyumesi } from './buyume-orani/kar-buyumesi';
+import { returnRaporu } from './buyume-orani/return-raporu';
+import { satisBuyumesi } from './buyume-orani/satis-buyumesi';
 import { alacakDevirHizi } from './faaliyet/alacak-devir-hizi';
 import { alacakTahsilSuresi } from './faaliyet/alacak-tahsil-suresi';
 import { borcDevirHizi } from './faaliyet/borc-devir-hizi';
@@ -55,5 +58,12 @@ export const chartStaticData = {
     faaliyetGiderlerininNetSatislaraOrani,
     faaliyetKarMarji,
     netKarMarji,
+  },
+  returnRaporu: {
+    returnRaporu,
+  },
+  buyumeRaporu: {
+    karBuyumesi,
+    satisBuyumesi,
   },
 };

@@ -1,21 +1,55 @@
 <app-select-period-type
   (onChange)="onPeriodTypeChange($event)"
 ></app-select-period-type>
-<hr />
-<app-select-year (onChange)="onStartYearChange($event)"></app-select-year>
-<app-select-month
-  label="Başlangıç"
-  (onChange)="onStartMonthChange($event)"
-></app-select-month>
-<hr />
-<app-select-year
-  [startYear]="selectedStartYear + 1"
-  (onChange)="onEndYearChange($event)"
-></app-select-year>
-<app-select-month
-  label="Bitiş"
-  (onChange)="onEndMonthChange($event)"
-></app-select-month>
-<button mat-icon-button (click)="onSearch()">
-  <mat-icon color="primary">search</mat-icon>
-</button>
+<div class="d-flex">
+  <div *ngIf="selectedPeriodType" class="align-self-center">
+    <h5>Birinci Period</h5>
+    <app-select-year (onChange)="onStartYearChange($event)"></app-select-year>
+    <app-select-month
+      (onChange)="onStartMonthChange($event)"
+      *ngIf="selectedStartYear"
+    ></app-select-month>
+  </div>
+  <div *ngIf="selectedStartMonth" class="align-self-center ms-3">
+    <h5>İkinci Period</h5>
+    <app-select-year
+      [startYear]="selectedStartYear + 1"
+      (onChange)="onEndYearChange($event)"
+    ></app-select-year>
+    <app-select-month
+      *ngIf="selectedEndYear"
+      (onChange)="onEndMonthChange($event)"
+    ></app-select-month>
+    <button mat-icon-button (click)="onSearch()" [disabled]="!selectedEndMonth">
+      <mat-icon color="primary">search</mat-icon>
+    </button>
+  </div>
+</div>
+<ng-container *ngIf="karBuyumesi || satisinBuyumesi">
+  <mat-form-field>
+    <mat-label>Rapor Seç</mat-label>
+    <mat-select [(ngModel)]="selectedReport">
+      <mat-option *ngFor="let report of reportList" [value]="report.value">
+        {{ report.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <app-buyume-raporu-chart
+    [selectedPeriod]="selectedPeriod"
+    *ngIf="selectedReport === 'karBuyumesi'"
+    [data]="karBuyumesi"
+    chartType="karBuyumesi"
+  ></app-buyume-raporu-chart>
+  <app-buyume-raporu-chart
+    [selectedPeriod]="selectedPeriod"
+    *ngIf="selectedReport === 'satisinBuyumesi'"
+    [data]="satisinBuyumesi"
+    chartType="satisBuyumesi"
+  ></app-buyume-raporu-chart>
+  <app-buyume-raporu-chart
+    [selectedPeriod]="selectedPeriod"
+    *ngIf="selectedReport === 'satisBuyumesi'"
+    [data]="satisinBuyumesi"
+    chartType="satisBuyumesi"
+  ></app-buyume-raporu-chart>
+</ng-container>

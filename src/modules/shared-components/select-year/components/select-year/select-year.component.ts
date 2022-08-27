@@ -5,10 +5,11 @@ import { getYears } from '@constants/get-years';
   selector: 'app-select-year',
   templateUrl: './select-year.component.html',
   styleUrls: ['./select-year.component.scss'],
-  inputs: ['selectedYear', 'startYear'],
+  inputs: ['selectedYear', 'startYear', 'label'],
   outputs: ['onChange'],
 })
 export class SelectYearComponent implements OnInit {
+  label: string = 'Yıl Seç';
   onChange = new EventEmitter<number>();
   private _startYear: number = 2010;
   public get startYear(): number {

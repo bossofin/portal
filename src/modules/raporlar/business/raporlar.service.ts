@@ -37,4 +37,9 @@ export class RaporlarService {
       })
     );
   }
+  resetData() {
+    this.selectedReport$.next(null);
+    this.selectedPeriods = undefined;
+    this.reportsResponse$.next(null);
+  }
 }

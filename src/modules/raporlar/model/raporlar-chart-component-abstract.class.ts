@@ -40,8 +40,8 @@ export abstract class RaporlarChartComponent {
     if (this.data instanceof Array) {
       const firstChild = this.data[0];
       this.starRate = firstChild.starRate;
-      const companyRatio = firstChild.companyRatio;
-      const idealRatio = firstChild.idealRatio;
+      const companyRatio = firstChild.companyRatio || firstChild.companyRate;
+      const idealRatio = firstChild.idealRatio || firstChild.idealRate;
       this.below = companyRatio < idealRatio;
       this.above = companyRatio > idealRatio;
       this.compatible = companyRatio === idealRatio;
@@ -53,16 +53,18 @@ export abstract class RaporlarChartComponent {
       const selectPeriodData: SelectPeriodData = JSON.parse(
         localStorage.getItem('selectedPeriodsOfReports')
       );
-      const handleMap = (item: RaporItem) => item.companyRatio;
+      const handleMap = (item: RaporItem) =>
+        item.companyRatio || item.companyRate;
       const dataArray = this.data.map(handleMap);
+      console.log(this.data);
       this.barChartData = {
         labels: [...selectPeriodData.periods, 'Optimum', 'Sektör'],
         datasets: [
           {
             data: [
               ...dataArray,
-              this.data[0].idealRatio,
-              this.data[0].sectoralRatio,
+              this.data[0].idealRatio || this.data[0].idealRate,
+              this.data[0].sectoralRatio || this.data[0].sectoralRate,
             ],
             backgroundColor: [
               ...selectPeriodData.periods.map(() => '#31558F'),
@@ -77,6 +79,7 @@ export abstract class RaporlarChartComponent {
           },
         ],
       };
+      console.log(this.barChartData);
     }
   }
 }

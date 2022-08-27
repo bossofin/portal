@@ -45,12 +45,11 @@ const routes: Routes = [
             '../operasyonel-karlilik-raporu/operasyonel-karlilik-raporu.module'
           ).then((module) => module.OperasyonelKarlilikRaporuModule),
       },
-
       {
-        path: 'sonuc-raporu',
+        path: 'return-raporu',
         loadChildren: () =>
-          import('../sonuc-raporu/sonuc-raporu.module').then(
-            (module) => module.SonucRaporuModule
+          import('../return-raporu/return-raporu.module').then(
+            (module) => module.ReturnRaporuModule
           ),
       },
     ],

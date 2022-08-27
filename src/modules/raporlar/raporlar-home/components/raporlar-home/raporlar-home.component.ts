@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { reportList } from '@constants/reports/rapor-drop-down-data';
 import { makeImmutable } from '@custom-utils/make-immutable.util';
@@ -16,7 +16,7 @@ import { lastValueFrom } from 'rxjs';
     class: 'bg-white d-block rounded p-3',
   },
 })
-export class RaporlarHomeComponent implements OnInit {
+export class RaporlarHomeComponent implements OnInit, OnDestroy {
   reportList = reportList;
   reportsResponse$: BehaviorSubject<{}>;
   selectedPeriods: string[];
@@ -45,6 +45,10 @@ export class RaporlarHomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.router.navigateByUrl('/raporlar');
+  }
+
+  ngOnDestroy(): void {
+    this.raporlarService.resetData();
   }
 
   onSearch(selectedPeriodsData: SelectPeriodData) {

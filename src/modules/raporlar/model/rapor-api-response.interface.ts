@@ -24,6 +24,7 @@ export interface RaporApiResponse {
   faaliyetGiderlerininNetSatislaraOrani: RaporItem;
   faaliyetKarMarji: RaporItem;
   netKarMarji: RaporItem;
+  returnAnaliz: RaporItem;
 }
 
 export type RaporKeys = keyof RaporApiResponse;

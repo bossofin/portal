@@ -1,74 +1,67 @@
 import { Component, OnInit } from '@angular/core';
+import { BuyumeRaporuService } from '@buyumeRaporu/business/buyume-raporu.service';
+import { RaporItem } from '@raporlar/model/rapor-item.interface';
 import { PeriodType } from '@shared-components/select-period/models/select-period-data.interface';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-buyume-raporu',
   templateUrl: './buyume-raporu.component.html',
   styleUrls: ['./buyume-raporu.component.scss'],
+  host: {
+    class: 'bg-white d-block rounded p-3',
+  },
 })
 export class BuyumeRaporuComponent implements OnInit {
+  reportList = [
+    {
+      name: 'Satışın Büyümesi',
+      value: 'satisinBuyumesi',
+    },
+    {
+      name: 'Kar Büyümesi',
+      value: 'karBuyumesi',
+    },
+  ];
+  selectedReport: string;
   selectedPeriodType: PeriodType;
   selectedStartYear: number;
-  selectedEndYear: number;
   selectedStartMonth: string;
+  selectedEndYear: number;
   selectedEndMonth: string;
-  constructor() {}
+  selectedPeriod: string[];
+  karBuyumesi: RaporItem;
+  satisinBuyumesi: RaporItem;
+  constructor(private buyumeRaporuService: BuyumeRaporuService) {}
   ngOnInit(): void {}
   onPeriodTypeChange(periodType: PeriodType) {
     this.selectedPeriodType = periodType;
+    this.buyumeRaporuService.selectedPeriodType = this.selectedPeriodType;
   }
   onStartYearChange(year: number) {
     this.selectedStartYear = year;
+    this.buyumeRaporuService.selectedStartYear = this.selectedStartYear;
   }
   onEndYearChange(year: number) {
     this.selectedEndYear = year;
+    this.buyumeRaporuService.selectedEndYear = this.selectedEndYear;
   }
   onStartMonthChange(month: string | string[]) {
     this.selectedStartMonth = month as string;
+    this.buyumeRaporuService.selectedStartMonth = this.selectedStartMonth;
   }
   onEndMonthChange(month: string | string[]) {
     this.selectedEndMonth = month as string;
+    this.buyumeRaporuService.selectedEndMonth = this.selectedEndMonth;
   }
-  onSearch() {
-    let firstPeriodEndMonth = 0;
-    let firstPeriodEndYear = this.selectedStartYear;
-    let secondPeriodEndMonth = 0;
-    let secondPeriodEndYear = this.selectedEndYear;
-    switch (this.selectedPeriodType) {
-      case 'aylik':
-        firstPeriodEndMonth = Number(this.selectedStartMonth) + 1;
-        secondPeriodEndMonth = Number(this.selectedEndMonth) + 1;
-        break;
-      case 'yillik':
-        firstPeriodEndMonth = Number(this.selectedStartMonth) + 12;
-        secondPeriodEndMonth = Number(this.selectedEndMonth) + 12;
-        break;
-      case 'ucAylik':
-        firstPeriodEndMonth = Number(this.selectedStartMonth) + 3;
-        secondPeriodEndMonth = Number(this.selectedEndMonth) + 3;
-        break;
-      case 'altiAylik':
-        firstPeriodEndMonth = Number(this.selectedStartMonth) + 6;
-        secondPeriodEndMonth = Number(this.selectedEndMonth) + 6;
-        break;
-    }
-    if (firstPeriodEndMonth > 12) {
-      firstPeriodEndYear = this.selectedStartYear + 1;
-      firstPeriodEndMonth = firstPeriodEndMonth - 12;
-    }
-    if (secondPeriodEndMonth > 12) {
-      secondPeriodEndYear = this.selectedEndYear + 1;
-      secondPeriodEndMonth = secondPeriodEndMonth - 12;
-    }
-    const firstPeriodEndMonthString = String(firstPeriodEndMonth).padStart(
-      2,
-      '0'
-    );
-    const secondPeriodEndMonthString = String(secondPeriodEndMonth).padStart(
-      2,
-      '0'
-    );
-    const urlString = `firstPeriodStart=${this.selectedStartYear}-${this.selectedStartMonth}&firstPeriodEnd=${firstPeriodEndYear}-${firstPeriodEndMonthString}&secondPeriodStart=${this.selectedEndYear}-${this.selectedEndMonth}&secondPeriodEnd=${secondPeriodEndYear}-${secondPeriodEndMonthString}`;
-    console.log(this.selectedPeriodType, urlString);
+  async onSearch() {
+    this.selectedPeriod = [
+      `${this.selectedStartYear}-${this.selectedStartMonth}`,
+      `${this.selectedEndYear}-${this.selectedEndMonth}`,
+    ];
+    const request$ = this.buyumeRaporuService.growThrateReport();
+    const response = await lastValueFrom(request$);
+    this.karBuyumesi = response.karBuyumesi;
+    this.satisinBuyumesi = response.satisBuyumesi;
   }
 }

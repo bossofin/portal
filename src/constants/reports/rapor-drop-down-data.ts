@@ -37,15 +37,9 @@ export const reportList: ReportList[] = [
     name: 'operasyonelKarlilikRaporu',
   },
   {
-    title: 'Büyüme Raporu',
-    url: 'raporlar/buyume-raporu',
+    title: 'Return Raporu',
+    url: 'raporlar/return-raporu',
     children: [],
-    name: '',
-  },
-  {
-    title: 'Sonuç Raporu',
-    url: 'raporlar/sonuc-raporu',
-    children: [],
-    name: '',
+    name: 'returnRaporu',
   },
 ];

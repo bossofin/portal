@@ -4,4 +4,7 @@ export interface RaporItem {
   idealRatio: number;
   sectoralRatio: number;
   starRate: number;
+  companyRate: number;
+  idealRate: number;
+  sectoralRate: number;
 }

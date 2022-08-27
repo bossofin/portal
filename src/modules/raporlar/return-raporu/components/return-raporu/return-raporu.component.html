@@ -1,0 +1,6 @@
+<div *ngIf="returnRaporu$ | async as returnRaporu">
+  <app-return-raporu-chart
+    chartType="returnRaporu"
+    [data]="returnRaporu"
+  ></app-return-raporu-chart>
+</div>
