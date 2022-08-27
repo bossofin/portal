@@ -7,8 +7,10 @@
     [(ngModel)]="selectedPeriods"
     (ngModelChange)="onModelChange()"
   >
-    <mat-option *ngFor="let month of months" [value]="month.value">
-      {{ month.name }}
-    </mat-option>
+    <ng-container *ngFor="let month of months">
+      <mat-option [value]="month.value" *ngIf="showMonth(month.value)">
+        {{ month.name }}
+      </mat-option>
+    </ng-container>
   </mat-select>
 </mat-form-field>

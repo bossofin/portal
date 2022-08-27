@@ -24,8 +24,10 @@ export class GlobalInterceptor implements HttpInterceptor {
         'Content-Type': 'application/json',
       }),
     });
-    this.globalStore.patchState({
-      isLoading: true,
+    setTimeout(() => {
+      this.globalStore.patchState({
+        isLoading: true,
+      });
     });
     return next.handle(newRequest).pipe(
       catchError((error: HttpErrorResponse) => {
@@ -33,8 +35,10 @@ export class GlobalInterceptor implements HttpInterceptor {
         return of();
       }),
       finalize(() => {
-        this.globalStore.patchState({
-          isLoading: false,
+        setTimeout(() => {
+          this.globalStore.patchState({
+            isLoading: false,
+          });
         });
       })
     );

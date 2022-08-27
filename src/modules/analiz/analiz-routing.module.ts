@@ -13,12 +13,19 @@ const routes: Routes = [
       import('./mizan/mizan.module').then((module) => module.MizanModule),
   },
   {
+    path: 'muavin-defter',
+    loadChildren: () =>
+      import('./muavin-defter/muavin-defter.module').then(
+        (module) => module.MuavinDefterModule
+      ),
+  },
+  /* {
     path: 'e-defter-yukle',
     loadChildren: () =>
       import('./e-defter-yukle/e-defter-yukle.module').then(
         (module) => module.EDefterYukleModule
       ),
-  },
+  }, */
 ];
 
 @NgModule({

@@ -10,10 +10,15 @@ export const mainMenuData = [
     icon: 'expand_more',
     url: '',
     children: [
-      {
+      /* {
         title: 'e-Defter Yükle',
         icon: 'upload_file',
         url: 'analiz/e-defter-yukle',
+      }, */
+      {
+        title: 'Muavin Defter',
+        icon: 'preview',
+        url: 'analiz/muavin-defter',
       },
       {
         title: 'Mizan Görüntüle',
@@ -29,7 +34,7 @@ export const mainMenuData = [
     children: [
       {
         title: 'Finansal Durum Tablosu',
-        icon: 'payments',
+        icon: 'trending_up',
         url: 'finansal-analizler/finansal-durum-tablosu',
       },
       {
