@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { getValidationMessage } from '@custom-validation/get-validation-message';
 import { vknValidator } from '@custom-validation/vkn-validator';
 import { CompanyService } from '@firmalar/business/company.service';
@@ -30,7 +31,8 @@ export class AddCompanyComponent implements OnInit {
     private companyService: CompanyService,
     formBuilder: FormBuilder,
     @Inject(MAT_DIALOG_DATA) data: Company,
-    private dialogRef: MatDialogRef<AddCompanyComponent>
+    private dialogRef: MatDialogRef<AddCompanyComponent>,
+    private snackbar: MatSnackBar
   ) {
     this.addForm = formBuilder.group({
       taxNumber: formBuilder.control(data?.taxNumber || '', [
@@ -67,10 +69,17 @@ export class AddCompanyComponent implements OnInit {
 
     const response = await lastValueFrom(request$);
     if (response) {
+      if (this.isEdit) {
+        this.snackbar.open(`Firma Güncellendi.`, 'Kapat', {
+          duration: 5000,
+        });
+      } else {
+        this.snackbar.open(`Firma Eklendi.`, 'Kapat', {
+          duration: 5000,
+        });
+      }
       this.dialogRef.close(true);
-      return;
     }
-    this.dialogRef.close();
   }
   get taxNumberValidationMessage(): string {
     return getValidationMessage(this.addForm.get('taxNumber'));

@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { CompanyService } from '@firmalar/business/company.service';
 import { Company } from '@firmalar/mdoels/company.interface';
 import {
@@ -55,7 +56,8 @@ export class CompanyListComponent implements OnInit, OnDestroy {
   }
   constructor(
     private companyService: CompanyService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackbar: MatSnackBar
   ) {}
 
   ngOnInit(): void {}
@@ -77,6 +79,9 @@ export class CompanyListComponent implements OnInit, OnDestroy {
     if (confirmResult) {
       const request$ = this.companyService.delete(company.id);
       await lastValueFrom(request$);
+      this.snackbar.open('Firma Silindi.', 'Kapat', {
+        duration: 5000,
+      });
       this.paginator.page.emit();
     }
   }

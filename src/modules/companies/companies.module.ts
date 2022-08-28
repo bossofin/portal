@@ -11,6 +11,7 @@ import { AddCompanyComponent } from './components/add-company/add-company.compon
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [CompanyListComponent, AddCompanyComponent],
@@ -26,6 +27,7 @@ import { MatInputModule } from '@angular/material/input';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
+    MatSnackBarModule,
   ],
 })
 export class CompaniesModule {}
