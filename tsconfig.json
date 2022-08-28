@@ -16,6 +16,7 @@
       "@finanaslAnalizler/*":["src/modules/finansal-analizler/*"],
       "@raporlar/*":["src/modules/raporlar/*"],
       "@buyumeRaporu/*":["src/modules/buyume-raporu/*"],
+      "@firmalar/*":["src/modules/companies/*"],
       "@shared-components/*":["src/modules/shared-components/*"],
       "@pre-loader/*":["src/modules/pre-loader/*"],
       "@store/*":["src/store/*"],

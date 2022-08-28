@@ -63,4 +63,9 @@ export const mainMenuData = [
       },
     ],
   },
+  {
+    title: 'Firmalar',
+    icon: 'store',
+    url: 'firmalar',
+  },
 ];

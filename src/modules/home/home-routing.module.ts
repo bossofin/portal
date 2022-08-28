@@ -43,6 +43,13 @@ const routes: Routes = [
             (module) => module.BuyumeRaporuModule
           ),
       },
+      {
+        path: 'firmalar',
+        loadChildren: () =>
+          import('@firmalar/companies.module').then(
+            (module) => module.CompaniesModule
+          ),
+      },
     ],
   },
 ];

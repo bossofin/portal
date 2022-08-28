@@ -29,51 +29,55 @@
   <table mat-table [dataSource]="data" class="w-100">
     <ng-container matColumnDef="mainId">
       <th class="p-2" mat-header-cell *matHeaderCellDef>Hesap Kodu</th>
-      <td class="p-2" mat-cell *matCellDef="let row">{{ row.mainId }}</td>
+      <td class="p-2 text-primary-dark" mat-cell *matCellDef="let row">
+        {{ row.mainId }}
+      </td>
     </ng-container>
     <ng-container matColumnDef="postingDate">
       <th class="p-2" mat-header-cell *matHeaderCellDef>Tarih</th>
-      <td class="p-2" mat-cell *matCellDef="let row">
+      <td class="p-2 text-primary-dark" mat-cell *matCellDef="let row">
         {{ row.postingDate | date }}
       </td>
     </ng-container>
     <ng-container matColumnDef="lineNumber">
       <th class="p-2" mat-header-cell *matHeaderCellDef>Sıra</th>
-      <td class="p-2" mat-cell *matCellDef="let row">{{ row.lineNumber }}</td>
+      <td class="p-2 text-primary-dark" mat-cell *matCellDef="let row">
+        {{ row.lineNumber }}
+      </td>
     </ng-container>
     <ng-container matColumnDef="lineNumberCounter">
       <th class="p-2" mat-header-cell *matHeaderCellDef>Yevmiye No</th>
-      <td class="p-2" mat-cell *matCellDef="let row">
+      <td class="p-2 text-primary-dark" mat-cell *matCellDef="let row">
         {{ row.lineNumberCounter }}
       </td>
     </ng-container>
     <ng-container matColumnDef="documentNumber">
       <th class="p-2" mat-header-cell *matHeaderCellDef>Belge No</th>
-      <td class="p-2" mat-cell *matCellDef="let row">
+      <td class="p-2 text-primary-dark" mat-cell *matCellDef="let row">
         {{ row.documentNumber }}
       </td>
     </ng-container>
     <ng-container matColumnDef="documentDate">
       <th class="p-2" mat-header-cell *matHeaderCellDef>Belge Tarihi</th>
-      <td class="p-2" mat-cell *matCellDef="let row">
+      <td class="p-2 text-primary-dark" mat-cell *matCellDef="let row">
         {{ row.documentDate | date }}
       </td>
     </ng-container>
     <ng-container matColumnDef="detailcomment">
       <th class="p-2" mat-header-cell *matHeaderCellDef>Açıklama</th>
-      <td class="p-2" mat-cell *matCellDef="let row">
+      <td class="p-2 text-primary-dark" mat-cell *matCellDef="let row">
         {{ row.detailcomment }}
       </td>
     </ng-container>
     <ng-container matColumnDef="debitAmount">
       <th class="text-end p-2" mat-header-cell *matHeaderCellDef>Borç</th>
-      <td class="p-2" mat-cell *matCellDef="let row">
+      <td class="p-2 text-primary-dark" mat-cell *matCellDef="let row">
         <app-currency [value]="row.debitAmount"></app-currency>
       </td>
     </ng-container>
     <ng-container matColumnDef="creditAmount">
       <th class="text-end p-2" mat-header-cell *matHeaderCellDef>Alacak</th>
-      <td class="p-2" mat-cell *matCellDef="let row">
+      <td class="p-2 text-primary-dark" mat-cell *matCellDef="let row">
         <app-currency [value]="row.creditAmount"></app-currency>
       </td>
     </ng-container>
@@ -81,7 +85,7 @@
       <th class="text-end p-2" mat-header-cell *matHeaderCellDef>
         Borç Bakiye
       </th>
-      <td class="p-2" mat-cell *matCellDef="let row">
+      <td class="p-2 text-primary-dark" mat-cell *matCellDef="let row">
         <app-currency [value]="row.debitBalanbce"></app-currency>
       </td>
     </ng-container>
@@ -89,7 +93,7 @@
       <th class="text-end p-2" mat-header-cell *matHeaderCellDef>
         Alacak Bakiye
       </th>
-      <td class="p-2" mat-cell *matCellDef="let row">
+      <td class="p-2 text-primary-dark" mat-cell *matCellDef="let row">
         <app-currency [value]="row.creditBalanbce"></app-currency>
       </td>
     </ng-container>

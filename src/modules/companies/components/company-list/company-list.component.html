@@ -1,0 +1,50 @@
+<div>
+  <button mat-flat-button color="primary" (click)="onCreate()">
+    <mat-icon>add</mat-icon>
+    <span>Yeni Firma</span>
+  </button>
+</div>
+<table mat-table [dataSource]="data$ | async" class="w-100">
+  <ng-container matColumnDef="logo">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell class="text-primary-dark" *matCellDef="let row">
+      {{ row.logo }}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="taxNumber">
+    <th mat-header-cell *matHeaderCellDef>Vergi No</th>
+    <td mat-cell class="text-primary-dark" *matCellDef="let row">
+      <div>
+        {{ row.taxOffice | titlecase }}
+      </div>
+      {{ row.taxNumber }}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="companyName">
+    <th mat-header-cell *matHeaderCellDef>Firma Adı</th>
+    <td mat-cell class="text-primary-dark" *matCellDef="let row">
+      {{ row.companyName }}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="createdDate">
+    <th mat-header-cell *matHeaderCellDef>Oluşturulma Tarihi</th>
+    <td mat-cell class="text-primary-dark" *matCellDef="let row">
+      <div>Oluşturan: {{ row.createdBy }}</div>
+      {{ row.createdDate | date }}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell class="text-primary-dark" *matCellDef="let row">
+      <button mat-icon-button (click)="onEdit(row)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="onDelete(row)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+<mat-paginator [length]="resultsLength" [pageSize]="10"></mat-paginator>
