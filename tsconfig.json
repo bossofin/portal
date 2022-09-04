@@ -17,6 +17,7 @@
       "@raporlar/*":["src/modules/raporlar/*"],
       "@buyumeRaporu/*":["src/modules/buyume-raporu/*"],
       "@firmalar/*":["src/modules/companies/*"],
+      "@kullanicilar/*":["src/modules/users/*"],
       "@shared-components/*":["src/modules/shared-components/*"],
       "@pre-loader/*":["src/modules/pre-loader/*"],
       "@store/*":["src/store/*"],

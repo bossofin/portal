@@ -45,9 +45,7 @@ export class CompanyListComponent implements OnInit, OnDestroy {
     }
     this.data$ = merge(this.paginator.page).pipe(
       startWith({}),
-      switchMap(() =>
-        this.companyService.getAll(this.paginator.pageIndex + 1, 10)
-      ),
+      switchMap(() => this.companyService.getAll(this.paginator.pageIndex, 10)),
       map((value) => {
         this.resultsLength = 10;
         return value;

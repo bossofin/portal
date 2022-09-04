@@ -1,0 +1,22 @@
+<mat-form-field>
+  <mat-label>Firma Ara...</mat-label>
+  <input
+    type="text"
+    matInput
+    [formControl]="userSearchControl"
+    [matAutocomplete]="auto"
+  />
+  <mat-autocomplete
+    autoActiveFirstOption
+    #auto="matAutocomplete"
+    [displayWith]="displayWith"
+    (optionSelected)="onCompanySelect($event)"
+  >
+    <mat-option
+      *ngFor="let company of filteredOptions$ | async"
+      [value]="company"
+    >
+      {{ company.companyName }}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>

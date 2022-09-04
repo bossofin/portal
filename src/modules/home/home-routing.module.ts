@@ -50,6 +50,13 @@ const routes: Routes = [
             (module) => module.CompaniesModule
           ),
       },
+      {
+        path: 'kullanicilar',
+        loadChildren: () =>
+          import('@kullanicilar/users.module').then(
+            (module) => module.UsersModule
+          ),
+      },
     ],
   },
 ];

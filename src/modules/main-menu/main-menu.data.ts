@@ -68,4 +68,9 @@ export const mainMenuData = [
     icon: 'store',
     url: 'firmalar',
   },
+  {
+    title: 'Kullanıcılar',
+    icon: 'group',
+    url: 'kullanicilar',
+  },
 ];

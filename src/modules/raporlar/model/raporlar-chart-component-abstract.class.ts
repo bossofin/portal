@@ -56,7 +56,6 @@ export abstract class RaporlarChartComponent {
       const handleMap = (item: RaporItem) =>
         item.companyRatio || item.companyRate;
       const dataArray = this.data.map(handleMap);
-      console.log(this.data);
       this.barChartData = {
         labels: [...selectPeriodData.periods, 'Optimum', 'Sektör'],
         datasets: [
@@ -79,7 +78,6 @@ export abstract class RaporlarChartComponent {
           },
         ],
       };
-      console.log(this.barChartData);
     }
   }
 }
