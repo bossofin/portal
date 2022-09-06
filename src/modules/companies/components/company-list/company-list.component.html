@@ -12,7 +12,7 @@
     </td>
   </ng-container>
   <ng-container matColumnDef="taxNumber">
-    <th mat-header-cell *matHeaderCellDef>Vergi No</th>
+    <th mat-header-cell *matHeaderCellDef>Vergi Dairesi / Vergi No</th>
     <td mat-cell class="text-primary-dark" *matCellDef="let row">
       <div>
         {{ row.taxOffice | titlecase }}
@@ -27,10 +27,10 @@
     </td>
   </ng-container>
   <ng-container matColumnDef="createdDate">
-    <th mat-header-cell *matHeaderCellDef>Oluşturulma Tarihi</th>
+    <th mat-header-cell *matHeaderCellDef>Oluşturma Bilgileri</th>
     <td mat-cell class="text-primary-dark" *matCellDef="let row">
       <div>Oluşturan: {{ row.createdBy }}</div>
-      {{ row.createdDate | date }}
+      {{ row.createdDate | date: "medium" }}
     </td>
   </ng-container>
   <ng-container matColumnDef="actions">

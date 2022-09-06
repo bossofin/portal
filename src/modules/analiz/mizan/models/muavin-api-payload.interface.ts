@@ -4,4 +4,5 @@ export interface MuavinApiPayload {
   periodEnd: string;
   pageNumber: number;
   count: number;
+  vkn: string;
 }

@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { CurrencyModule } from '@shared-components/currency/currency.module';
 import { KarZararTablosuBarChartComponent } from './components/kar-zarar-tablosu-bar-chart/kar-zarar-tablosu-bar-chart.component';
 import { NgChartsModule } from 'ng2-charts';
+import { SelectCompanyModule } from '@shared-components/select-company/select-company.module';
 
 @NgModule({
   declarations: [KarZararTablosuComponent, KarZararTablosuBarChartComponent],
@@ -18,6 +19,7 @@ import { NgChartsModule } from 'ng2-charts';
     MatIconModule,
     CurrencyModule,
     NgChartsModule,
+    SelectCompanyModule,
   ],
 })
 export class KarZararTablosuModule {}

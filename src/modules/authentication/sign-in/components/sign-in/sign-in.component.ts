@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from '@authentication/business/authentication.service';
 import { emailValidator } from '@custom-validation/email-validator';
 import { getValidationMessage } from '@custom-validation/get-validation-message';
+import { GlobalStore } from '@store/global.store';
 import { lastValueFrom } from 'rxjs';
 
 @Component({
@@ -22,7 +23,8 @@ export class SignInComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authenticationService: AuthenticationService,
     private snackbar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private globalStore: GlobalStore
   ) {
     this.createForm();
   }
@@ -60,6 +62,7 @@ export class SignInComponent implements OnInit {
         this.snackbar.open('Giriş başarılı.', 'Kapat', {
           duration: 5000,
         });
+        sessionStorage.setItem('userName', userName);
         return;
       }
       this.snackbar.open('Kullanıcı bilgileri hatalı.', 'Kapat', {

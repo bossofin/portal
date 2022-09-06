@@ -19,12 +19,12 @@ export class RaporlarService {
   selectedPeriods: SelectPeriodData;
   reportsResponse$ = new BehaviorSubject<RaporApiResponse[]>(null);
   constructor(private http: HttpClient) {}
-  getRatioReport() {
+  getRatioReport(companyId: string) {
     const selectedPeriodsUrlString = new SelectPeriodReturnData(
       this.selectedPeriods
     ).getURLString();
     return this.http.get<RaporApiResponse[]>(
-      `${this.api}/ratioreport/6490519109?${selectedPeriodsUrlString}`
+      `${this.api}/ratioreport/${companyId}?${selectedPeriodsUrlString}`
     );
   }
   getDataByKey(key: RaporKeys) {

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit } from '@angular/core';
+import { Company } from '@firmalar/mdoels/company.interface';
 import { mainMenuData } from '@main-menu/main-menu.data';
 
 @Component({

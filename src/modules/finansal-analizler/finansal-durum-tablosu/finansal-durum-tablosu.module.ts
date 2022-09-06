@@ -9,9 +9,14 @@ import { PasifVarliklarTableModule } from '@finanaslAnalizler/pasif-varliklar-ta
 import { CurrencyModule } from '@shared-components/currency/currency.module';
 import { FinansmanGiderKisitlamasiTabloComponent } from './components/finansman-gider-kisitlamasi-tablo/finansman-gider-kisitlamasi-tablo.component';
 import { FinansmanGiderKisitlamasiDetayTabloComponent } from './components/finansman-gider-kisitlamasi-detay-tablo/finansman-gider-kisitlamasi-detay-tablo.component';
+import { SelectCompanyModule } from '@shared-components/select-company/select-company.module';
 
 @NgModule({
-  declarations: [FinansalDurumTablosuComponent, FinansmanGiderKisitlamasiTabloComponent, FinansmanGiderKisitlamasiDetayTabloComponent],
+  declarations: [
+    FinansalDurumTablosuComponent,
+    FinansmanGiderKisitlamasiTabloComponent,
+    FinansmanGiderKisitlamasiDetayTabloComponent,
+  ],
   imports: [
     CommonModule,
     FinansalDurumTablosuRoutingModule,
@@ -19,6 +24,7 @@ import { FinansmanGiderKisitlamasiDetayTabloComponent } from './components/finan
     AktifVarliklarTableModule,
     PasifVarliklarTableModule,
     CurrencyModule,
+    SelectCompanyModule,
   ],
 })
 export class FinansalDurumTablosuModule {}

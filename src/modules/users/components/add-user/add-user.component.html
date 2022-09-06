@@ -1,0 +1,65 @@
+<h2 mat-dialog-title>
+  {{ title }}
+</h2>
+<div class="alert alert-info">
+  Seçilen firma:
+  <u>{{ company.companyName }}</u>
+</div>
+<mat-dialog-content>
+  <form [formGroup]="addForm" autocomplete="new-password">
+    <mat-form-field class="d-block">
+      <mat-label>Kullanıcı Adı</mat-label>
+      <input
+        type="text"
+        matInput
+        formControlName="userName"
+        name="userName"
+        autocomplete="userName"
+      />
+      <mat-error>
+        {{ userNameValidationErrorMessage }}
+      </mat-error>
+    </mat-form-field>
+    <mat-slide-toggle
+      (change)="onStatusChange($event)"
+      formControlName="activationStatus"
+    >
+      {{ toggleTitle }}
+    </mat-slide-toggle>
+    <hr />
+    <fieldset>
+      <mat-form-field class="d-block">
+        <mat-label>Yeni Şifre</mat-label>
+        <input
+          type="password"
+          matInput
+          formControlName="password"
+          name="password"
+          autocomplete="password"
+        />
+        <mat-error>
+          {{ passwordValidationErrorMessage }}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="d-block">
+        <mat-label>Yeni Şifre Tekrar</mat-label>
+        <input
+          type="password"
+          matInput
+          formControlName="rePassword"
+          name="rePassword"
+          autocomplete="rePassword"
+        />
+        <mat-error>
+          {{ rePasswordValidationError }}
+        </mat-error>
+      </mat-form-field>
+    </fieldset>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>İptal</button>
+  <button mat-button (click)="onSave()" [disabled]="addForm.invalid">
+    Kaydet
+  </button>
+</mat-dialog-actions>

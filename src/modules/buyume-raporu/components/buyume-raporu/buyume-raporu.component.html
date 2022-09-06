@@ -1,5 +1,8 @@
+<app-select-company (onSelect)="onCompanySelect($event)"></app-select-company>
 <app-select-period-type
+  *ngIf="selectedCompany"
   (onChange)="onPeriodTypeChange($event)"
+  class="ms-2"
 ></app-select-period-type>
 <div class="d-flex">
   <div *ngIf="selectedPeriodType" class="align-self-center">
@@ -13,7 +16,7 @@
   <div *ngIf="selectedStartMonth" class="align-self-center ms-3">
     <h5>İkinci Period</h5>
     <app-select-year
-      [startYear]="selectedStartYear + 1"
+      [startYear]="selectedStartYear"
       (onChange)="onEndYearChange($event)"
     ></app-select-year>
     <app-select-month

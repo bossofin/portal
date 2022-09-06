@@ -4,6 +4,7 @@ import { FinansalAnalizlerService } from '@finanaslAnalizler/business/finansal-a
 import { FinansalDurumTablosuActiveData } from '@finanaslAnalizler/models/finansal-durum-tablosu-active-data.interface';
 import { FinansalDurumTablosuApiResponse } from '@finanaslAnalizler/models/finansal-durum-tablosu-api-response.interface';
 import { FinansalDurumTablosuPassiveData } from '@finanaslAnalizler/models/finansal-durum-tablosu-passive-data.interface';
+import { Company } from '@firmalar/mdoels/company.interface';
 import { SelectPeriodData } from '@shared-components/select-period/models/select-period-data.interface';
 import { lastValueFrom } from 'rxjs';
 
@@ -20,13 +21,18 @@ export class FinansalDurumTablosuComponent implements OnInit {
   passiveItems: FinansalDurumTablosuPassiveData[];
   selectedPeriods: string[];
   giderKisitlamaTabloData: FinansalDurumTablosuApiResponse;
+  selectedCompany: Company;
   constructor(private finansalAnalizlerService: FinansalAnalizlerService) {}
 
   ngOnInit(): void {}
+  onCompanySelect(company: Company) {
+    this.selectedCompany = company;
+  }
   async onSearch(selectedPeriodsData: SelectPeriodData) {
     this.setSelectedPeriods(selectedPeriodsData);
     const request$ = this.finansalAnalizlerService.getDetailedBalance(
-      makeImmutable(selectedPeriodsData)
+      makeImmutable(selectedPeriodsData),
+      this.selectedCompany.taxNumber
     );
     const response = await lastValueFrom(request$);
     this.activeItems = response.map((item) => item.aktifVarliklar);

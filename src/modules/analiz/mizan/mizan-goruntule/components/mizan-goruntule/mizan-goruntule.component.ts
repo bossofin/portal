@@ -5,6 +5,7 @@ import { MatOptionSelectionChange } from '@angular/material/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
+import { Company } from '@firmalar/mdoels/company.interface';
 import { lastValueFrom } from 'rxjs';
 
 @Component({
@@ -28,7 +29,7 @@ export class MizanGoruntuleComponent implements OnInit {
     'totalCreditBalance',
   ];
   showTable: boolean;
-
+  selectedCompany: Company;
   private _paginator: MatPaginator;
   public get paginator(): MatPaginator {
     return this._paginator;
@@ -43,7 +44,9 @@ export class MizanGoruntuleComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {}
-
+  onSelectCompany(company: Company) {
+    this.selectedCompany = company;
+  }
   getMonthRange({
     selectedEndMonth,
     selectedStartMonth,
@@ -58,7 +61,8 @@ export class MizanGoruntuleComponent implements OnInit {
 
   async onSearch() {
     const requets$ = this.mizanService.getTrialBalance(
-      `${this.selectedStartMonth}/${this.selectedEndMonth}`
+      `${this.selectedStartMonth}/${this.selectedEndMonth}`,
+      this.selectedCompany.taxNumber
     );
     const response = await lastValueFrom(requets$);
     this.showTable = response.length > 0;

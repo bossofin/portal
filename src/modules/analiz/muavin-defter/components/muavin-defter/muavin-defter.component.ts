@@ -1,4 +1,4 @@
-import { MuavinService } from '@analiz/mizan/business/muavin.service';
+import { MuavinService } from '@analiz/muavin-defter/business/muavin.service';
 import { Muavin } from '@analiz/mizan/models/muavin.interface';
 import {
   Component,
@@ -10,6 +10,7 @@ import {
 import { MatPaginator } from '@angular/material/paginator';
 import { hesapKodlari } from '@constants/hesap-kodlari';
 import { map, merge, of, startWith, Subscription, switchMap } from 'rxjs';
+import { Company } from '@firmalar/mdoels/company.interface';
 
 @Component({
   selector: 'app-muavin-defter',
@@ -63,6 +64,7 @@ export class MuavinDefterComponent implements OnInit, OnDestroy {
               pageNumber: this.paginator.pageIndex,
               periodEnd: this.periodEnd,
               periodStart: this.periodStart,
+              vkn: this.selectedCompany.taxNumber,
             });
           }),
           map((value: Muavin[]) => {
@@ -78,9 +80,13 @@ export class MuavinDefterComponent implements OnInit, OnDestroy {
   }
   private periodEnd: string;
   private periodStart: string;
+  selectedCompany: Company;
   constructor(private muavinService: MuavinService) {}
 
   ngOnInit(): void {}
+  onCompanySelect(company: Company) {
+    this.selectedCompany = company;
+  }
   ngOnDestroy(): void {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }

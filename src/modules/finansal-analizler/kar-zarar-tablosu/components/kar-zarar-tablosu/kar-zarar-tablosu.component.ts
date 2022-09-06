@@ -15,6 +15,7 @@ import {
   KarZararTablosuSatisIndirimleriData,
   KarZarartablosuSatislarinMaliyetiData,
 } from '@finanaslAnalizler/models/kar-zarar-tablosu-api-response.interface';
+import { Company } from '@firmalar/mdoels/company.interface';
 import { SelectPeriodData } from '@shared-components/select-period/models/select-period-data.interface';
 import { lastValueFrom } from 'rxjs';
 
@@ -52,14 +53,18 @@ export class KarZararTablosuComponent implements OnInit {
   percentageOfDonemKariVeyaZarari: number[];
   percentageOfDonemNetKariVeyaZarari: number[];
   percentageOfOlaganKarVeyaZarar: number[];
+  selectedCompany: Company;
   constructor(private finansalAnalizlerService: FinansalAnalizlerService) {}
 
   ngOnInit(): void {}
-
+  onSelectCompany(company: Company) {
+    this.selectedCompany = company;
+  }
   async onSearch(selectedPeriodsData: SelectPeriodData) {
     this.setSelectedPeriods(selectedPeriodsData);
     const request$ = this.finansalAnalizlerService.getProfitAndlossReport(
-      makeImmutable(selectedPeriodsData)
+      makeImmutable(selectedPeriodsData),
+      this.selectedCompany.taxNumber
     );
     const response = await lastValueFrom(request$);
     this.response = makeImmutable(response);

@@ -43,3 +43,21 @@ th {
 .text-primary-dark {
   color: darken($color: $primary, $amount: 15);
 }
+.light-theme,
+.light-theme.mat-focused {
+  .mat-select-placeholder,
+  .mat-select-value-text,
+  .mat-select-arrow,
+  .mat-form-field-outline,
+  .mat-form-field-empty.mat-form-field-label,
+  .mat-form-field-label,
+  .mat-form-field-underline,
+  .mat-input-element,
+  ::placeholder {
+    color: #fff !important;
+  }
+  .mat-form-field-underline,
+  .mat-form-field-ripple {
+    background-color: #fff !important;
+  }
+}

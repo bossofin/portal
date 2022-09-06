@@ -3,7 +3,10 @@ import { RaporItem } from './rapor-item.interface';
 import { ChartConfiguration } from 'chart.js';
 import DataLabelsPlugin from 'chartjs-plugin-datalabels';
 import { SelectPeriodData } from '@shared-components/select-period/models/select-period-data.interface';
+import { RaporlarService } from '@raporlar/business/raporlar.service';
+import { Directive } from '@angular/core';
 
+@Directive()
 export abstract class RaporlarChartComponent {
   private _data: RaporItem[] | Observable<null>;
   public get data(): RaporItem[] | Observable<null> {
@@ -36,6 +39,7 @@ export abstract class RaporlarChartComponent {
   below: boolean;
   above: boolean;
   compatible: boolean;
+  constructor(private raporlarService: RaporlarService) {}
   private setStarRate() {
     if (this.data instanceof Array) {
       const firstChild = this.data[0];
@@ -50,9 +54,8 @@ export abstract class RaporlarChartComponent {
 
   private setBarChartOptions() {
     if (this.data instanceof Array) {
-      const selectPeriodData: SelectPeriodData = JSON.parse(
-        localStorage.getItem('selectedPeriodsOfReports')
-      );
+      const selectPeriodData: SelectPeriodData =
+        this.raporlarService.selectedPeriods;
       const handleMap = (item: RaporItem) =>
         item.companyRatio || item.companyRate;
       const dataArray = this.data.map(handleMap);

@@ -16,6 +16,7 @@ export class AuthenticationService {
     });
   }
   signOut() {
+    sessionStorage.clear();
     return this.http.delete(`${this.api}/session`);
   }
   signUp() {}

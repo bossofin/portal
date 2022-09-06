@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { reportList } from '@constants/reports/rapor-drop-down-data';
 import { makeImmutable } from '@custom-utils/make-immutable.util';
+import { Company } from '@firmalar/mdoels/company.interface';
 import { RaporlarService } from '@raporlar/business/raporlar.service';
 import { ReportList } from '@raporlarModel/report-list.interface';
 import { SelectPeriodData } from '@shared-components/select-period/models/select-period-data.interface';
@@ -36,6 +37,7 @@ export class RaporlarHomeComponent implements OnInit, OnDestroy {
     this._selectedReport = value;
     this.raporlarService.selectedReport$.next(value);
   }
+  selectedCompany: Company;
   constructor(
     private raporlarService: RaporlarService,
     private router: Router
@@ -53,11 +55,18 @@ export class RaporlarHomeComponent implements OnInit, OnDestroy {
 
   onSearch(selectedPeriodsData: SelectPeriodData) {
     this.raporlarService.selectedPeriods = makeImmutable(selectedPeriodsData);
+
     this.getReportsData();
   }
 
+  onCompanySelect(company: Company) {
+    this.selectedCompany = company;
+  }
+
   private async getReportsData() {
-    const request$ = this.raporlarService.getRatioReport();
+    const request$ = this.raporlarService.getRatioReport(
+      this.selectedCompany.taxNumber
+    );
     const response = await lastValueFrom(request$);
     this.raporlarService.reportsResponse$.next(response);
   }

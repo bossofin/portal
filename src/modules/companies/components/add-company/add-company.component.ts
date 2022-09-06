@@ -6,7 +6,7 @@ import { getValidationMessage } from '@custom-validation/get-validation-message'
 import { vknValidator } from '@custom-validation/vkn-validator';
 import { CompanyService } from '@firmalar/business/company.service';
 import { Company } from '@firmalar/mdoels/company.interface';
-import { lastValueFrom } from 'rxjs';
+import { lastValueFrom, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-add-company',
@@ -25,7 +25,7 @@ export class AddCompanyComponent implements OnInit {
       this.title = 'Firma Güncelle';
     }
   }
-  title: string = 'Firma Ekle';
+  title: string = 'Firma Oluştur';
   companyId: number;
   constructor(
     private companyService: CompanyService,
@@ -55,7 +55,7 @@ export class AddCompanyComponent implements OnInit {
 
   ngOnInit(): void {}
   async onSave() {
-    let request$;
+    let request$: Observable<Object>;
     if (this.isEdit) {
       request$ = this.companyService.update({
         ...this.addForm.value,

@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { SelectMonthRangeModule } from '@shared-components/select-month-range/select-month-range.module';
+import { SelectCompanyModule } from '@shared-components/select-company/select-company.module';
 
 @NgModule({
   declarations: [MizanGoruntuleComponent],
@@ -26,6 +27,7 @@ import { SelectMonthRangeModule } from '@shared-components/select-month-range/se
     MatButtonModule,
     MatSelectModule,
     SelectMonthRangeModule,
+    SelectCompanyModule,
   ],
 })
 export class MizanGoruntuleModule {}

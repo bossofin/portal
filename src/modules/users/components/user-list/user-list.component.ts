@@ -1,10 +1,13 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Company } from '@firmalar/mdoels/company.interface';
 import { UserService } from '@kullanicilar/business/user.service';
 import { User } from '@kullanicilar/models/user.interface';
-import { Observable, of } from 'rxjs';
+import { lastValueFrom, Observable, of, Subscription } from 'rxjs';
 import { map, merge, startWith, switchMap } from 'rxjs';
+import { AddUserComponent } from '../add-user/add-user.component';
 
 @Component({
   selector: 'app-user-list',
@@ -14,12 +17,12 @@ import { map, merge, startWith, switchMap } from 'rxjs';
     class: 'bg-white d-block rounded p-3',
   },
 })
-export class UserListComponent implements OnInit {
-  selectedCompany: Company;
+export class UserListComponent implements OnInit, OnDestroy {
   userList: any[];
-  displayedColumns = ['userName', 'createdDate', 'activationStatus', 'actions'];
+  displayedColumns = ['userName', 'activationStatus', 'createdDate', 'actions'];
   resultsLength: number;
   data$: Observable<User[]>;
+  private selectedCompany: Company;
   private _paginator: MatPaginator;
   public get paginator(): MatPaginator {
     return this._paginator;
@@ -31,12 +34,12 @@ export class UserListComponent implements OnInit {
         this.data$ = merge(this.paginator.page).pipe(
           startWith({}),
           switchMap(() => {
-            if (this.selectedCompany) {
-              return this.userService.getUsersByCompanyId(
-                this.selectedCompany.id
-              );
+            if (!this.selectedCompany) {
+              return of([]);
             }
-            return of([]);
+            return this.userService.getUsersByCompanyId(
+              this.selectedCompany.id
+            );
           }),
           map((userList) => {
             this.resultsLength = 1000;
@@ -46,14 +49,56 @@ export class UserListComponent implements OnInit {
       });
     }
   }
-  constructor(private userService: UserService) {}
+  subscriptions: Subscription[] = [];
+  constructor(
+    private userService: UserService,
+    private dialog: MatDialog,
+    private snackbar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {}
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+  }
+
   onCompanySelect(company: Company) {
     this.selectedCompany = company;
-    if (this.paginator) {
-      this.paginator.pageIndex = 0;
+    this.paginator.pageIndex = 0;
+    this.paginator.page.emit();
+  }
+
+  onCreate() {
+    const dialogRef = this.dialog.open(AddUserComponent);
+    this.onDialogClose(dialogRef);
+  }
+
+  onEdit(user: User) {
+    const dialogRef = this.dialog.open(AddUserComponent, {
+      data: {
+        user,
+      },
+    });
+    this.onDialogClose(dialogRef);
+  }
+  async onDelete(user: User) {
+    const confirmResult = confirm(`${user.userName} silinecek. Emin misiniz?`);
+    if (confirmResult) {
+      const request$ = this.userService.delete(user.id);
+      await lastValueFrom(request$);
+      this.snackbar.open('Kullanıcı Silindi.', 'Kapat', {
+        duration: 5000,
+      });
       this.paginator.page.emit();
     }
+  }
+
+  private onDialogClose(dialogRef: MatDialogRef<AddUserComponent>) {
+    this.subscriptions.push(
+      dialogRef.afterClosed().subscribe((value) => {
+        if (value) {
+          this.paginator.page.emit();
+        }
+      })
+    );
   }
 }

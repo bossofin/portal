@@ -10,7 +10,7 @@ export class MizanService {
   private api = environment.apiUrl;
   constructor(private http: HttpClient) {}
 
-  getTrialBalance(selectedPeriods: string, vkn: string = '6490519109') {
+  getTrialBalance(selectedPeriods: string, vkn: string) {
     return this.http.get<Mizan[]>(
       `${this.api}/trialbalance/${vkn}/${selectedPeriods}`
     );

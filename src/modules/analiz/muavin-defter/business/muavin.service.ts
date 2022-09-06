@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@environment/environment';
-import { MuavinApiPayload } from '../models/muavin-api-payload.interface';
-import { Muavin } from '../models/muavin.interface';
+import { MuavinApiPayload } from '../../mizan/models/muavin-api-payload.interface';
+import { Muavin } from '../../mizan/models/muavin.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -16,8 +16,9 @@ export class MuavinService {
     pageNumber,
     periodEnd,
     periodStart,
+    vkn,
   }: MuavinApiPayload) {
-    return this.http.get<Muavin[]>(`${this.api}/subsidiaryledger/6490519109?`, {
+    return this.http.get<Muavin[]>(`${this.api}/subsidiaryledger/${vkn}?`, {
       params: {
         mainId,
         periodStart,

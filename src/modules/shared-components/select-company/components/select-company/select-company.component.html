@@ -1,0 +1,11 @@
+<mat-form-field>
+  <mat-label>Firma Seç</mat-label>
+  <mat-select
+    (selectionChange)="onSelectHandle($event)"
+    [value]="companies && companies[0]"
+  >
+    <mat-option *ngFor="let company of companies" [value]="company">
+      {{ company.companyName }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

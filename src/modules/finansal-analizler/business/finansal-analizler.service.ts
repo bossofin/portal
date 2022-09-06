@@ -14,10 +14,7 @@ export class FinansalAnalizlerService {
   private api = environment.apiUrl;
   constructor(private http: HttpClient) {}
 
-  getDetailedBalance(
-    selectedPeriodData: SelectPeriodData,
-    vkn: string = '6490519109'
-  ) {
+  getDetailedBalance(selectedPeriodData: SelectPeriodData, vkn: string) {
     const selectedPeriodsUrlString = new SelectPeriodReturnData(
       selectedPeriodData
     ).getURLString();
@@ -26,10 +23,7 @@ export class FinansalAnalizlerService {
     );
   }
 
-  getProfitAndlossReport(
-    selectedPeriodData: SelectPeriodData,
-    vkn: string = '6490519109'
-  ) {
+  getProfitAndlossReport(selectedPeriodData: SelectPeriodData, vkn: string) {
     const selectedPeriodsUrlString = new SelectPeriodReturnData(
       selectedPeriodData
     ).getURLString();

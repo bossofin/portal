@@ -16,10 +16,10 @@ export class BuyumeRaporuService {
   selectedStartMonth: string;
   selectedStartYear: number;
   constructor(private http: HttpClient) {}
-  growThrateReport() {
+  growThrateReport(companyId: string) {
     const urlString = this.createUrlString();
     return this.http.get<BuyumeRaporApiResponse>(
-      `${this.api}/growthratereport/6490519109?${urlString}`
+      `${this.api}/growthratereport/${companyId}?${urlString}`
     );
   }
 

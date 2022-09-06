@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { BuyumeRaporuService } from '@buyumeRaporu/business/buyume-raporu.service';
+import { Company } from '@firmalar/mdoels/company.interface';
 import { RaporItem } from '@raporlar/model/rapor-item.interface';
 import { PeriodType } from '@shared-components/select-period/models/select-period-data.interface';
-import { lastValueFrom } from 'rxjs';
+import { lastValueFrom, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-buyume-raporu',
@@ -32,6 +33,8 @@ export class BuyumeRaporuComponent implements OnInit {
   selectedPeriod: string[];
   karBuyumesi: RaporItem;
   satisinBuyumesi: RaporItem;
+  subscriptions: Subscription[] = [];
+  selectedCompany: Company;
   constructor(private buyumeRaporuService: BuyumeRaporuService) {}
   ngOnInit(): void {}
   onPeriodTypeChange(periodType: PeriodType) {
@@ -54,12 +57,21 @@ export class BuyumeRaporuComponent implements OnInit {
     this.selectedEndMonth = month as string;
     this.buyumeRaporuService.selectedEndMonth = this.selectedEndMonth;
   }
+  onCompanySelect(company: Company) {
+    this.selectedCompany = company;
+  }
   async onSearch() {
+    if (!this.selectedStartYear || !this.selectedStartMonth) {
+      return;
+    }
     this.selectedPeriod = [
       `${this.selectedStartYear}-${this.selectedStartMonth}`,
       `${this.selectedEndYear}-${this.selectedEndMonth}`,
     ];
-    const request$ = this.buyumeRaporuService.growThrateReport();
+
+    const request$ = this.buyumeRaporuService.growThrateReport(
+      this.selectedCompany.taxNumber
+    );
     const response = await lastValueFrom(request$);
     this.karBuyumesi = response.karBuyumesi;
     this.satisinBuyumesi = response.satisBuyumesi;

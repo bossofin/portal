@@ -12,6 +12,7 @@ import { NgChartsModule } from 'ng2-charts';
 import { StarRateModule } from '@shared-components/star-rate/star-rate.module';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
+import { SelectCompanyModule } from '@shared-components/select-company/select-company.module';
 
 @NgModule({
   declarations: [BuyumeRaporuComponent, BuyumeRaporuChartComponent],
@@ -27,6 +28,7 @@ import { FormsModule } from '@angular/forms';
     StarRateModule,
     MatSelectModule,
     FormsModule,
+    SelectCompanyModule,
   ],
 })
 export class BuyumeRaporuModule {}

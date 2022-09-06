@@ -13,6 +13,7 @@ import { CurrencyModule } from '@shared-components/currency/currency.module';
 import { SelectYearModule } from '@shared-components/select-year/select-year.module';
 import { SelectMonthModule } from '@shared-components/select-month/select-month.module';
 import { MuavinSelectPeriodComponent } from './components/muavin-select-period/muavin-select-period.component';
+import { SelectCompanyModule } from '@shared-components/select-company/select-company.module';
 
 @NgModule({
   declarations: [MuavinDefterComponent, MuavinSelectPeriodComponent],
@@ -28,6 +29,7 @@ import { MuavinSelectPeriodComponent } from './components/muavin-select-period/m
     CurrencyModule,
     SelectYearModule,
     SelectMonthModule,
+    SelectCompanyModule,
   ],
 })
 export class MuavinDefterModule {}
