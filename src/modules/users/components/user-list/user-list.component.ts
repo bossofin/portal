@@ -68,7 +68,11 @@ export class UserListComponent implements OnInit, OnDestroy {
   }
 
   onCreate() {
-    const dialogRef = this.dialog.open(AddUserComponent);
+    const dialogRef = this.dialog.open(AddUserComponent, {
+      data: {
+        company: this.selectedCompany,
+      },
+    });
     this.onDialogClose(dialogRef);
   }
 
@@ -76,6 +80,7 @@ export class UserListComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(AddUserComponent, {
       data: {
         user,
+        company: this.selectedCompany,
       },
     });
     this.onDialogClose(dialogRef);
