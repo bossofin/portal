@@ -12,6 +12,11 @@ import { NgChartsModule } from 'ng2-charts';
 import { CurrencyModule } from '@shared-components/currency/currency.module';
 import { MusteriBakiyeSiralamasiComponent } from './components/musteri-bakiye-siralamasi/musteri-bakiye-siralamasi.component';
 import { MusteriCiroSiralamasiComponent } from './components/musteri-ciro-siralamasi/musteri-ciro-siralamasi.component';
+import { DovizKuruComponent } from './components/doviz-kuru/doviz-kuru.component';
+import { MatButtonModule } from '@angular/material/button';
+import { SelectYearModule } from '@shared-components/select-year/select-year.module';
+import { SelectMonthModule } from '@shared-components/select-month/select-month.module';
+import { SelectCompanyModule } from '@shared-components/select-company/select-company.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +27,7 @@ import { MusteriCiroSiralamasiComponent } from './components/musteri-ciro-sirala
     TableComponent,
     MusteriBakiyeSiralamasiComponent,
     MusteriCiroSiralamasiComponent,
+    DovizKuruComponent,
   ],
   imports: [
     CommonModule,
@@ -30,6 +36,10 @@ import { MusteriCiroSiralamasiComponent } from './components/musteri-ciro-sirala
     MatTableModule,
     NgChartsModule,
     CurrencyModule,
+    MatButtonModule,
+    SelectYearModule,
+    SelectMonthModule,
+    SelectCompanyModule,
   ],
 })
 export class DashboardModule {}

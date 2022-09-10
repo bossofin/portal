@@ -1,17 +1,68 @@
-<div class="row">
-  <div class="col-lg-6 mb-4">
-    <app-summary></app-summary>
+<div class="row m-0">
+  <div class="col-12">
+    <div class="bg-white rounded p-3 mb-4">
+      <div class="alert alert-info m-0">
+        <p>Merhaba,</p>
+        <p>
+          BOSSOFIN size e-Defter verileriniz üzerinden anlık ve güncel veriler
+          sunar. Gerçek finansal verilerinizi görmek için e-Defter verilerinizi
+          yüklemeniz yeterlidir.
+        </p>
+        <button mat-flat-button color="primary">e-Defter Yükle</button>
+      </div>
+    </div>
   </div>
-  <app-bar-chart class="col-lg-6 mb-4"></app-bar-chart>
-
-  <div class="col-lg-6 mb-4">
-    <div class="bg-white rounded p-3">
-      <app-musteri-ciro-siralamasi></app-musteri-ciro-siralamasi>
+  <div class="col-12">
+    <div class="bg-white p-3 rounded mb-4 d-flex">
+      <app-select-company
+        (onSelect)="onSelectCompany($event)"
+      ></app-select-company>
+      <app-select-year
+        class="ms-3 align-self-center"
+        [selectedYear]="selectedYear"
+        (onChange)="getSelectedYear($event)"
+      ></app-select-year>
+      <app-select-month
+        class="ms-3 align-self-center"
+        [selectedPeriods]="selectedMonth"
+        (onChange)="getSelectedMonth($event)"
+      ></app-select-month>
+      <button mat-icon-button class="align-self-center" (click)="onSearch()">
+        <mat-icon>search</mat-icon>
+      </button>
     </div>
   </div>
   <div class="col-lg-6 mb-4">
-    <div class="bg-white rounded p-3">
-      <app-musteri-bakiye-siralamasi></app-musteri-bakiye-siralamasi>
-    </div>
+    <app-summary
+      [score]="score"
+      [profitAndDebit]="profitAndDebitData"
+    ></app-summary>
   </div>
+  <div class="col-lg-6 mb-4">
+    <app-doviz-kuru></app-doviz-kuru>
+  </div>
+  <app-bar-chart
+    class="col-lg-6 mb-4"
+    [data]="cariOran"
+    [selectedYear]="selectedYear"
+    text="Cari Oran"
+  ></app-bar-chart>
+  <app-bar-chart
+    class="col-lg-6 mb-4"
+    [data]="borcOdemeSuresi"
+    [selectedYear]="selectedYear"
+    text="Borç Ödeme Süresi"
+  ></app-bar-chart>
+  <app-bar-chart
+    class="col-lg-6 mb-4"
+    [data]="aktifKarlilik"
+    [selectedYear]="selectedYear"
+    text="Aktif Karlılık"
+  ></app-bar-chart>
+  <app-bar-chart
+    class="col-lg-6 mb-4"
+    [data]="faaliyetGiderlerininNetSatislaraOrani"
+    [selectedYear]="selectedYear"
+    text="Faaliyet Giderlerinin Net Satışlara Oranı"
+  ></app-bar-chart>
 </div>

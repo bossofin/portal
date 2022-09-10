@@ -43,7 +43,12 @@ export class SelectMonthRangeComponent implements OnInit {
 
   onEndMonthChange(event: MatOptionSelectionChange) {
     if (event.isUserInput) {
-      this.selectedEndMonth = event.source.value;
+      const value: string = event.source.value;
+      const stringArray = value.split('-');
+      const year = stringArray[0];
+      const month = Number(stringArray[1]) - 1;
+
+      this.selectedEndMonth = `${year}-${String(month).padStart(2, '0')}`;
     }
   }
   onSearchHandle() {

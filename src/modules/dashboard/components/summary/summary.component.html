@@ -1,4 +1,4 @@
-<div class="col-md-6 mb-4">
+<!-- <div class="col-md-6 mb-4">
   <div class="bg-white rounded p-4 summary-first">
     <h4 class="text-primary mb-0 d-flex">
       <mat-icon class="align-self-center">group</mat-icon>
@@ -21,8 +21,8 @@
     </ul>
     <i class="d-block mt-3">Nullam non viverra nisl, quis fringilla justo.</i>
   </div>
-</div>
-<div class="col-md-6 mb-4">
+</div> -->
+<!-- <div class="col-md-6 mb-4">
   <div class="bg-white rounded p-4 summary-first">
     <h4 class="text-success mb-0 d-flex">
       <mat-icon class="align-self-center">group</mat-icon>
@@ -45,24 +45,30 @@
     </ul>
     <i class="d-block mt-3">Nullam non viverra nisl, quis fringilla justo.</i>
   </div>
-</div>
+</div> -->
 <div class="col-md-6">
   <div class="bg-white rounded p-4 summary-first">
     <h4 class="text-warning mb-0 d-flex">
-      <mat-icon class="align-self-center">store</mat-icon>
-      <span class="align-self-center ms-2">54896</span>
+      <mat-icon class="align-self-center">score</mat-icon>
+      <span class="align-self-center ms-2">
+        {{ score }}
+      </span>
     </h4>
-    <span class="text-secondary">Aktif Satıcı / Tedarikçi Sayısı</span>
-    <i class="d-block mt-3">Nullam non viverra nisl, quis fringilla justo.</i>
+    <span class="text-secondary">SKOR</span>
+    <!--     <i class="d-block mt-3">Nullam non viverra nisl, quis fringilla justo.</i>
+ -->
   </div>
 </div>
 <div class="col-md-6">
   <div class="bg-white rounded p-4 summary-first">
     <h4 class="text-danger mb-0 d-flex">
-      <mat-icon class="align-self-center">store</mat-icon>
-      <span class="align-self-center ms-2">54896 ₺</span>
+      <mat-icon class="align-self-center">payments</mat-icon>
+      <span class="align-self-center ms-2">
+        <app-currency [value]="profitAndDebit"></app-currency>
+      </span>
     </h4>
-    <span class="text-secondary">Toplam Satıcı - Tedarikçi Sayısı</span>
-    <i class="d-block mt-3">Nullam non viverra nisl, quis fringilla justo.</i>
+    <span class="text-secondary">Aylık Net Kar ve Zarar</span>
+    <!--     <i class="d-block mt-3">Nullam non viverra nisl, quis fringilla justo.</i>
+ -->
   </div>
 </div>

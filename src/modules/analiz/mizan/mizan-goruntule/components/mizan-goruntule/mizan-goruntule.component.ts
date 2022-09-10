@@ -1,7 +1,6 @@
 import { MizanService } from '@analiz/mizan/business/mizan.service';
 import { Mizan } from '@analiz/mizan/models/mizan-item.interface';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatOptionSelectionChange } from '@angular/material/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
@@ -17,8 +16,8 @@ import { lastValueFrom } from 'rxjs';
   },
 })
 export class MizanGoruntuleComponent implements OnInit {
-  selectedStartMonth: string;
-  selectedEndMonth: string;
+  periodStart: string;
+  periodEnd: string;
   dataSource = new MatTableDataSource<Mizan>();
   displayedColumns: string[] = [
     'accountMainId',
@@ -47,21 +46,19 @@ export class MizanGoruntuleComponent implements OnInit {
   onSelectCompany(company: Company) {
     this.selectedCompany = company;
   }
-  getMonthRange({
-    selectedEndMonth,
-    selectedStartMonth,
-  }: {
-    selectedEndMonth: string;
-    selectedStartMonth: string;
+  getMonthRange(value: {
+    selectedStartYear: number;
+    selectedStartMonth: number;
+    selectedEndtYear: number;
+    selectedEndtMonth: number;
   }) {
-    this.selectedEndMonth = selectedEndMonth;
-    this.selectedStartMonth = selectedStartMonth;
+    this.periodEnd = `${value.selectedEndtYear}-${value.selectedEndtMonth}`;
+    this.periodStart = `${value.selectedStartYear}-${value.selectedStartMonth}`;
     this.onSearch();
   }
-
   async onSearch() {
     const requets$ = this.mizanService.getTrialBalance(
-      `${this.selectedStartMonth}/${this.selectedEndMonth}`,
+      `${this.periodStart}/${this.periodEnd}`,
       this.selectedCompany.taxNumber
     );
     const response = await lastValueFrom(requets$);

@@ -19,6 +19,13 @@ const routes: Routes = [
         (module) => module.MuavinDefterModule
       ),
   },
+  {
+    path: 'veri-ekle',
+    loadChildren: () =>
+      import('./veri-ekle/veri-ekle.module').then(
+        (module) => module.VeriEkleModule
+      ),
+  },
   /* {
     path: 'e-defter-yukle',
     loadChildren: () =>

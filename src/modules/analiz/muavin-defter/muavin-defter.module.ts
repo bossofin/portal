@@ -10,26 +10,23 @@ import { FormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { CurrencyModule } from '@shared-components/currency/currency.module';
-import { SelectYearModule } from '@shared-components/select-year/select-year.module';
-import { SelectMonthModule } from '@shared-components/select-month/select-month.module';
-import { MuavinSelectPeriodComponent } from './components/muavin-select-period/muavin-select-period.component';
 import { SelectCompanyModule } from '@shared-components/select-company/select-company.module';
+import { MuavinSelectPeriodModule } from './components/muavin-select-period/muavin-select-period.module';
 
 @NgModule({
-  declarations: [MuavinDefterComponent, MuavinSelectPeriodComponent],
+  declarations: [MuavinDefterComponent],
   imports: [
     CommonModule,
     MuavinDefterRoutingModule,
     MatSelectModule,
-    MatButtonModule,
     MatIconModule,
     FormsModule,
     MatTableModule,
     MatPaginatorModule,
     CurrencyModule,
-    SelectYearModule,
-    SelectMonthModule,
     SelectCompanyModule,
+    MuavinSelectPeriodModule,
   ],
+  exports: [],
 })
 export class MuavinDefterModule {}

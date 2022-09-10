@@ -25,6 +25,11 @@ export const mainMenuData = [
         icon: 'preview',
         url: 'analiz/mizan/goruntule',
       },
+      {
+        title: 'Veri Ekle',
+        icon: 'storage',
+        url: 'analiz/veri-ekle',
+      },
     ],
   },
   {

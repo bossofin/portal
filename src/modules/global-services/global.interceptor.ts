@@ -23,6 +23,7 @@ export class GlobalInterceptor implements HttpInterceptor {
     const newRequest = request.clone({
       setHeaders: {
         Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+        'Content-Type': 'application/json; charset=utf8',
       },
     });
     const isChacheable = newRequest.headers.get('cache');

@@ -1,39 +1,39 @@
 export const months = [
   {
     name: 'Ocak',
-    value: '01',
+    value: '1',
   },
   {
     name: 'Şubat',
-    value: '02',
+    value: '2',
   },
   {
     name: 'Mart',
-    value: '03',
+    value: '3',
   },
   {
     name: 'Nisan',
-    value: '04',
+    value: '4',
   },
   {
     name: 'Mayıs',
-    value: '05',
+    value: '5',
   },
   {
     name: 'Haziran',
-    value: '06',
+    value: '6',
   },
   {
     name: 'Temmuz',
-    value: '07',
+    value: '7',
   },
   {
     name: 'Ağustos',
-    value: '08',
+    value: '8',
   },
   {
     name: 'Eylül',
-    value: '09',
+    value: '9',
   },
   {
     name: 'Ekim',

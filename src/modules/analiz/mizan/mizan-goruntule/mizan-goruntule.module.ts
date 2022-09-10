@@ -10,8 +10,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
-import { SelectMonthRangeModule } from '@shared-components/select-month-range/select-month-range.module';
 import { SelectCompanyModule } from '@shared-components/select-company/select-company.module';
+import { MuavinSelectPeriodModule } from '@analiz/muavin-defter/components/muavin-select-period/muavin-select-period.module';
 
 @NgModule({
   declarations: [MizanGoruntuleComponent],
@@ -26,8 +26,8 @@ import { SelectCompanyModule } from '@shared-components/select-company/select-co
     MatIconModule,
     MatButtonModule,
     MatSelectModule,
-    SelectMonthRangeModule,
     SelectCompanyModule,
+    MuavinSelectPeriodModule,
   ],
 })
 export class MizanGoruntuleModule {}
