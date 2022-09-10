@@ -1,17 +1,11 @@
 import { MuavinService } from '@analiz/muavin-defter/business/muavin.service';
 import { Muavin } from '@analiz/mizan/models/muavin.interface';
-import {
-  Component,
-  EventEmitter,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, EventEmitter, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { hesapKodlari } from '@constants/hesap-kodlari';
-import { map, merge, of, startWith, Subscription, switchMap } from 'rxjs';
-import { Company } from '@firmalar/mdoels/company.interface';
+import { map, merge, startWith, switchMap } from 'rxjs';
 import { GlobalStore } from '@store/global.store';
+import { SelectCompany } from '@globalModels/select-company.abstract.class';
 
 @Component({
   selector: 'app-muavin-defter',
@@ -21,7 +15,7 @@ import { GlobalStore } from '@store/global.store';
     class: 'bg-white d-block rounded p-3',
   },
 })
-export class MuavinDefterComponent implements OnInit, OnDestroy {
+export class MuavinDefterComponent extends SelectCompany implements OnInit {
   data: Muavin[];
   resultsLength: number;
   hesapKodlari = hesapKodlari;
@@ -41,7 +35,6 @@ export class MuavinDefterComponent implements OnInit, OnDestroy {
     'debitBalanbce',
     'creditBalanbce',
   ];
-  subscriptions: Subscription[] = [];
   private _paginator: MatPaginator;
   public get paginator(): MatPaginator {
     return this._paginator;
@@ -81,20 +74,14 @@ export class MuavinDefterComponent implements OnInit, OnDestroy {
   }
   private periodEnd: string;
   private periodStart: string;
-  selectedCompany: Company;
   constructor(private muavinService: MuavinService, globalStore: GlobalStore) {
-    this.subscriptions.push(
-      globalStore.selectedCompany$.subscribe((company) => {
-        this.selectedCompany = company;
-        this.resetPaginatorAndGetData();
-      })
-    );
+    super(globalStore);
   }
-
+  onCompanySelect(): void {
+    this.resetPaginatorAndGetData();
+  }
   ngOnInit(): void {}
-  ngOnDestroy(): void {
-    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
-  }
+
   onFilter() {
     this.resetPaginatorAndGetData();
   }

@@ -1,13 +1,13 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { makeImmutable } from '@custom-utils/make-immutable.util';
 import { FinansalAnalizlerService } from '@finanaslAnalizler/business/finansal-analizler.service';
 import { FinansalDurumTablosuActiveData } from '@finanaslAnalizler/models/finansal-durum-tablosu-active-data.interface';
 import { FinansalDurumTablosuApiResponse } from '@finanaslAnalizler/models/finansal-durum-tablosu-api-response.interface';
 import { FinansalDurumTablosuPassiveData } from '@finanaslAnalizler/models/finansal-durum-tablosu-passive-data.interface';
-import { Company } from '@firmalar/mdoels/company.interface';
+import { SelectCompany } from '@globalModels/select-company.abstract.class';
 import { SelectPeriodData } from '@shared-components/select-period/models/select-period-data.interface';
 import { GlobalStore } from '@store/global.store';
-import { lastValueFrom, Subscription } from 'rxjs';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-finansal-durum-tablosu',
@@ -17,29 +17,25 @@ import { lastValueFrom, Subscription } from 'rxjs';
     class: 'bg-white d-block rounded p-3',
   },
 })
-export class FinansalDurumTablosuComponent implements OnInit, OnDestroy {
+export class FinansalDurumTablosuComponent
+  extends SelectCompany
+  implements OnInit
+{
   activeItems: FinansalDurumTablosuActiveData[];
   passiveItems: FinansalDurumTablosuPassiveData[];
   selectedPeriods: string[];
   selectedPeriodsData: SelectPeriodData;
   giderKisitlamaTabloData: FinansalDurumTablosuApiResponse;
-  selectedCompany: Company;
-  subscriptions: Subscription[] = [];
   constructor(
     private finansalAnalizlerService: FinansalAnalizlerService,
     globalStore: GlobalStore
   ) {
-    this.subscriptions.push(
-      globalStore.selectedCompany$.subscribe((company) => {
-        this.selectedCompany = company;
-        this.onSearch();
-      })
-    );
+    super(globalStore);
   }
 
   ngOnInit(): void {}
-  ngOnDestroy(): void {
-    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+  onCompanySelect(): void {
+    this.onSearch();
   }
   onSelectPeriod(selectedPeriodsData: SelectPeriodData) {
     this.selectedPeriodsData = selectedPeriodsData;

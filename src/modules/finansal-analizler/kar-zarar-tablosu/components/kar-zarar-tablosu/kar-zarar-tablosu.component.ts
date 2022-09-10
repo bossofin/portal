@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { makeImmutable } from '@custom-utils/make-immutable.util';
 import { FinansalAnalizlerService } from '@finanaslAnalizler/business/finansal-analizler.service';
 import {
@@ -16,9 +16,10 @@ import {
   KarZarartablosuSatislarinMaliyetiData,
 } from '@finanaslAnalizler/models/kar-zarar-tablosu-api-response.interface';
 import { Company } from '@firmalar/mdoels/company.interface';
+import { SelectCompany } from '@globalModels/select-company.abstract.class';
 import { SelectPeriodData } from '@shared-components/select-period/models/select-period-data.interface';
 import { GlobalStore } from '@store/global.store';
-import { lastValueFrom, Subscription } from 'rxjs';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-kar-zarar-tablosu',
@@ -28,7 +29,7 @@ import { lastValueFrom, Subscription } from 'rxjs';
     class: 'bg-white d-block rounded p-3',
   },
 })
-export class KarZararTablosuComponent implements OnInit, OnDestroy {
+export class KarZararTablosuComponent extends SelectCompany implements OnInit {
   selectedPeriods: string[];
   response: KarZararTablosuApiResponse[];
   amortismanGiderleri: KarZararTablosuAmortismanGiderleriData[];
@@ -54,24 +55,17 @@ export class KarZararTablosuComponent implements OnInit, OnDestroy {
   percentageOfDonemKariVeyaZarari: number[];
   percentageOfDonemNetKariVeyaZarari: number[];
   percentageOfOlaganKarVeyaZarar: number[];
-  selectedCompany: Company;
   selectedPeriodsData: SelectPeriodData;
-  subscipritons: Subscription[] = [];
   constructor(
     private finansalAnalizlerService: FinansalAnalizlerService,
     globalStore: GlobalStore
   ) {
-    this.subscipritons.push(
-      globalStore.selectedCompany$.subscribe((company) => {
-        this.selectedCompany = company;
-        this.onSearch();
-      })
-    );
+    super(globalStore);
   }
 
   ngOnInit(): void {}
-  ngOnDestroy(): void {
-    this.subscipritons.forEach((subscription) => subscription.unsubscribe());
+  onCompanySelect(): void {
+    this.onSearch();
   }
   onSelectCompany(company: Company) {
     this.selectedCompany = company;

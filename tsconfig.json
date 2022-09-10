@@ -24,6 +24,7 @@
       "@custom-utils/*":["src/modules/custom-utils/*"],
       "@header/*":["src/modules/header/*"],
       "@raporlarModel/*":["src/modules/raporlar/model/*"],
+      "@globalModels/*":["src/modules/models/*"],
     },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,

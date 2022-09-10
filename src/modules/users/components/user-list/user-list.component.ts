@@ -1,12 +1,12 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Company } from '@firmalar/mdoels/company.interface';
+import { SelectCompany } from '@globalModels/select-company.abstract.class';
 import { UserService } from '@kullanicilar/business/user.service';
 import { User } from '@kullanicilar/models/user.interface';
 import { GlobalStore } from '@store/global.store';
-import { lastValueFrom, Observable, of, Subscription } from 'rxjs';
+import { lastValueFrom, Observable, of } from 'rxjs';
 import { map, merge, startWith, switchMap } from 'rxjs';
 import { AddUserComponent } from '../add-user/add-user.component';
 
@@ -18,12 +18,11 @@ import { AddUserComponent } from '../add-user/add-user.component';
     class: 'bg-white d-block rounded p-3',
   },
 })
-export class UserListComponent implements OnInit, OnDestroy {
+export class UserListComponent extends SelectCompany implements OnInit {
   userList: any[];
   displayedColumns = ['userName', 'activationStatus', 'createdDate', 'actions'];
   resultsLength: number;
   data$: Observable<User[]>;
-  private selectedCompany: Company;
   private _paginator: MatPaginator;
   public get paginator(): MatPaginator {
     return this._paginator;
@@ -50,27 +49,20 @@ export class UserListComponent implements OnInit, OnDestroy {
       });
     }
   }
-  subscriptions: Subscription[] = [];
   constructor(
     private userService: UserService,
     private dialog: MatDialog,
     private snackbar: MatSnackBar,
     globalStore: GlobalStore
   ) {
-    this.subscriptions.push(
-      globalStore.selectedCompany$.subscribe((company) => {
-        this.selectedCompany = company;
-        this.paginator.pageIndex = 0;
-        this.paginator.page.emit();
-      })
-    );
+    super(globalStore);
   }
 
   ngOnInit(): void {}
-  ngOnDestroy(): void {
-    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+  onCompanySelect(): void {
+    this.paginator.pageIndex = 0;
+    this.paginator.page.emit();
   }
-
   onCreate() {
     const dialogRef = this.dialog.open(AddUserComponent, {
       data: {

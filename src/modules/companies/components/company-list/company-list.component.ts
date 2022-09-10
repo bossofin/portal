@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -10,9 +10,9 @@ import {
   merge,
   Observable,
   startWith,
-  Subscription,
   switchMap,
 } from 'rxjs';
+import { UnsubscribeOnDestroy } from 'src/modules/models/unsubscribe-on-destroy.abstract.class';
 import { AddCompanyComponent } from '../add-company/add-company.component';
 
 @Component({
@@ -23,7 +23,10 @@ import { AddCompanyComponent } from '../add-company/add-company.component';
     class: 'bg-white d-block rounded p-3',
   },
 })
-export class CompanyListComponent implements OnInit, OnDestroy {
+export class CompanyListComponent
+  extends UnsubscribeOnDestroy
+  implements OnInit
+{
   displayedColumns = [
     'logo',
     'taxNumber',
@@ -33,7 +36,6 @@ export class CompanyListComponent implements OnInit, OnDestroy {
   ];
   data$: Observable<Company[]>;
   resultsLength: number;
-  subscriptions: Subscription[] = [];
   private _paginator: MatPaginator;
   public get paginator(): MatPaginator {
     return this._paginator;
@@ -56,7 +58,9 @@ export class CompanyListComponent implements OnInit, OnDestroy {
     private companyService: CompanyService,
     private dialog: MatDialog,
     private snackbar: MatSnackBar
-  ) {}
+  ) {
+    super();
+  }
 
   ngOnInit(): void {}
   onCreate() {
@@ -96,8 +100,5 @@ export class CompanyListComponent implements OnInit, OnDestroy {
         }
       })
     );
-  }
-  ngOnDestroy(): void {
-    this.subscriptions.forEach((subscriotion) => subscriotion.unsubscribe());
   }
 }

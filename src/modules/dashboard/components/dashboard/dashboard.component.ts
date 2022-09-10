@@ -1,10 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { makeImmutable } from '@custom-utils/make-immutable.util';
-import { Company } from '@firmalar/mdoels/company.interface';
+import { SelectCompany } from '@globalModels/select-company.abstract.class';
 import { RaporApiResponse } from '@raporlar/model/rapor-api-response.interface';
 import { RaporItem } from '@raporlar/model/rapor-item.interface';
 import { GlobalStore } from '@store/global.store';
-import { forkJoin, lastValueFrom, Subscription } from 'rxjs';
+import { forkJoin, lastValueFrom } from 'rxjs';
 import { DashboardService } from '../../business/dashboard.service';
 
 @Component({
@@ -12,10 +12,9 @@ import { DashboardService } from '../../business/dashboard.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent implements OnInit, OnDestroy {
+export class DashboardComponent extends SelectCompany implements OnInit {
   selectedMonth = String(new Date().getMonth() + 1);
   selectedYear = new Date().getFullYear();
-  selectedCompany: Company;
   private _chartsData: RaporApiResponse;
   public get chartsData(): RaporApiResponse {
     return this._chartsData;
@@ -37,25 +36,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
   borcOdemeSuresi: RaporItem[];
   aktifKarlilik: RaporItem[];
   faaliyetGiderlerininNetSatislaraOrani: RaporItem[];
-  subscriptions: Subscription[] = [];
   constructor(
     private dashboardService: DashboardService,
     globalStore: GlobalStore
   ) {
-    this.subscriptions.push(
-      globalStore.selectedCompany$.subscribe((company) => {
-        this.selectedCompany = company;
-        if (this.selectedCompany) {
-          this.getData();
-        }
-      })
-    );
+    super(globalStore);
   }
-
+  onCompanySelect(): void {
+    this.getData();
+  }
   ngOnInit(): void {}
-  ngOnDestroy(): void {
-    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
-  }
 
   getSelectedYear(year: number) {
     this.selectedYear = year;

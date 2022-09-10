@@ -1,13 +1,13 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { reportList } from '@constants/reports/rapor-drop-down-data';
 import { makeImmutable } from '@custom-utils/make-immutable.util';
-import { Company } from '@firmalar/mdoels/company.interface';
+import { SelectCompany } from '@globalModels/select-company.abstract.class';
 import { RaporlarService } from '@raporlar/business/raporlar.service';
 import { ReportList } from '@raporlarModel/report-list.interface';
 import { SelectPeriodData } from '@shared-components/select-period/models/select-period-data.interface';
 import { GlobalStore } from '@store/global.store';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { lastValueFrom } from 'rxjs';
 
 @Component({
@@ -18,7 +18,7 @@ import { lastValueFrom } from 'rxjs';
     class: 'bg-white d-block rounded p-3',
   },
 })
-export class RaporlarHomeComponent implements OnInit, OnDestroy {
+export class RaporlarHomeComponent extends SelectCompany implements OnInit {
   reportList = reportList;
   reportsResponse$: BehaviorSubject<{}>;
   private _selectedReportTitle: ReportList;
@@ -37,30 +37,24 @@ export class RaporlarHomeComponent implements OnInit, OnDestroy {
     this._selectedReport = value;
     this.raporlarService.selectedReport$.next(value);
   }
-  selectedCompany: Company;
   selectedPeriodsData: SelectPeriodData;
-  subscriptions: Subscription[] = [];
   constructor(
     private raporlarService: RaporlarService,
     private router: Router,
     globalStore: GlobalStore
   ) {
+    super(globalStore);
     this.reportsResponse$ = raporlarService.reportsResponse$;
-    this.subscriptions.push(
-      globalStore.selectedCompany$.subscribe((company) => {
-        this.selectedCompany = company;
-        this.onSearch();
-      })
-    );
   }
 
   ngOnInit(): void {
     this.router.navigateByUrl('/raporlar');
   }
-
-  ngOnDestroy(): void {
+  onCompanySelect(): void {
+    this.onSearch();
+  }
+  override onDestroyHandle(): void {
     this.raporlarService.resetData();
-    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 
   onPeriodSelect(selectedPeriodsData: SelectPeriodData) {
@@ -77,11 +71,6 @@ export class RaporlarHomeComponent implements OnInit, OnDestroy {
 
     this.getReportsData();
   }
-
-  onCompanySelect(company: Company) {
-    this.selectedCompany = company;
-  }
-
   private async getReportsData() {
     const request$ = this.raporlarService.getRatioReport(
       this.selectedCompany.taxNumber

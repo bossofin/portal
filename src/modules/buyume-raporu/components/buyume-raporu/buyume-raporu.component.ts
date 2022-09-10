@@ -1,10 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BuyumeRaporuService } from '@buyumeRaporu/business/buyume-raporu.service';
-import { Company } from '@firmalar/mdoels/company.interface';
+import { SelectCompany } from '@globalModels/select-company.abstract.class';
 import { RaporItem } from '@raporlar/model/rapor-item.interface';
 import { PeriodType } from '@shared-components/select-period/models/select-period-data.interface';
 import { GlobalStore } from '@store/global.store';
-import { lastValueFrom, Subscription } from 'rxjs';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-buyume-raporu',
@@ -14,7 +14,7 @@ import { lastValueFrom, Subscription } from 'rxjs';
     class: 'bg-white d-block rounded p-3',
   },
 })
-export class BuyumeRaporuComponent implements OnInit, OnDestroy {
+export class BuyumeRaporuComponent extends SelectCompany implements OnInit {
   reportList = [
     {
       name: 'Satışın Büyümesi',
@@ -34,23 +34,17 @@ export class BuyumeRaporuComponent implements OnInit, OnDestroy {
   selectedPeriod: string[];
   karBuyumesi: RaporItem;
   satisinBuyumesi: RaporItem;
-  subscriptions: Subscription[] = [];
-  selectedCompany: Company;
   constructor(
     private buyumeRaporuService: BuyumeRaporuService,
     globalStore: GlobalStore
   ) {
-    this.subscriptions.push(
-      globalStore.selectedCompany$.subscribe((company) => {
-        this.selectedCompany = company;
-        this.onSearch();
-      })
-    );
+    super(globalStore);
+  }
+  onCompanySelect(): void {
+    this.onSearch();
   }
   ngOnInit(): void {}
-  ngOnDestroy(): void {
-    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
-  }
+
   onPeriodTypeChange(periodType: PeriodType) {
     this.selectedPeriodType = periodType;
     this.buyumeRaporuService.selectedPeriodType = this.selectedPeriodType;

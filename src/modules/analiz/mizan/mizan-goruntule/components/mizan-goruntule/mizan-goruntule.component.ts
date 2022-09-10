@@ -1,12 +1,12 @@
 import { MizanService } from '@analiz/mizan/business/mizan.service';
 import { Mizan } from '@analiz/mizan/models/mizan-item.interface';
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
-import { Company } from '@firmalar/mdoels/company.interface';
+import { SelectCompany } from '@globalModels/select-company.abstract.class';
 import { GlobalStore } from '@store/global.store';
-import { lastValueFrom, Subscription } from 'rxjs';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-mizan-goruntule',
@@ -16,7 +16,7 @@ import { lastValueFrom, Subscription } from 'rxjs';
     class: 'bg-white d-block rounded p-3',
   },
 })
-export class MizanGoruntuleComponent implements OnInit, OnDestroy {
+export class MizanGoruntuleComponent extends SelectCompany implements OnInit {
   periodStart: string;
   periodEnd: string;
   dataSource = new MatTableDataSource<Mizan>();
@@ -29,7 +29,6 @@ export class MizanGoruntuleComponent implements OnInit, OnDestroy {
     'totalCreditBalance',
   ];
   showTable: boolean;
-  selectedCompany: Company;
   private _paginator: MatPaginator;
   public get paginator(): MatPaginator {
     return this._paginator;
@@ -38,24 +37,17 @@ export class MizanGoruntuleComponent implements OnInit, OnDestroy {
     this._paginator = value;
     this.dataSource.paginator = this.paginator;
   }
-  subscriptions: Subscription[] = [];
   constructor(
     private mizanService: MizanService,
     private snackbar: MatSnackBar,
     globalStore: GlobalStore
   ) {
-    this.subscriptions.push(
-      globalStore.selectedCompany$.subscribe((company) => {
-        this.selectedCompany = company;
-        this.onSearch();
-      })
-    );
+    super(globalStore);
   }
-
+  onCompanySelect(): void {
+    this.onSearch();
+  }
   ngOnInit(): void {}
-  ngOnDestroy(): void {
-    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
-  }
   getMonthRange(value: {
     selectedStartYear: number;
     selectedStartMonth: number;
