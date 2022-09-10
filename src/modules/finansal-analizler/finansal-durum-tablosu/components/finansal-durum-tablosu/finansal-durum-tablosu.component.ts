@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { makeImmutable } from '@custom-utils/make-immutable.util';
 import { FinansalAnalizlerService } from '@finanaslAnalizler/business/finansal-analizler.service';
 import { FinansalDurumTablosuActiveData } from '@finanaslAnalizler/models/finansal-durum-tablosu-active-data.interface';
@@ -6,7 +6,8 @@ import { FinansalDurumTablosuApiResponse } from '@finanaslAnalizler/models/finan
 import { FinansalDurumTablosuPassiveData } from '@finanaslAnalizler/models/finansal-durum-tablosu-passive-data.interface';
 import { Company } from '@firmalar/mdoels/company.interface';
 import { SelectPeriodData } from '@shared-components/select-period/models/select-period-data.interface';
-import { lastValueFrom } from 'rxjs';
+import { GlobalStore } from '@store/global.store';
+import { lastValueFrom, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-finansal-durum-tablosu',
@@ -16,22 +17,41 @@ import { lastValueFrom } from 'rxjs';
     class: 'bg-white d-block rounded p-3',
   },
 })
-export class FinansalDurumTablosuComponent implements OnInit {
+export class FinansalDurumTablosuComponent implements OnInit, OnDestroy {
   activeItems: FinansalDurumTablosuActiveData[];
   passiveItems: FinansalDurumTablosuPassiveData[];
   selectedPeriods: string[];
+  selectedPeriodsData: SelectPeriodData;
   giderKisitlamaTabloData: FinansalDurumTablosuApiResponse;
   selectedCompany: Company;
-  constructor(private finansalAnalizlerService: FinansalAnalizlerService) {}
+  subscriptions: Subscription[] = [];
+  constructor(
+    private finansalAnalizlerService: FinansalAnalizlerService,
+    globalStore: GlobalStore
+  ) {
+    this.subscriptions.push(
+      globalStore.selectedCompany$.subscribe((company) => {
+        this.selectedCompany = company;
+        this.onSearch();
+      })
+    );
+  }
 
   ngOnInit(): void {}
-  onCompanySelect(company: Company) {
-    this.selectedCompany = company;
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
-  async onSearch(selectedPeriodsData: SelectPeriodData) {
-    this.setSelectedPeriods(selectedPeriodsData);
+  onSelectPeriod(selectedPeriodsData: SelectPeriodData) {
+    this.selectedPeriodsData = selectedPeriodsData;
+    this.setSelectedPeriods();
+    this.onSearch();
+  }
+  private async onSearch() {
+    if (!this.selectedPeriodsData) {
+      return;
+    }
     const request$ = this.finansalAnalizlerService.getDetailedBalance(
-      makeImmutable(selectedPeriodsData),
+      makeImmutable(this.selectedPeriodsData),
       this.selectedCompany.taxNumber
     );
     const response = await lastValueFrom(request$);
@@ -40,18 +60,18 @@ export class FinansalDurumTablosuComponent implements OnInit {
     this.giderKisitlamaTabloData = response[0];
   }
 
-  private setSelectedPeriods(selectedPeriodsData: SelectPeriodData) {
-    switch (selectedPeriodsData.periodType) {
+  private setSelectedPeriods() {
+    switch (this.selectedPeriodsData.periodType) {
       case 'aylik':
         this.selectedPeriods = [
-          `${selectedPeriodsData.selectedYear}-${selectedPeriodsData.periods[0]}`,
+          `${this.selectedPeriodsData.selectedYear}-${this.selectedPeriodsData.periods[0]}`,
         ];
         break;
       case 'yillik':
-        this.selectedPeriods = [String(selectedPeriodsData.selectedYear)];
+        this.selectedPeriods = [String(this.selectedPeriodsData.selectedYear)];
         break;
       default:
-        this.selectedPeriods = selectedPeriodsData.periods;
+        this.selectedPeriods = this.selectedPeriodsData.periods;
         break;
     }
   }

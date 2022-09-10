@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BuyumeRaporuService } from '@buyumeRaporu/business/buyume-raporu.service';
 import { Company } from '@firmalar/mdoels/company.interface';
 import { RaporItem } from '@raporlar/model/rapor-item.interface';
 import { PeriodType } from '@shared-components/select-period/models/select-period-data.interface';
+import { GlobalStore } from '@store/global.store';
 import { lastValueFrom, Subscription } from 'rxjs';
 
 @Component({
@@ -13,7 +14,7 @@ import { lastValueFrom, Subscription } from 'rxjs';
     class: 'bg-white d-block rounded p-3',
   },
 })
-export class BuyumeRaporuComponent implements OnInit {
+export class BuyumeRaporuComponent implements OnInit, OnDestroy {
   reportList = [
     {
       name: 'Satışın Büyümesi',
@@ -35,8 +36,21 @@ export class BuyumeRaporuComponent implements OnInit {
   satisinBuyumesi: RaporItem;
   subscriptions: Subscription[] = [];
   selectedCompany: Company;
-  constructor(private buyumeRaporuService: BuyumeRaporuService) {}
+  constructor(
+    private buyumeRaporuService: BuyumeRaporuService,
+    globalStore: GlobalStore
+  ) {
+    this.subscriptions.push(
+      globalStore.selectedCompany$.subscribe((company) => {
+        this.selectedCompany = company;
+        this.onSearch();
+      })
+    );
+  }
   ngOnInit(): void {}
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+  }
   onPeriodTypeChange(periodType: PeriodType) {
     this.selectedPeriodType = periodType;
     this.buyumeRaporuService.selectedPeriodType = this.selectedPeriodType;
@@ -56,9 +70,6 @@ export class BuyumeRaporuComponent implements OnInit {
   onEndMonthChange(month: string | string[]) {
     this.selectedEndMonth = month as string;
     this.buyumeRaporuService.selectedEndMonth = this.selectedEndMonth;
-  }
-  onCompanySelect(company: Company) {
-    this.selectedCompany = company;
   }
   async onSearch() {
     if (!this.selectedStartYear || !this.selectedStartMonth) {

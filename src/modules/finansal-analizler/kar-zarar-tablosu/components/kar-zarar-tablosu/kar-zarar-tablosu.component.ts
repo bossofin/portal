@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { makeImmutable } from '@custom-utils/make-immutable.util';
 import { FinansalAnalizlerService } from '@finanaslAnalizler/business/finansal-analizler.service';
 import {
@@ -17,7 +17,8 @@ import {
 } from '@finanaslAnalizler/models/kar-zarar-tablosu-api-response.interface';
 import { Company } from '@firmalar/mdoels/company.interface';
 import { SelectPeriodData } from '@shared-components/select-period/models/select-period-data.interface';
-import { lastValueFrom } from 'rxjs';
+import { GlobalStore } from '@store/global.store';
+import { lastValueFrom, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-kar-zarar-tablosu',
@@ -27,7 +28,7 @@ import { lastValueFrom } from 'rxjs';
     class: 'bg-white d-block rounded p-3',
   },
 })
-export class KarZararTablosuComponent implements OnInit {
+export class KarZararTablosuComponent implements OnInit, OnDestroy {
   selectedPeriods: string[];
   response: KarZararTablosuApiResponse[];
   amortismanGiderleri: KarZararTablosuAmortismanGiderleriData[];
@@ -54,34 +55,53 @@ export class KarZararTablosuComponent implements OnInit {
   percentageOfDonemNetKariVeyaZarari: number[];
   percentageOfOlaganKarVeyaZarar: number[];
   selectedCompany: Company;
-  constructor(private finansalAnalizlerService: FinansalAnalizlerService) {}
+  selectedPeriodsData: SelectPeriodData;
+  subscipritons: Subscription[] = [];
+  constructor(
+    private finansalAnalizlerService: FinansalAnalizlerService,
+    globalStore: GlobalStore
+  ) {
+    this.subscipritons.push(
+      globalStore.selectedCompany$.subscribe((company) => {
+        this.selectedCompany = company;
+        this.onSearch();
+      })
+    );
+  }
 
   ngOnInit(): void {}
+  ngOnDestroy(): void {
+    this.subscipritons.forEach((subscription) => subscription.unsubscribe());
+  }
   onSelectCompany(company: Company) {
     this.selectedCompany = company;
   }
-  async onSearch(selectedPeriodsData: SelectPeriodData) {
-    this.setSelectedPeriods(selectedPeriodsData);
+  onSelectPeriod(selectedPeriodsData: SelectPeriodData) {
+    this.selectedPeriodsData = selectedPeriodsData;
+    this.setSelectedPeriods();
+    this.onSearch();
+  }
+  async onSearch() {
     const request$ = this.finansalAnalizlerService.getProfitAndlossReport(
-      makeImmutable(selectedPeriodsData),
+      makeImmutable(this.selectedPeriodsData),
       this.selectedCompany.taxNumber
     );
     const response = await lastValueFrom(request$);
     this.response = makeImmutable(response);
     this.setTableData(this.selectedPeriods);
   }
-  private setSelectedPeriods(selectedPeriodsData: SelectPeriodData) {
-    switch (selectedPeriodsData.periodType) {
+  private setSelectedPeriods() {
+    switch (this.selectedPeriodsData.periodType) {
       case 'aylik':
         this.selectedPeriods = [
-          `${selectedPeriodsData.selectedYear}-${selectedPeriodsData.periods[0]}`,
+          `${this.selectedPeriodsData.selectedYear}-${this.selectedPeriodsData.periods[0]}`,
         ];
         break;
       case 'yillik':
-        this.selectedPeriods = [String(selectedPeriodsData.selectedYear)];
+        this.selectedPeriods = [String(this.selectedPeriodsData.selectedYear)];
         break;
       default:
-        this.selectedPeriods = selectedPeriodsData.periods;
+        this.selectedPeriods = this.selectedPeriodsData.periods;
         break;
     }
   }

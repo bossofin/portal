@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Company } from '@firmalar/mdoels/company.interface';
 import { UserService } from '@kullanicilar/business/user.service';
 import { User } from '@kullanicilar/models/user.interface';
+import { GlobalStore } from '@store/global.store';
 import { lastValueFrom, Observable, of, Subscription } from 'rxjs';
 import { map, merge, startWith, switchMap } from 'rxjs';
 import { AddUserComponent } from '../add-user/add-user.component';
@@ -53,18 +54,21 @@ export class UserListComponent implements OnInit, OnDestroy {
   constructor(
     private userService: UserService,
     private dialog: MatDialog,
-    private snackbar: MatSnackBar
-  ) {}
+    private snackbar: MatSnackBar,
+    globalStore: GlobalStore
+  ) {
+    this.subscriptions.push(
+      globalStore.selectedCompany$.subscribe((company) => {
+        this.selectedCompany = company;
+        this.paginator.pageIndex = 0;
+        this.paginator.page.emit();
+      })
+    );
+  }
 
   ngOnInit(): void {}
   ngOnDestroy(): void {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
-  }
-
-  onCompanySelect(company: Company) {
-    this.selectedCompany = company;
-    this.paginator.pageIndex = 0;
-    this.paginator.page.emit();
   }
 
   onCreate() {

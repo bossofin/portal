@@ -16,7 +16,6 @@ import { DovizKuruComponent } from './components/doviz-kuru/doviz-kuru.component
 import { MatButtonModule } from '@angular/material/button';
 import { SelectYearModule } from '@shared-components/select-year/select-year.module';
 import { SelectMonthModule } from '@shared-components/select-month/select-month.module';
-import { SelectCompanyModule } from '@shared-components/select-company/select-company.module';
 
 @NgModule({
   declarations: [
@@ -39,7 +38,6 @@ import { SelectCompanyModule } from '@shared-components/select-company/select-co
     MatButtonModule,
     SelectYearModule,
     SelectMonthModule,
-    SelectCompanyModule,
   ],
 })
 export class DashboardModule {}

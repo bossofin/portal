@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { makeImmutable } from '@custom-utils/make-immutable.util';
 import { Company } from '@firmalar/mdoels/company.interface';
-import { RaporlarService } from '@raporlar/business/raporlar.service';
 import { RaporApiResponse } from '@raporlar/model/rapor-api-response.interface';
 import { RaporItem } from '@raporlar/model/rapor-item.interface';
-import { forkJoin, lastValueFrom } from 'rxjs';
+import { GlobalStore } from '@store/global.store';
+import { forkJoin, lastValueFrom, Subscription } from 'rxjs';
 import { DashboardService } from '../../business/dashboard.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { DashboardService } from '../../business/dashboard.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
   selectedMonth = String(new Date().getMonth() + 1);
   selectedYear = new Date().getFullYear();
   selectedCompany: Company;
@@ -37,9 +37,25 @@ export class DashboardComponent implements OnInit {
   borcOdemeSuresi: RaporItem[];
   aktifKarlilik: RaporItem[];
   faaliyetGiderlerininNetSatislaraOrani: RaporItem[];
-  constructor(private dashboardService: DashboardService) {}
+  subscriptions: Subscription[] = [];
+  constructor(
+    private dashboardService: DashboardService,
+    globalStore: GlobalStore
+  ) {
+    this.subscriptions.push(
+      globalStore.selectedCompany$.subscribe((company) => {
+        this.selectedCompany = company;
+        if (this.selectedCompany) {
+          this.getData();
+        }
+      })
+    );
+  }
 
   ngOnInit(): void {}
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+  }
 
   getSelectedYear(year: number) {
     this.selectedYear = year;
@@ -52,13 +68,20 @@ export class DashboardComponent implements OnInit {
   onSearch() {
     this.getData();
   }
-  onSelectCompany(company: Company) {
-    this.selectedCompany = company;
-    if (this.selectedCompany && !this.chartsData) {
-      this.getData();
-    }
-  }
+
   private async getData() {
+    const { chartsDataApi, profitAndDebitDataApi } = this.getApiRequests();
+    const request$ = forkJoin({
+      chartsData: chartsDataApi,
+      profitAndDebitData: profitAndDebitDataApi,
+    });
+    const response = await lastValueFrom(request$);
+    this.chartsData = response.chartsData[0];
+    this.profitAndDebitData =
+      response.profitAndDebitData[0].donemKariVergiVeDigerYasalYukumlulukKarsiliklari.sumOfDonemKariVergiVeDigerYasalYukumlulukKarsiliklari;
+    this.setScore();
+  }
+  private getApiRequests() {
     const periodStart = `${this.selectedYear}-${this.selectedMonth}`;
     const chartsDataApi = this.dashboardService.getChartsData(
       periodStart,
@@ -70,16 +93,9 @@ export class DashboardComponent implements OnInit {
       periodStart,
       this.selectedCompany.taxNumber
     );
-    const request$ = forkJoin({
-      chartsData: chartsDataApi,
-      profitAndDebitData: profitAndDebitDataApi,
-    });
-    const response = await lastValueFrom(request$);
-    this.chartsData = response.chartsData[0];
-    this.profitAndDebitData =
-      response.profitAndDebitData[0].donemKariVergiVeDigerYasalYukumlulukKarsiliklari.sumOfDonemKariVergiVeDigerYasalYukumlulukKarsiliklari;
-    this.setScore();
+    return { chartsDataApi, profitAndDebitDataApi };
   }
+
   private setScore() {
     const values = Object.values(this.chartsData);
     let totalItem = 0;

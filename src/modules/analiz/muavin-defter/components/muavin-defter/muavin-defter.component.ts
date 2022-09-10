@@ -11,6 +11,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { hesapKodlari } from '@constants/hesap-kodlari';
 import { map, merge, of, startWith, Subscription, switchMap } from 'rxjs';
 import { Company } from '@firmalar/mdoels/company.interface';
+import { GlobalStore } from '@store/global.store';
 
 @Component({
   selector: 'app-muavin-defter',
@@ -81,23 +82,25 @@ export class MuavinDefterComponent implements OnInit, OnDestroy {
   private periodEnd: string;
   private periodStart: string;
   selectedCompany: Company;
-  constructor(private muavinService: MuavinService) {}
+  constructor(private muavinService: MuavinService, globalStore: GlobalStore) {
+    this.subscriptions.push(
+      globalStore.selectedCompany$.subscribe((company) => {
+        this.selectedCompany = company;
+        this.resetPaginatorAndGetData();
+      })
+    );
+  }
 
   ngOnInit(): void {}
-  onCompanySelect(company: Company) {
-    this.selectedCompany = company;
-  }
   ngOnDestroy(): void {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
   onFilter() {
-    this.paginator.pageIndex = 0;
-    this.onFilterChange.emit();
+    this.resetPaginatorAndGetData();
   }
   onDeleteHandle() {
     this.selectedHesapKodu = undefined;
-    this.paginator.pageIndex = 0;
-    this.onDelete.emit();
+    this.resetPaginatorAndGetData();
   }
   onPeriodChange(value: {
     selectedStartYear: number;
@@ -107,7 +110,13 @@ export class MuavinDefterComponent implements OnInit, OnDestroy {
   }) {
     this.periodEnd = `${value.selectedEndtYear}-${value.selectedEndtMonth}`;
     this.periodStart = `${value.selectedStartYear}-${value.selectedStartMonth}`;
+    this.resetPaginatorAndGetData();
+  }
+  private resetPaginatorAndGetData() {
+    if (!this.paginator) {
+      return;
+    }
     this.paginator.pageIndex = 0;
-    this.paginator.page.emit();
+    this.onFilterChange.emit();
   }
 }

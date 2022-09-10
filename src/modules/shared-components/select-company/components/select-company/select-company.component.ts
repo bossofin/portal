@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit } from '@angular/core';
 import { MatSelectChange } from '@angular/material/select';
 import { Company } from '@firmalar/mdoels/company.interface';
 import { UserService } from '@kullanicilar/business/user.service';
+import { GlobalStore } from '@store/global.store';
 import { lastValueFrom, switchMap } from 'rxjs';
 
 @Component({
@@ -13,13 +14,17 @@ import { lastValueFrom, switchMap } from 'rxjs';
 export class SelectCompanyComponent implements OnInit {
   onSelect = new EventEmitter<Company>();
   companies: Company[];
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private globalStore: GlobalStore
+  ) {}
 
   ngOnInit(): void {
     this.getCompaniesOfUser();
   }
   onSelectHandle(event: MatSelectChange) {
     this.onSelect.emit(event.value);
+    this.globalStore.setCompany(event.value);
   }
 
   private async getCompaniesOfUser() {
@@ -36,5 +41,6 @@ export class SelectCompanyComponent implements OnInit {
     );
     this.companies = companiesOfUserResponse;
     this.onSelect.emit(this.companies[0]);
+    this.globalStore.setCompany(this.companies[0]);
   }
 }

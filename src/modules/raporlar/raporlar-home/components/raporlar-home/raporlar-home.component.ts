@@ -6,7 +6,8 @@ import { Company } from '@firmalar/mdoels/company.interface';
 import { RaporlarService } from '@raporlar/business/raporlar.service';
 import { ReportList } from '@raporlarModel/report-list.interface';
 import { SelectPeriodData } from '@shared-components/select-period/models/select-period-data.interface';
-import { BehaviorSubject } from 'rxjs';
+import { GlobalStore } from '@store/global.store';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { lastValueFrom } from 'rxjs';
 
 @Component({
@@ -20,7 +21,6 @@ import { lastValueFrom } from 'rxjs';
 export class RaporlarHomeComponent implements OnInit, OnDestroy {
   reportList = reportList;
   reportsResponse$: BehaviorSubject<{}>;
-  selectedPeriods: string[];
   private _selectedReportTitle: ReportList;
   public get selectedReportTitle(): ReportList {
     return this._selectedReportTitle;
@@ -38,11 +38,20 @@ export class RaporlarHomeComponent implements OnInit, OnDestroy {
     this.raporlarService.selectedReport$.next(value);
   }
   selectedCompany: Company;
+  selectedPeriodsData: SelectPeriodData;
+  subscriptions: Subscription[] = [];
   constructor(
     private raporlarService: RaporlarService,
-    private router: Router
+    private router: Router,
+    globalStore: GlobalStore
   ) {
     this.reportsResponse$ = raporlarService.reportsResponse$;
+    this.subscriptions.push(
+      globalStore.selectedCompany$.subscribe((company) => {
+        this.selectedCompany = company;
+        this.onSearch();
+      })
+    );
   }
 
   ngOnInit(): void {
@@ -51,10 +60,20 @@ export class RaporlarHomeComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.raporlarService.resetData();
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 
-  onSearch(selectedPeriodsData: SelectPeriodData) {
-    this.raporlarService.selectedPeriods = makeImmutable(selectedPeriodsData);
+  onPeriodSelect(selectedPeriodsData: SelectPeriodData) {
+    this.selectedPeriodsData = selectedPeriodsData;
+    this.onSearch();
+  }
+  onSearch() {
+    if (!this.selectedPeriodsData) {
+      return;
+    }
+    this.raporlarService.selectedPeriods = makeImmutable(
+      this.selectedPeriodsData
+    );
 
     this.getReportsData();
   }

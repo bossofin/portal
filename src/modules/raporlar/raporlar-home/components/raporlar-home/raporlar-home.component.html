@@ -1,8 +1,6 @@
-<app-select-company (onSelect)="onCompanySelect($event)"></app-select-company>
 <app-select-period
   [multiple]="true"
-  (onSearch)="onSearch($event)"
-  [selectedPeriods]="selectedPeriods"
+  (onSearch)="onPeriodSelect($event)"
   #selectPeriod
 ></app-select-period>
 <div *ngIf="reportsResponse$ | async">

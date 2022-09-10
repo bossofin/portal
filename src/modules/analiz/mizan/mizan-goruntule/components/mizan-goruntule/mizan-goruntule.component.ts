@@ -1,11 +1,12 @@
 import { MizanService } from '@analiz/mizan/business/mizan.service';
 import { Mizan } from '@analiz/mizan/models/mizan-item.interface';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { Company } from '@firmalar/mdoels/company.interface';
-import { lastValueFrom } from 'rxjs';
+import { GlobalStore } from '@store/global.store';
+import { lastValueFrom, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-mizan-goruntule',
@@ -15,7 +16,7 @@ import { lastValueFrom } from 'rxjs';
     class: 'bg-white d-block rounded p-3',
   },
 })
-export class MizanGoruntuleComponent implements OnInit {
+export class MizanGoruntuleComponent implements OnInit, OnDestroy {
   periodStart: string;
   periodEnd: string;
   dataSource = new MatTableDataSource<Mizan>();
@@ -37,14 +38,23 @@ export class MizanGoruntuleComponent implements OnInit {
     this._paginator = value;
     this.dataSource.paginator = this.paginator;
   }
+  subscriptions: Subscription[] = [];
   constructor(
     private mizanService: MizanService,
-    private snackbar: MatSnackBar
-  ) {}
+    private snackbar: MatSnackBar,
+    globalStore: GlobalStore
+  ) {
+    this.subscriptions.push(
+      globalStore.selectedCompany$.subscribe((company) => {
+        this.selectedCompany = company;
+        this.onSearch();
+      })
+    );
+  }
 
   ngOnInit(): void {}
-  onSelectCompany(company: Company) {
-    this.selectedCompany = company;
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
   getMonthRange(value: {
     selectedStartYear: number;
@@ -57,6 +67,9 @@ export class MizanGoruntuleComponent implements OnInit {
     this.onSearch();
   }
   async onSearch() {
+    if (!this.selectedCompany || !this.periodEnd || !this.periodStart) {
+      return;
+    }
     const requets$ = this.mizanService.getTrialBalance(
       `${this.periodStart}/${this.periodEnd}`,
       this.selectedCompany.taxNumber

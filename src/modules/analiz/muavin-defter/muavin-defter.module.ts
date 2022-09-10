@@ -10,7 +10,6 @@ import { FormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { CurrencyModule } from '@shared-components/currency/currency.module';
-import { SelectCompanyModule } from '@shared-components/select-company/select-company.module';
 import { MuavinSelectPeriodModule } from './components/muavin-select-period/muavin-select-period.module';
 
 @NgModule({
@@ -24,8 +23,8 @@ import { MuavinSelectPeriodModule } from './components/muavin-select-period/muav
     MatTableModule,
     MatPaginatorModule,
     CurrencyModule,
-    SelectCompanyModule,
     MuavinSelectPeriodModule,
+    MatButtonModule,
   ],
   exports: [],
 })

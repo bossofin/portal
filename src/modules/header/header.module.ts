@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { SignOutButtonComponent } from './components/sign-out-button/sign-out-button.component';
 import { PageTitleComponent } from './components/page-title/page-title.component';
+import { SelectCompanyModule } from '@shared-components/select-company/select-company.module';
 
 @NgModule({
   declarations: [HeaderComponent, SignOutButtonComponent, PageTitleComponent],
@@ -16,6 +17,7 @@ import { PageTitleComponent } from './components/page-title/page-title.component
     MatMenuModule,
     MatIconModule,
     MatSnackBarModule,
+    SelectCompanyModule,
   ],
   exports: [HeaderComponent],
 })

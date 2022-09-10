@@ -6,7 +6,6 @@ import { RaporlarHomeComponent } from './components/raporlar-home/raporlar-home.
 import { SelectPeriodModule } from '@shared-components/select-period/select-period.module';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
-import { SelectCompanyModule } from '@shared-components/select-company/select-company.module';
 
 @NgModule({
   declarations: [RaporlarHomeComponent],
@@ -16,7 +15,6 @@ import { SelectCompanyModule } from '@shared-components/select-company/select-co
     SelectPeriodModule,
     MatSelectModule,
     FormsModule,
-    SelectCompanyModule,
   ],
 })
 export class RaporlarHomeModule {}
