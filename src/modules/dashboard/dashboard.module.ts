@@ -16,6 +16,8 @@ import { DovizKuruComponent } from './components/doviz-kuru/doviz-kuru.component
 import { MatButtonModule } from '@angular/material/button';
 import { SelectYearModule } from '@shared-components/select-year/select-year.module';
 import { SelectMonthModule } from '@shared-components/select-month/select-month.module';
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { DashboardApexChartComponent } from './components/dashboard-apex-chart/dashboard-apex-chart.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { SelectMonthModule } from '@shared-components/select-month/select-month.
     MusteriBakiyeSiralamasiComponent,
     MusteriCiroSiralamasiComponent,
     DovizKuruComponent,
+    DashboardApexChartComponent,
   ],
   imports: [
     CommonModule,
@@ -38,6 +41,7 @@ import { SelectMonthModule } from '@shared-components/select-month/select-month.
     MatButtonModule,
     SelectYearModule,
     SelectMonthModule,
+    NgApexchartsModule,
   ],
 })
 export class DashboardModule {}

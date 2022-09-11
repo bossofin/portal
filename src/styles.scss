@@ -61,3 +61,17 @@ th {
     background-color: #fff !important;
   }
 }
+.mat-form-field-underline {
+  display: none;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px rgba(245, 245, 245) inset !important;
+}
+app-header {
+  .mat-form-field-wrapper {
+    padding-bottom: 0px !important;
+  }
+}

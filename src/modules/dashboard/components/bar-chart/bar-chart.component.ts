@@ -69,8 +69,8 @@ export class BarChartComponent implements OnInit {
               this.data[0].idealRatio || this.data[0].idealRate,
               this.data[0].sectoralRatio || this.data[0].sectoralRate,
             ],
-            backgroundColor: ['#31558F', '#50ad7d', '#d76767'],
-            hoverBackgroundColor: ['#31558F', '#50ad7d', '#d76767'],
+            backgroundColor: ['#15A6F8', '#15A6F8', '#15A6F8'],
+            hoverBackgroundColor: ['#15A6F8', '#15A6F8', '#15A6F8'],
           },
         ],
       };

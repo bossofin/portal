@@ -1,10 +1,10 @@
 <form [formGroup]="addForm">
-  <mat-form-field>
+  <mat-form-field appearance="fill">
     <mat-label>Toplam Çalışan Sayısı</mat-label>
     <input type="number" matInput formControlName="calisanSayisi" />
     <mat-error></mat-error>
   </mat-form-field>
-  <mat-form-field class="ms-3">
+  <mat-form-field class="ms-3" appearance="fill">
     <mat-label>Hesap Kodları</mat-label>
     <mat-select formControlName="hesapKodu">
       <mat-option *ngFor="let kod of kodlar" [value]="kod.value">
@@ -12,7 +12,7 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <mat-form-field class="ms-3">
+  <mat-form-field class="ms-3" appearance="fill">
     <mat-label>Tutar</mat-label>
     <input
       type="text"
@@ -46,7 +46,7 @@
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef></th>
     <td mat-cell *matCellDef="let element; let i = index">
-      <button mat-icon-button color="warn" (click)="onDelete(i)">
+      <button mat-icon-button color="warn" (click)="onDelete(i)" class="ms-3">
         <mat-icon>delete</mat-icon>
       </button>
     </td>

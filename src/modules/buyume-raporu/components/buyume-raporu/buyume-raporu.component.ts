@@ -58,11 +58,11 @@ export class BuyumeRaporuComponent extends SelectCompany implements OnInit {
     this.buyumeRaporuService.selectedEndYear = this.selectedEndYear;
   }
   onStartMonthChange(month: string | string[]) {
-    this.selectedStartMonth = month as string;
+    this.selectedStartMonth = String(month).padStart(2, '0');
     this.buyumeRaporuService.selectedStartMonth = this.selectedStartMonth;
   }
   onEndMonthChange(month: string | string[]) {
-    this.selectedEndMonth = month as string;
+    this.selectedEndMonth = String(month).padStart(2, '0');
     this.buyumeRaporuService.selectedEndMonth = this.selectedEndMonth;
   }
   async onSearch() {

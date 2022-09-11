@@ -10,6 +10,7 @@
     <app-select-month
       (onChange)="onStartMonthChange($event)"
       *ngIf="selectedStartYear"
+      class="ms-3"
     ></app-select-month>
   </div>
   <div *ngIf="selectedStartMonth" class="align-self-center ms-3">
@@ -21,14 +22,20 @@
     <app-select-month
       *ngIf="selectedEndYear"
       (onChange)="onEndMonthChange($event)"
+      class="ms-3"
     ></app-select-month>
-    <button mat-icon-button (click)="onSearch()" [disabled]="!selectedEndMonth">
-      <mat-icon color="primary">search</mat-icon>
+    <button
+      mat-mini-fab
+      (click)="onSearch()"
+      [disabled]="!selectedEndMonth"
+      class="ms-3"
+    >
+      <mat-icon>search</mat-icon>
     </button>
   </div>
 </div>
 <ng-container *ngIf="karBuyumesi || satisinBuyumesi">
-  <mat-form-field>
+  <mat-form-field appearance="fill">
     <mat-label>Rapor Seç</mat-label>
     <mat-select [(ngModel)]="selectedReport">
       <mat-option *ngFor="let report of reportList" [value]="report.value">

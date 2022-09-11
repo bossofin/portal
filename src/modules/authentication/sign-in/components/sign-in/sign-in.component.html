@@ -11,14 +11,14 @@
   </mat-card-subtitle>
   <mat-card-content class="mt-4">
     <form [formGroup]="form">
-      <mat-form-field class="d-block mb-4">
+      <mat-form-field class="d-block mb-4" appearance="fill">
         <mat-label>Email</mat-label>
         <input matInput type="email" formControlName="email" />
         <mat-error>
           {{ emailValidationError }}
         </mat-error>
       </mat-form-field>
-      <mat-form-field class="d-block">
+      <mat-form-field class="d-block" appearance="fill">
         <mat-label>Şifre</mat-label>
         <input matInput type="password" formControlName="password" />
         <mat-error>

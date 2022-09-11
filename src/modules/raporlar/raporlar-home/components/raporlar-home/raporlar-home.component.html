@@ -4,7 +4,7 @@
   #selectPeriod
 ></app-select-period>
 <div *ngIf="reportsResponse$ | async">
-  <mat-form-field>
+  <mat-form-field appearance="fill">
     <mat-label>Başlık Seç</mat-label>
     <mat-select #report [(ngModel)]="selectedReportTitle">
       <mat-option *ngFor="let report of reportList" [value]="report">
@@ -13,6 +13,7 @@
     </mat-select>
   </mat-form-field>
   <mat-form-field
+    appearance="fill"
     *ngIf="selectedReportTitle && selectedReportTitle.name !== 'returnRaporu'"
     class="ms-3"
   >

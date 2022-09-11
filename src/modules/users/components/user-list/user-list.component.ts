@@ -60,6 +60,9 @@ export class UserListComponent extends SelectCompany implements OnInit {
 
   ngOnInit(): void {}
   onCompanySelect(): void {
+    if (!this.paginator) {
+      return;
+    }
     this.paginator.pageIndex = 0;
     this.paginator.page.emit();
   }

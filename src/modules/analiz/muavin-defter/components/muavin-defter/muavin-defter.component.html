@@ -1,30 +1,34 @@
 <app-muavin-select-period
   (onChange)="onPeriodChange($event)"
 ></app-muavin-select-period>
-<mat-form-field>
-  <mat-label>Hesap Kodu Seç</mat-label>
-  <mat-select [(ngModel)]="selectedHesapKodu" [disabled]="!data">
-    <mat-option *ngFor="let kod of hesapKodlari" [value]="kod.value">
-      {{ kod.value }} - {{ kod.name }}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
-<button
-  [disabled]="!selectedHesapKodu"
-  mat-icon-button
-  color="primary"
-  (click)="onFilter()"
->
-  <mat-icon>filter_alt</mat-icon>
-</button>
-<button
-  *ngIf="selectedHesapKodu"
-  mat-icon-button
-  color="warn"
-  (click)="onDeleteHandle()"
->
-  <mat-icon>delete</mat-icon>
-</button>
+<div class="d-flex">
+  <mat-form-field appearance="fill" class="align-self-center">
+    <mat-label>Hesap Kodu Seç</mat-label>
+    <mat-select [(ngModel)]="selectedHesapKodu" [disabled]="!data">
+      <mat-option *ngFor="let kod of hesapKodlari" [value]="kod.value">
+        {{ kod.value }} - {{ kod.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button
+    [disabled]="!selectedHesapKodu"
+    mat-mini-fab
+    color="primary"
+    (click)="onFilter()"
+    class="ms-3 align-self-center"
+  >
+    <mat-icon>filter_alt</mat-icon>
+  </button>
+  <button
+    *ngIf="selectedHesapKodu"
+    mat-mini-fab
+    color="warn"
+    (click)="onDeleteHandle()"
+    class="ms-3 align-self-center"
+  >
+    <mat-icon>delete</mat-icon>
+  </button>
+</div>
 <div class="table-responsive">
   <table mat-table [dataSource]="data" class="w-100">
     <ng-container matColumnDef="mainId">

@@ -43,9 +43,14 @@ export class DashboardComponent extends SelectCompany implements OnInit {
     super(globalStore);
   }
   onCompanySelect(): void {
+    if (!this.dashboardService) {
+      return;
+    }
     this.getData();
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.onCompanySelect();
+  }
 
   getSelectedYear(year: number) {
     this.selectedYear = year;
@@ -60,6 +65,9 @@ export class DashboardComponent extends SelectCompany implements OnInit {
   }
 
   private async getData() {
+    if (!this.selectedCompany) {
+      return;
+    }
     const { chartsDataApi, profitAndDebitDataApi } = this.getApiRequests();
     const request$ = forkJoin({
       chartsData: chartsDataApi,

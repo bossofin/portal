@@ -3,21 +3,21 @@
 </h2>
 <mat-dialog-content>
   <form [formGroup]="addForm">
-    <mat-form-field class="d-block">
+    <mat-form-field class="d-block" appearance="fill">
       <mat-label>Firma Adı</mat-label>
       <input type="text" matInput formControlName="companyName" />
       <mat-error>
         {{ companyNameValidationMessage }}
       </mat-error>
     </mat-form-field>
-    <mat-form-field class="d-block">
+    <mat-form-field class="d-block" appearance="fill">
       <mat-label>Vergi No</mat-label>
       <input type="number" matInput formControlName="taxNumber" />
       <mat-error>
         {{ taxNumberValidationMessage }}
       </mat-error>
     </mat-form-field>
-    <mat-form-field class="d-block">
+    <mat-form-field class="d-block" appearance="fill">
       <mat-label>Vergi Dairesi</mat-label>
       <input type="text" matInput formControlName="taxOffice" />
       <mat-error>

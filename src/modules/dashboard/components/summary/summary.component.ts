@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Company } from '@firmalar/mdoels/company.interface';
+import { GlobalStore } from '@store/global.store';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-summary',
@@ -12,7 +15,10 @@ import { Component, OnInit } from '@angular/core';
 export class SummaryComponent implements OnInit {
   score: number;
   profitAndDebit: number;
-  constructor() {}
+  company$: Observable<Company>;
+  constructor(globalStore: GlobalStore) {
+    this.company$ = globalStore.selectedCompany$;
+  }
 
   ngOnInit(): void {}
 }

@@ -9,7 +9,9 @@ export abstract class SelectCompany extends UnsubscribeOnDestroy {
     this.subscriptions.push(
       globalStore.selectedCompany$.subscribe((company) => {
         this.selectedCompany = company;
-        this.onCompanySelect();
+        if (this.selectedCompany) {
+          this.onCompanySelect();
+        }
       })
     );
   }

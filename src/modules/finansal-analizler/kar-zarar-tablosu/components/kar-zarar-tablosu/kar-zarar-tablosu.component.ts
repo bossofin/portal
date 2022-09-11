@@ -65,6 +65,9 @@ export class KarZararTablosuComponent extends SelectCompany implements OnInit {
 
   ngOnInit(): void {}
   onCompanySelect(): void {
+    if (!this.finansalAnalizlerService || !this.selectedPeriodsData) {
+      return;
+    }
     this.onSearch();
   }
   onSelectCompany(company: Company) {
