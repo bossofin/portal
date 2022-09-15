@@ -67,9 +67,9 @@ export class MizanGoruntuleComponent extends SelectCompany implements OnInit {
       this.selectedCompany.taxNumber
     );
     const response = await lastValueFrom(requets$);
-    this.showTable = response.length > 0;
-    this.dataSource.data = response;
-    if (response.length === 0) {
+    this.showTable = response.dataContainer.length > 0;
+    this.dataSource.data = response.dataContainer;
+    if (response.dataContainer.length === 0) {
       this.snackbar.open('Sonuç bulunamadı.', 'Kapat', {
         duration: 5000,
       });

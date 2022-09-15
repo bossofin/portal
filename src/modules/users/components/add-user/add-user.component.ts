@@ -13,6 +13,7 @@ import { UserService } from '@kullanicilar/business/user.service';
 import { CreateUserPayload } from '@kullanicilar/models/create-user-payload.interface';
 import { User } from '@kullanicilar/models/user.interface';
 import { lastValueFrom, Observable } from 'rxjs';
+import { ApiResponseContainer } from 'src/global';
 
 @Component({
   selector: 'app-add-user',
@@ -33,7 +34,7 @@ export class AddUserComponent implements OnInit {
   }
   title: string = 'Kullanıcı Oluştur';
   addForm: FormGroup;
-  toggleTitle: string;
+  toggleTitle: string = 'Aktif';
   constructor(
     @Inject(DIALOG_DATA) private data: { user: User; company: Company },
     private formBuilder: FormBuilder,
@@ -96,7 +97,7 @@ export class AddUserComponent implements OnInit {
 
   async onSave() {
     const formValue = makeImmutable(this.addForm.value) as CreateUserPayload;
-    let request$: Observable<User>;
+    let request$: Observable<ApiResponseContainer<User>>;
     if (this.isEdit) {
       request$ = this.userService.update({
         activationStatus: Boolean(formValue.activationStatus) ? 1 : 0,
@@ -114,7 +115,7 @@ export class AddUserComponent implements OnInit {
     }
 
     const response = await lastValueFrom(request$);
-    if (response.userName) {
+    if (response.dataContainer.userName) {
       if (this.isEdit) {
         this.snackbar.open('Kullanıcı güncellendi.', 'Kapat', {
           duration: 5000,

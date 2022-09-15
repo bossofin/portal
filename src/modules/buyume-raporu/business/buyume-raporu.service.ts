@@ -4,6 +4,7 @@ import { BuyumeRaporApiResponse } from '@buyumeRaporu/models/buyume-rapor-api-re
 import { addCharToStart } from '@custom-utils/add-char-to-start';
 import { environment } from '@environment/environment';
 import { PeriodType } from '@shared-components/select-period/models/select-period-data.interface';
+import { ApiResponseContainer } from 'src/global';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +19,7 @@ export class BuyumeRaporuService {
   constructor(private http: HttpClient) {}
   growThrateReport(companyId: string) {
     const urlString = this.createUrlString();
-    return this.http.get<BuyumeRaporApiResponse>(
+    return this.http.get<ApiResponseContainer<BuyumeRaporApiResponse>>(
       `${this.api}/growthratereport/${companyId}?${urlString}`
     );
   }

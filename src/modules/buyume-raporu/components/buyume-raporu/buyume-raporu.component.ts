@@ -78,7 +78,7 @@ export class BuyumeRaporuComponent extends SelectCompany implements OnInit {
       this.selectedCompany.taxNumber
     );
     const response = await lastValueFrom(request$);
-    this.karBuyumesi = response.karBuyumesi;
-    this.satisinBuyumesi = response.satisBuyumesi;
+    this.karBuyumesi = response.dataContainer.karBuyumesi;
+    this.satisinBuyumesi = response.dataContainer.satisBuyumesi;
   }
 }

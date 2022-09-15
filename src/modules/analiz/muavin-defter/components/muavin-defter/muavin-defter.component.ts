@@ -6,6 +6,7 @@ import { hesapKodlari } from '@constants/hesap-kodlari';
 import { map, merge, startWith, switchMap } from 'rxjs';
 import { GlobalStore } from '@store/global.store';
 import { SelectCompany } from '@globalModels/select-company.abstract.class';
+import { ApiResponseContainer } from 'src/global';
 
 @Component({
   selector: 'app-muavin-defter',
@@ -61,10 +62,10 @@ export class MuavinDefterComponent extends SelectCompany implements OnInit {
               vkn: this.selectedCompany.taxNumber,
             });
           }),
-          map((value: Muavin[]) => {
-            if (value.length > 0) {
+          map((value: ApiResponseContainer<Muavin[]>) => {
+            if (value.dataContainer.length > 0) {
               this.resultsLength = 1000;
-              return value;
+              return value.dataContainer;
             }
             return [];
           })

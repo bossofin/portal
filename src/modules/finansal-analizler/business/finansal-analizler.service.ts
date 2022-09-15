@@ -6,6 +6,7 @@ import { FinansalDurumTablosuApiResponse } from '@finanaslAnalizler/models/finan
 import { KarZararTablosuApiResponse } from '@finanaslAnalizler/models/kar-zarar-tablosu-api-response.interface';
 import { SelectPeriodData } from '@shared-components/select-period/models/select-period-data.interface';
 import { SelectPeriodReturnData } from '@shared-components/select-period/models/select-period-return-data.class';
+import { ApiResponseContainer } from 'src/global';
 
 @Injectable({
   providedIn: 'root',
@@ -18,16 +19,16 @@ export class FinansalAnalizlerService {
     const selectedPeriodsUrlString = new SelectPeriodReturnData(
       selectedPeriodData
     ).getURLString();
-    return this.http.get<FinansalDurumTablosuApiResponse[]>(
-      `${this.api}/detailedbalance/${vkn}?${selectedPeriodsUrlString}`
-    );
+    return this.http.get<
+      ApiResponseContainer<FinansalDurumTablosuApiResponse[]>
+    >(`${this.api}/detailedbalance/${vkn}?${selectedPeriodsUrlString}`);
   }
 
   getProfitAndlossReport(selectedPeriodData: SelectPeriodData, vkn: string) {
     const selectedPeriodsUrlString = new SelectPeriodReturnData(
       selectedPeriodData
     ).getURLString();
-    return this.http.get<KarZararTablosuApiResponse[]>(
+    return this.http.get<ApiResponseContainer<KarZararTablosuApiResponse[]>>(
       `${this.api}/profitandlossreport/${vkn}?${selectedPeriodsUrlString}`
     );
   }

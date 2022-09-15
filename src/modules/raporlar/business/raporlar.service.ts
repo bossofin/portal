@@ -9,6 +9,7 @@ import {
 import { SelectPeriodData } from '@shared-components/select-period/models/select-period-data.interface';
 import { SelectPeriodReturnData } from '@shared-components/select-period/models/select-period-return-data.class';
 import { BehaviorSubject, filter, map, of, switchMap } from 'rxjs';
+import { ApiResponseContainer } from 'src/global';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +24,7 @@ export class RaporlarService {
     const selectedPeriodsUrlString = new SelectPeriodReturnData(
       this.selectedPeriods
     ).getURLString();
-    return this.http.get<RaporApiResponse[]>(
+    return this.http.get<ApiResponseContainer<RaporApiResponse[]>>(
       `${this.api}/ratioreport/${companyId}?${selectedPeriodsUrlString}`
     );
   }

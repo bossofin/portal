@@ -74,9 +74,9 @@ export class DashboardComponent extends SelectCompany implements OnInit {
       profitAndDebitData: profitAndDebitDataApi,
     });
     const response = await lastValueFrom(request$);
-    this.chartsData = response.chartsData[0];
+    this.chartsData = response.chartsData.dataContainer[0];
     this.profitAndDebitData =
-      response.profitAndDebitData[0].donemKariVergiVeDigerYasalYukumlulukKarsiliklari.sumOfDonemKariVergiVeDigerYasalYukumlulukKarsiliklari;
+      response.profitAndDebitData.dataContainer[0].totalOfDonemNetKariVeyaZarari;
     this.setScore();
   }
   private getApiRequests() {

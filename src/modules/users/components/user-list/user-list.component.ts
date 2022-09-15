@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { SelectCompany } from '@globalModels/select-company.abstract.class';
 import { UserService } from '@kullanicilar/business/user.service';
 import { User } from '@kullanicilar/models/user.interface';
+import { CustomConfirmComponent } from '@shared-components/custom-confirm/components/custom-confirm/custom-confirm.component';
 import { GlobalStore } from '@store/global.store';
 import { lastValueFrom, Observable, of } from 'rxjs';
 import { map, merge, startWith, switchMap } from 'rxjs';
@@ -34,16 +35,20 @@ export class UserListComponent extends SelectCompany implements OnInit {
         this.data$ = merge(this.paginator.page).pipe(
           startWith({}),
           switchMap(() => {
-            if (!this.selectedCompany) {
-              return of([]);
+            if (this.selectedCompany) {
+              return this.userService.getUsersByCompanyId(
+                this.selectedCompany.id
+              );
             }
-            return this.userService.getUsersByCompanyId(
-              this.selectedCompany.id
-            );
+            return of({
+              statusCode: 200,
+              statusDescription: 'OK',
+              dataContainer: [],
+            });
           }),
           map((userList) => {
             this.resultsLength = 1000;
-            return userList;
+            return userList.dataContainer;
           })
         );
       });
@@ -84,16 +89,25 @@ export class UserListComponent extends SelectCompany implements OnInit {
     });
     this.onDialogClose(dialogRef);
   }
+  onDeleteConfirmDialog(user: User) {
+    const dialogRef = this.dialog.open(CustomConfirmComponent, {
+      data: `${user.userName} kullanıcısı silinecek. Emin misiniz?`,
+    });
+    this.subscriptions.push(
+      dialogRef.afterClosed().subscribe((value) => {
+        if (value) {
+          this.onDelete(user);
+        }
+      })
+    );
+  }
   async onDelete(user: User) {
-    const confirmResult = confirm(`${user.userName} silinecek. Emin misiniz?`);
-    if (confirmResult) {
-      const request$ = this.userService.delete(user.id);
-      await lastValueFrom(request$);
-      this.snackbar.open('Kullanıcı Silindi.', 'Kapat', {
-        duration: 5000,
-      });
-      this.paginator.page.emit();
-    }
+    const request$ = this.userService.delete(user.id);
+    await lastValueFrom(request$);
+    this.snackbar.open('Kullanıcı Silindi.', 'Kapat', {
+      duration: 5000,
+    });
+    this.paginator.page.emit();
   }
 
   private onDialogClose(dialogRef: MatDialogRef<AddUserComponent>) {

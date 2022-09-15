@@ -12,6 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { CustomConfirmModule } from '@shared-components/custom-confirm/custom-confirm.module';
 
 @NgModule({
   declarations: [CompanyListComponent, AddCompanyComponent],
@@ -28,6 +29,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatInputModule,
     MatIconModule,
     MatSnackBarModule,
+    CustomConfirmModule,
   ],
 })
 export class CompaniesModule {}

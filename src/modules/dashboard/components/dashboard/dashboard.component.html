@@ -1,21 +1,26 @@
 <div class="row m-0">
   <div class="col-12">
-    <div class="bg-white rounded p-3 mb-4">
-      <div class="alert alert-info m-0">
-        <p>Merhaba,</p>
-        <p>
-          BOSSOFIN size e-Defter verileriniz üzerinden anlık ve güncel veriler
-          sunar. Gerçek finansal verilerinizi görmek için e-Defter verilerinizi
-          yüklemeniz yeterlidir.
-        </p>
-        <button mat-flat-button color="primary">e-Defter Yükle</button>
-      </div>
+    <div class="dashboard-info-box rounded p-3 mb-4 text-white">
+      <p>Merhaba,</p>
+      <p>
+        BOSSOFIN size e-Defter verileriniz üzerinden anlık ve güncel veriler
+        sunar. Gerçek finansal verilerinizi görmek için e-Defter verilerinizi
+        yüklemeniz yeterlidir.
+      </p>
+      <p>
+        e-Defter verilerinizi otomatik olarak yüklemek için çalışmış olduğunuz
+        <u> Özel Entegratör veya Muhasebe Yazılım</u> firmasının web servis
+        bağlantısı yapması yeterlidir.
+      </p>
+      <p>
+        Kullanmış olduğunuz sistemler ile entegrasyon mevcut değil ise
+        <b>teknik@bossofin.com</b> adresi ile iletişime geçiniz.
+      </p>
     </div>
   </div>
-  <div class="col-12"></div>
-  <div class="col-lg-5 mb-4">
+  <div class="col-lg-6 mb-4">
     <div class="bg-white pt-3 ps-3 rounded mb-4 d-flex">
-      <h5 class="align-self-center">Dönem</h5>
+      <h6 class="align-self-center">Dönem</h6>
       <app-select-year
         class="ms-3 align-self-center"
         [selectedYear]="selectedYear"
@@ -26,7 +31,7 @@
         [selectedPeriods]="selectedMonth"
         (onChange)="getSelectedMonth($event)"
       ></app-select-month>
-      <button mat-mini-fab class="ms-3 align-self-center" (click)="onSearch()">
+      <button mat-mini-fab class="ms-2 align-self-center" (click)="onSearch()">
         <mat-icon>search</mat-icon>
       </button>
     </div>
@@ -36,7 +41,7 @@
     ></app-summary>
     <app-doviz-kuru class="mt-4 align-self-center"></app-doviz-kuru>
   </div>
-  <div class="col-lg-7">
+  <div class="col-lg-6">
     <div class="row">
       <app-bar-chart
         class="col-lg-6 mb-4"

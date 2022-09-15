@@ -51,9 +51,13 @@ export class FinansalDurumTablosuComponent
       this.selectedCompany.taxNumber
     );
     const response = await lastValueFrom(request$);
-    this.activeItems = response.map((item) => item.aktifVarliklar);
-    this.passiveItems = response.map((item) => item.pasifKaynaklar);
-    this.giderKisitlamaTabloData = response[0];
+    this.activeItems = response.dataContainer.map(
+      (item) => item.aktifVarliklar
+    );
+    this.passiveItems = response.dataContainer.map(
+      (item) => item.pasifKaynaklar
+    );
+    this.giderKisitlamaTabloData = response.dataContainer[0];
   }
 
   private setSelectedPeriods() {

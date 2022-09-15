@@ -18,6 +18,7 @@ import { SelectYearModule } from '@shared-components/select-year/select-year.mod
 import { SelectMonthModule } from '@shared-components/select-month/select-month.module';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { DashboardApexChartComponent } from './components/dashboard-apex-chart/dashboard-apex-chart.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { DashboardApexChartComponent } from './components/dashboard-apex-chart/d
     SelectYearModule,
     SelectMonthModule,
     NgApexchartsModule,
+    MatTooltipModule,
   ],
 })
 export class DashboardModule {}

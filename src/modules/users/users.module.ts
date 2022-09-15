@@ -12,6 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { CustomConfirmModule } from '@shared-components/custom-confirm/custom-confirm.module';
 
 @NgModule({
   declarations: [UserListComponent, AddUserComponent],
@@ -28,6 +29,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatFormFieldModule,
     MatInputModule,
     MatSlideToggleModule,
+    CustomConfirmModule,
   ],
 })
 export class UsersModule {}

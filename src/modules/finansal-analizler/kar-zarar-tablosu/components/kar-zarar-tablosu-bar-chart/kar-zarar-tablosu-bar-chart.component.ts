@@ -11,6 +11,7 @@ import DataLabelsPlugin from 'chartjs-plugin-datalabels';
   providers: [CurrencyPipe],
 })
 export class KarZararTablosuBarChartComponent implements OnInit, OnChanges {
+  legendTitle: string;
   periods: string[];
   inputData: number[];
   private _data: { name: string; value: number }[];

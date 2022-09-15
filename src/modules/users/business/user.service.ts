@@ -6,6 +6,7 @@ import { CreateUserPayload } from '@kullanicilar/models/create-user-payload.inte
 import { UpdateUserPayload } from '@kullanicilar/models/update-user-payload.interface';
 import { User } from '@kullanicilar/models/user.interface';
 import { BehaviorSubject } from 'rxjs';
+import { ApiResponseContainer } from 'src/global';
 
 @Injectable({
   providedIn: 'root',
@@ -16,14 +17,17 @@ export class UserService {
   constructor(private http: HttpClient) {}
   getUserByUserName(cache: boolean = false) {
     const userName = sessionStorage.getItem('userName');
-    return this.http.get<User>(`${this.api}/user/name/${userName}`, {
-      headers: {
-        cache: cache ? '1' : undefined,
-      },
-    });
+    return this.http.get<ApiResponseContainer<User>>(
+      `${this.api}/user/name/${userName}`,
+      {
+        headers: {
+          cache: cache ? '1' : undefined,
+        },
+      }
+    );
   }
   getCompaniesByUserId(cache: boolean = false) {
-    return this.http.get<Company[]>(
+    return this.http.get<ApiResponseContainer<Company[]>>(
       `${this.api}/company/user/${this.user.id}`,
       {
         headers: {
@@ -33,20 +37,22 @@ export class UserService {
     );
   }
   getCompanies(companyName: string) {
-    return this.http.get<Company[]>(
+    return this.http.get<ApiResponseContainer<Company[]>>(
       `${this.api}/company/${companyName}/0/1000`
     );
   }
   getUsersByCompanyId(companyId: number) {
-    return this.http.get<User[]>(`${this.api}/user/_/${companyId}/0/1000`);
+    return this.http.get<ApiResponseContainer<User[]>>(
+      `${this.api}/user/_/${companyId}/0/1000`
+    );
   }
   create(user: CreateUserPayload) {
-    return this.http.post<User>(`${this.api}/user`, {
+    return this.http.post<ApiResponseContainer<User>>(`${this.api}/user`, {
       ...user,
     });
   }
   update(user: UpdateUserPayload) {
-    return this.http.put<User>(`${this.api}/user`, {
+    return this.http.put<ApiResponseContainer<User>>(`${this.api}/user`, {
       ...user,
     });
   }

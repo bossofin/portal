@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '@authentication/business/authentication.service';
-import { emailValidator } from '@custom-validation/email-validator';
 import { getValidationMessage } from '@custom-validation/get-validation-message';
 import { GlobalStore } from '@store/global.store';
 import { lastValueFrom } from 'rxjs';
@@ -56,8 +55,8 @@ export class SignInComponent implements OnInit {
       const { email: userName, password } = this.form.value;
       const request$ = this.authenticationService.signIn(userName, password);
       const response = await lastValueFrom(request$);
-      if (response.sessionToken) {
-        sessionStorage.setItem('token', response.sessionToken);
+      if (response.dataContainer.sessionToken) {
+        sessionStorage.setItem('token', response.dataContainer.sessionToken);
         this.router.navigateByUrl('/');
         this.snackbar.open('Giriş başarılı.', 'Kapat', {
           duration: 5000,

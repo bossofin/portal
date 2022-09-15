@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@environment/environment';
+import { ApiResponseContainer } from 'src/global';
 import { MuavinApiPayload } from '../../mizan/models/muavin-api-payload.interface';
 import { Muavin } from '../../mizan/models/muavin.interface';
 
@@ -18,14 +19,17 @@ export class MuavinService {
     periodStart,
     vkn,
   }: MuavinApiPayload) {
-    return this.http.get<Muavin[]>(`${this.api}/subsidiaryledger/${vkn}?`, {
-      params: {
-        mainId,
-        periodStart,
-        periodEnd,
-        pageNumber,
-        count,
-      },
-    });
+    return this.http.get<ApiResponseContainer<Muavin[]>>(
+      `${this.api}/subsidiaryledger/${vkn}?`,
+      {
+        params: {
+          mainId,
+          periodStart,
+          periodEnd,
+          pageNumber,
+          count,
+        },
+      }
+    );
   }
 }

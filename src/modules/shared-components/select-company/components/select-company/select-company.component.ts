@@ -32,14 +32,14 @@ export class SelectCompanyComponent implements OnInit {
       .getUserByUserName(true)
       .pipe(
         switchMap((user) => {
-          this.userService.user = user;
+          this.userService.user = user.dataContainer;
           return this.userService.getCompaniesByUserId(true);
         })
       );
     const companiesOfUserResponse = await lastValueFrom(
       companiesOfUserRequest$
     );
-    this.companies = companiesOfUserResponse;
+    this.companies = companiesOfUserResponse.dataContainer;
     this.onSelect.emit(this.companies[0]);
     this.globalStore.setCompany(this.companies[0]);
   }

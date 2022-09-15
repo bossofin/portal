@@ -4,6 +4,7 @@ import { environment } from '@environment/environment';
 import { Company } from '@firmalar/mdoels/company.interface';
 import { CreateCompanyPayload } from '@firmalar/mdoels/create-company-api-payload.interface';
 import { UpdateCompanyPayload } from '@firmalar/mdoels/update-company-api-payload.interface';
+import { ApiResponseContainer } from 'src/global';
 
 @Injectable({
   providedIn: 'root',
@@ -26,7 +27,7 @@ export class CompanyService {
     );
   }
   getAll(pageOffset: number, pageSize: number) {
-    return this.http.get<Company[]>(
+    return this.http.get<ApiResponseContainer<Company[]>>(
       `${this.api}/company/_/${pageOffset}/${pageSize}`
     );
   }

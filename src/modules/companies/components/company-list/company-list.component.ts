@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CompanyService } from '@firmalar/business/company.service';
 import { Company } from '@firmalar/mdoels/company.interface';
+import { CustomConfirmComponent } from '@shared-components/custom-confirm/components/custom-confirm/custom-confirm.component';
 import {
   lastValueFrom,
   map,
@@ -50,7 +51,7 @@ export class CompanyListComponent
       switchMap(() => this.companyService.getAll(this.paginator.pageIndex, 10)),
       map((value) => {
         this.resultsLength = 10;
-        return value;
+        return value.dataContainer;
       })
     );
   }
@@ -74,18 +75,25 @@ export class CompanyListComponent
       })
     );
   }
-  async onDelete(company: Company) {
-    const confirmResult = confirm(
-      `${company.companyName} silinecek. Emin misiniz?`
+  onDeleteConfirm(company: Company) {
+    const dialogRef = this.dialog.open(CustomConfirmComponent, {
+      data: `${company.companyName} firması silinecek. Emin misiniz?`,
+    });
+    this.subscriptions.push(
+      dialogRef.afterClosed().subscribe((value) => {
+        if (value) {
+          this.onDelete(company);
+        }
+      })
     );
-    if (confirmResult) {
-      const request$ = this.companyService.delete(company.id);
-      await lastValueFrom(request$);
-      this.snackbar.open('Firma Silindi.', 'Kapat', {
-        duration: 5000,
-      });
-      this.paginator.page.emit();
-    }
+  }
+  async onDelete(company: Company) {
+    const request$ = this.companyService.delete(company.id);
+    await lastValueFrom(request$);
+    this.snackbar.open('Firma Silindi.', 'Kapat', {
+      duration: 5000,
+    });
+    this.paginator.page.emit();
   }
   onEdit(company: Company) {
     const dialogRef = this.dialog.open(AddCompanyComponent, {

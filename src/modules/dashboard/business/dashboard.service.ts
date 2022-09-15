@@ -4,6 +4,7 @@ import { environment } from '@environment/environment';
 import { KarZararTablosuApiResponse } from '@finanaslAnalizler/models/kar-zarar-tablosu-api-response.interface';
 import { RaporApiResponse } from '@raporlar/model/rapor-api-response.interface';
 import { forkJoin, map } from 'rxjs';
+import { ApiResponseContainer } from 'src/global';
 import { ExchangeRateApiData } from '../models/exchange-rate-api-data.interface';
 @Injectable({
   providedIn: 'root',
@@ -44,7 +45,7 @@ export class DashboardService {
     );
   }
   getChartsData(periodStart: string, periodEnd: string, companyTax: string) {
-    return this.http.get<RaporApiResponse[]>(
+    return this.http.get<ApiResponseContainer<RaporApiResponse[]>>(
       `${this.api}/ratioreport/${companyTax}?periodArray=${periodStart}:${periodEnd}`
     );
   }
@@ -53,7 +54,7 @@ export class DashboardService {
     periodEnd: string,
     companyTax: string
   ) {
-    return this.http.get<KarZararTablosuApiResponse[]>(
+    return this.http.get<ApiResponseContainer<KarZararTablosuApiResponse[]>>(
       `${this.api}/profitandlossreport/${companyTax}?periodArray=${periodStart}:${periodEnd}`
     );
   }

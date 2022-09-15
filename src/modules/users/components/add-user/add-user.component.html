@@ -59,7 +59,12 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>İptal</button>
-  <button mat-button (click)="onSave()" [disabled]="addForm.invalid">
+  <button
+    mat-flat-button
+    color="primary"
+    (click)="onSave()"
+    [disabled]="addForm.invalid"
+  >
     Kaydet
   </button>
 </mat-dialog-actions>

@@ -20,6 +20,7 @@ export class SignOutButtonComponent implements OnInit {
   async signOut() {
     const request$ = this.authenticationService.signOut();
     await lastValueFrom(request$);
+    sessionStorage.clear();
     this.router.navigateByUrl('/auth');
     this.snackbar.open('Çıkış Başarılı', 'Kapat', {
       duration: 5000,

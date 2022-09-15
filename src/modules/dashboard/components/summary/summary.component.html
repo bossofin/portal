@@ -1,21 +1,27 @@
 <div class="col-12">
-  <div class="bg-primary rounded p-3">
+  <div class="summary-wrapper rounded p-3">
     <ng-container *ngIf="company$ | async as company">
       <h5 class="text-white text-center mb-4">{{ company.companyName }}</h5>
     </ng-container>
     <div class="row">
-      <div class="col">
-        <div class="bg-white rounded p-4 summary-first">
+      <div class="col mb-3">
+        <div class="bg-white rounded p-4 summary-first position-relative">
+          <mat-icon
+            matTooltip="Skorunuz ortalamanın altındadır."
+            class="position-absolute text-danger"
+            *ngIf="score < 2.5"
+            >report</mat-icon
+          >
           <h4 class="text-warning mb-0 d-flex">
             <mat-icon class="align-self-center">score</mat-icon>
             <span class="align-self-center ms-2">
-              {{ score }}
+              {{ score | number: "1.1-2" }}
             </span>
           </h4>
           <span class="text-secondary">SKOR</span>
         </div>
       </div>
-      <div class="col">
+      <div class="col mb-3">
         <div class="bg-white rounded p-4 summary-first">
           <h4 class="text-danger mb-0 d-flex">
             <mat-icon class="align-self-center">payments</mat-icon>

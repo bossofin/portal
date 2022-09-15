@@ -29,6 +29,7 @@ export class SelectPeriodComponent implements OnInit {
   }
   public set selectedPeriodType(value: PeriodType) {
     this._selectedPeriodType = value;
+    this.selectedPeriods = [];
     this.setMaxSelectionCount();
   }
 

@@ -84,7 +84,7 @@ export class KarZararTablosuComponent extends SelectCompany implements OnInit {
       this.selectedCompany.taxNumber
     );
     const response = await lastValueFrom(request$);
-    this.response = makeImmutable(response);
+    this.response = makeImmutable(response.dataContainer);
     this.setTableData(this.selectedPeriods);
   }
   private setSelectedPeriods() {

@@ -1,0 +1,23 @@
+.summary-wrapper {
+  background: -moz-linear-gradient(
+    90deg,
+    rgba(22, 117, 173, 1) 0%,
+    rgba(98, 195, 252, 1) 100%
+  );
+  background: -webkit-linear-gradient(
+    90deg,
+    rgba(22, 117, 173, 1) 0%,
+    rgba(98, 195, 252, 1) 100%
+  );
+  background: linear-gradient(
+    90deg,
+    rgba(22, 117, 173, 1) 0%,
+    rgba(98, 195, 252, 1) 100%
+  );
+  .mat-icon {
+    &.text-danger {
+      right: 8px;
+      top: 8px;
+    }
+  }
+}

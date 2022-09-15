@@ -1,0 +1,15 @@
+<h2 mat-dialog-title class="text-center">Onay Gerekiyor</h2>
+<mat-dialog-content class="text-center">
+  <div>
+    <mat-icon class="text-warning">help</mat-icon>
+  </div>
+  <div class="my-3">
+    {{ data }}
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>İptal</button>
+  <button mat-flat-button color="primary" [mat-dialog-close]="true">
+    Onayla
+  </button>
+</mat-dialog-actions>

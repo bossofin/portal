@@ -76,6 +76,6 @@ export class RaporlarHomeComponent extends SelectCompany implements OnInit {
       this.selectedCompany.taxNumber
     );
     const response = await lastValueFrom(request$);
-    this.raporlarService.reportsResponse$.next(response);
+    this.raporlarService.reportsResponse$.next(response.dataContainer);
   }
 }
