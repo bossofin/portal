@@ -1,5 +1,5 @@
 <ng-container *ngIf="paris$ | async as pairs">
-  <div class="d-flex">
+  <div class="d-md-flex d-sm-block">
     <div class="flex-fill text-center px-3">
       <h5 class="mb-3 text-primary">EUR</h5>
       <span class="text-secondary">{{ pairs.eur }}₺</span>
@@ -12,7 +12,7 @@
       <h5 class="mb-3 text-primary">GBP</h5>
       <span class="text-secondary">{{ pairs.gbp }}₺</span>
     </div>
-    <div class="align-self-center">
+    <div class="align-self-center d-none d-md-block">
       <button mat-mini-fab color="primary" (click)="onRefresh()">
         <mat-icon>refresh</mat-icon>
       </button>

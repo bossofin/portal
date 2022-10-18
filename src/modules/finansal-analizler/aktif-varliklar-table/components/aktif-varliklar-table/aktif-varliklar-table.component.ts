@@ -12,9 +12,35 @@ import { FinansalDurumTablosuItem } from '@finanaslAnalizler/models/finansal-dur
   selector: 'app-aktif-varliklar-table',
   templateUrl: './aktif-varliklar-table.component.html',
   styleUrls: ['./aktif-varliklar-table.component.scss'],
-  inputs: ['activeItems', 'periods'],
+  inputs: ['activeItems', 'periods', 'openAll'],
 })
 export class AktifVarliklarTableComponent implements OnInit {
+  private _openAll: boolean;
+  public get openAll(): boolean {
+    return this._openAll;
+  }
+  public set openAll(value: boolean) {
+    this._openAll = value;
+    if (this.openAll) {
+      this.toggleDonenVarliklar = true;
+      this.toggleHazirDegerler = true;
+      this.toggleMenkulKiymetler = true;
+      this.toggleTicariAlacaklar = true;
+      this.toggleDigerAlacaklar = true;
+      this.toggleStoklar = true;
+      this.toggleYillaraYayginInsaatVeOnarimMaliyetleri = true;
+      this.toggleGelecekAylaraAitGiderlerVeGelirTahakkuklari = true;
+      this.toggleDigerDonenVarliklar = true;
+      this.toggleDuranVarliklar = true;
+      this.toggleTicariAlacaklarDuran = true;
+      this.toggleDigerAlacaklarDuran = true;
+      this.toggleMaliDuranVarliklar = true;
+      this.toggleMaddiDuranVarliklar = true;
+      this.toggleMaddiOlmayanDuranVarliklar = true;
+      this.toggleOzelTukenmeyeTabiVarliklar = true;
+      this.toggleGelecekYillaraAitGiderlerVeGelirlerTahakkuklari = true;
+    }
+  }
   periods: string[];
   private _activeItems: FinansalDurumTablosuActiveData[];
   public get activeItems(): FinansalDurumTablosuActiveData[] {

@@ -8,7 +8,7 @@
     <mat-label>Hesap Kodları</mat-label>
     <mat-select formControlName="hesapKodu">
       <mat-option *ngFor="let kod of kodlar" [value]="kod.value">
-        {{ kod.name }}
+        {{ kod.value }} - {{ kod.name }}
       </mat-option>
     </mat-select>
   </mat-form-field>
@@ -24,6 +24,8 @@
     <span matSuffix>₺</span>
     <mat-error></mat-error>
   </mat-form-field>
+  <app-select-year class="ms-3"></app-select-year>
+  <app-select-month class="ms-3"></app-select-month>
   <button mat-flat-button color="primary" (click)="onAdd()" class="ms-3">
     Ekle
   </button>

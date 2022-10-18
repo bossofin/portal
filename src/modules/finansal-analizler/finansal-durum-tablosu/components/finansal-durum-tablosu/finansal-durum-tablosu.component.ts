@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { makeImmutable } from '@custom-utils/make-immutable.util';
 import { FinansalAnalizlerService } from '@finanaslAnalizler/business/finansal-analizler.service';
 import { FinansalDurumTablosuActiveData } from '@finanaslAnalizler/models/finansal-durum-tablosu-active-data.interface';
@@ -8,6 +8,12 @@ import { SelectCompany } from '@globalModels/select-company.abstract.class';
 import { SelectPeriodData } from '@shared-components/select-period/models/select-period-data.interface';
 import { GlobalStore } from '@store/global.store';
 import { lastValueFrom } from 'rxjs';
+import * as pdfMake from 'pdfmake/build/pdfMake';
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+var htmlToPdfmake = require('html-to-pdfmake');
+(pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
+import htmlToCanvas from 'html2canvas';
+import { jsPDF } from 'jspdf';
 
 @Component({
   selector: 'app-finansal-durum-tablosu',
@@ -26,6 +32,14 @@ export class FinansalDurumTablosuComponent
   selectedPeriods: string[];
   selectedPeriodsData: SelectPeriodData;
   giderKisitlamaTabloData: FinansalDurumTablosuApiResponse;
+  openAll: boolean;
+  private _export: ElementRef;
+  public get export(): ElementRef {
+    return this._export;
+  }
+  @ViewChild('export') public set export(value: ElementRef) {
+    this._export = value;
+  }
   constructor(
     private finansalAnalizlerService: FinansalAnalizlerService,
     globalStore: GlobalStore
@@ -74,5 +88,28 @@ export class FinansalDurumTablosuComponent
         this.selectedPeriods = this.selectedPeriodsData.periods;
         break;
     }
+  }
+  exportAsPDF() {
+    this.openAll = true;
+    setTimeout(() => {
+      const pdfTable = this.export.nativeElement;
+      htmlToCanvas(pdfTable).then((canvas) => {
+        let pdf = new jsPDF({
+          orientation: 'portrait',
+          unit: 'px',
+          format: [canvas.width + 60, canvas.height + 60],
+        });
+        pdf.addImage({
+          imageData: canvas.toDataURL(),
+          width: canvas.width,
+          height: canvas.height,
+          x: 30,
+          y: 30,
+          format: 'JPG',
+          compression: 'FAST',
+        });
+        pdf.save();
+      });
+    });
   }
 }

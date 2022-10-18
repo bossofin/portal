@@ -107,4 +107,5 @@ export class MuavinDefterComponent extends SelectCompany implements OnInit {
     this.paginator.pageIndex = 0;
     this.onFilterChange.emit();
   }
+  export() {}
 }

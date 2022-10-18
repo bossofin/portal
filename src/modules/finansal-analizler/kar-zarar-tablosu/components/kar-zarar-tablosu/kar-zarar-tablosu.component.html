@@ -45,7 +45,7 @@
           </tr>
           <ng-container *ngIf="toggle.show">
             <tr>
-              <td class="ps-4">600- Yurt içi Satışlar</td>
+              <td class="ps-4">600- YURT İÇİ SATIŞLAR</td>
               <ng-container *ngFor="let brutSatis of brutSatislar">
                 <td>
                   <app-currency [value]="brutSatis.kasa600"></app-currency>
@@ -54,7 +54,7 @@
               </ng-container>
             </tr>
             <tr>
-              <td class="ps-4">601- Yurt dışı Satışlar</td>
+              <td class="ps-4">601- YURT DIŞI SATIŞLAR</td>
               <ng-container *ngFor="let brutSatis of brutSatislar">
                 <td>
                   <app-currency [value]="brutSatis.kasa601"></app-currency>
@@ -63,7 +63,7 @@
               </ng-container>
             </tr>
             <tr>
-              <td class="ps-4">602- Diğer Gelirler</td>
+              <td class="ps-4">602- DİĞER GELİRLER</td>
               <ng-container *ngFor="let brutSatis of brutSatislar">
                 <td>
                   <app-currency [value]="brutSatis.kasa602"></app-currency>
@@ -100,7 +100,7 @@
           </tr>
           <ng-container *ngIf="toggle.show">
             <tr>
-              <td class="ps-4">610- Satıştan İadeler (-)</td>
+              <td class="ps-4">610- SATIŞTAN İADELER (-)</td>
               <ng-container *ngFor="let satisIndirimi of satisIndirimleri">
                 <td>
                   <app-currency [value]="satisIndirimi.kasa610"></app-currency>
@@ -109,7 +109,7 @@
               </ng-container>
             </tr>
             <tr>
-              <td class="ps-4">611- Satış İskontolari (-)</td>
+              <td class="ps-4">611- SATIŞ İSKONTOLARI (-)</td>
               <ng-container *ngFor="let satisIndirimi of satisIndirimleri">
                 <td>
                   <app-currency [value]="satisIndirimi.kasa611"></app-currency>
@@ -118,7 +118,7 @@
               </ng-container>
             </tr>
             <tr>
-              <td class="ps-4">612- Diğer İndirimler (-)</td>
+              <td class="ps-4">612- DİĞER İNDİRİMLER (-)</td>
               <ng-container *ngFor="let satisIndirimi of satisIndirimleri">
                 <td>
                   <app-currency [value]="satisIndirimi.kasa612"></app-currency>
@@ -141,7 +141,7 @@
                 <mat-icon class="align-self-center me-3" *ngIf="!toggle.show"
                   >expand_less</mat-icon
                 >
-                <span class="align-self-center">C. Net Satışlar</span>
+                <span class="align-self-center">C. NET SATIŞLAR</span>
               </div>
             </td>
             <ng-container *ngFor="let totalOfNetSatis of totalOfNetSatislar">
@@ -164,7 +164,7 @@
               </ng-container>
             </tr>
             <tr>
-              <td class="ps-4">620- Satılan Mamüller Maliyeti (-)</td>
+              <td class="ps-4">620- SATILAN MAMÜLLER MALİYETİ (-)</td>
               <ng-container *ngFor="let satisMaliyeti of satislarinMaliyeti">
                 <td>
                   <app-currency [value]="satisMaliyeti.kasa620"></app-currency>
@@ -173,7 +173,7 @@
               </ng-container>
             </tr>
             <tr>
-              <td class="ps-4">621- Satılan Ticari Mallar Maliyeti (-)</td>
+              <td class="ps-4">621- SATILAN TİCARİ MALLAR MALİYETİ</td>
               <ng-container *ngFor="let satisMaliyeti of satislarinMaliyeti">
                 <td>
                   <app-currency [value]="satisMaliyeti.kasa621"></app-currency>
@@ -182,7 +182,7 @@
               </ng-container>
             </tr>
             <tr>
-              <td class="ps-4">622- Satılan Hizmet Maliyeti (-)</td>
+              <td class="ps-4">622- SATILAN HİZMET MALİYETİ (-)</td>
               <ng-container *ngFor="let satisMaliyeti of satislarinMaliyeti">
                 <td>
                   <app-currency [value]="satisMaliyeti.kasa622"></app-currency>
@@ -191,7 +191,7 @@
               </ng-container>
             </tr>
             <tr>
-              <td class="ps-4">623- Diğer Satışlarin Maliyeti (-)</td>
+              <td class="ps-4">623- DİĞER SATIŞLARIN MALİYETİ (-)</td>
               <ng-container *ngFor="let satisMaliyeti of satislarinMaliyeti">
                 <td>
                   <app-currency [value]="satisMaliyeti.kasa623"></app-currency>
@@ -214,7 +214,7 @@
                 <mat-icon class="align-self-center me-3" *ngIf="!toggle.show"
                   >expand_less</mat-icon
                 >
-                <span class="align-self-center">Brüt Satış Kar veya Zarar</span>
+                <span class="align-self-center">BRÜT SATIŞ KAR VEYA ZARAR</span>
               </div>
             </td>
             <ng-container
@@ -228,7 +228,9 @@
                   [value]="totalOfBrutSatisKariVeyaZarar"
                 ></app-currency>
               </td>
-              <td>{{ percentageOfBrutSatisKariVeyaZarari[i] }}%</td>
+              <td>
+                {{ percentageOfBrutSatisKariVeyaZarari[i] | number: "2.2-2" }}%
+              </td>
             </ng-container>
           </tr>
           <ng-container *ngIf="toggle.show">
@@ -244,7 +246,7 @@
               </ng-container>
             </tr>
             <tr>
-              <td class="ps-4">630- Araştırma Ve Geliştirme Gid (-)</td>
+              <td class="ps-4">630- ARAŞTIRMA VE GELİŞTİRME GİD. (-)</td>
               <ng-container *ngFor="let faliyetGideri of faliyetGiderleri">
                 <td>
                   <app-currency [value]="faliyetGideri.kasa630"></app-currency>
@@ -253,7 +255,7 @@
               </ng-container>
             </tr>
             <tr>
-              <td class="ps-4">631- Pazarlama Satış ve Dağ. Gid. (-)</td>
+              <td class="ps-4">631- PAZARLAMA SATIŞ VE DAĞ. GİD. (-)</td>
               <ng-container *ngFor="let faliyetGideri of faliyetGiderleri">
                 <td>
                   <app-currency [value]="faliyetGideri.kasa631"></app-currency>
@@ -262,7 +264,7 @@
               </ng-container>
             </tr>
             <tr>
-              <td class="ps-4">632- Genel Yönetim Giderleri (-)</td>
+              <td class="ps-4">632- GENEL YÖNETİM GİDERLERİ (-)</td>
               <ng-container *ngFor="let faliyetGideri of faliyetGiderleri">
                 <td>
                   <app-currency [value]="faliyetGideri.kasa632"></app-currency>
@@ -285,7 +287,7 @@
                 <mat-icon class="align-self-center me-3" *ngIf="!toggle.show"
                   >expand_less</mat-icon
                 >
-                <span class="align-self-center">Faaliyet Kar veya Zarar</span>
+                <span class="align-self-center">FAALİYET KAR VEYA ZARAR</span>
               </div>
             </td>
             <ng-container
@@ -299,7 +301,9 @@
                   [value]="totalOfFaliyetKariVeyaZarar"
                 ></app-currency>
               </td>
-              <td>{{ percentageOfFaliyetKariVeyaZarari[i] }}%</td>
+              <td>
+                {{ percentageOfFaliyetKariVeyaZarari[i] | number: "2.2-2" }}%
+              </td>
             </ng-container>
           </tr>
           <ng-container *ngIf="toggle.show">
@@ -347,7 +351,7 @@
               </tr>
               <ng-container *ngIf="toggleDigerFaalOlanGelirVeKarlar.show">
                 <tr>
-                  <td class="ps-4">640- İştiraklerden Temettü Gelirleri</td>
+                  <td class="ps-4">640- İŞTİRAKLERDEN TEMETTÜ GELİRLERİ</td>
                   <ng-container
                     *ngFor="
                       let digerFaalOlaganGiderVeKar of digerFaalOlaganGiderVeKarlar
@@ -362,7 +366,7 @@
                   </ng-container>
                 </tr>
                 <tr>
-                  <td class="ps-4">641- Bağlı Ortaklık Temettü Gelirleri</td>
+                  <td class="ps-4">641- BAĞLI ORTAKLIK TEMETTÜ GELİRLERİ</td>
                   <ng-container
                     *ngFor="
                       let digerFaalOlaganGiderVeKar of digerFaalOlaganGiderVeKarlar
@@ -377,7 +381,7 @@
                   </ng-container>
                 </tr>
                 <tr>
-                  <td class="ps-4">642- Faiz Gelirleri</td>
+                  <td class="ps-4">642- FAİZ GELİRLERİ</td>
                   <ng-container
                     *ngFor="
                       let digerFaalOlaganGiderVeKar of digerFaalOlaganGiderVeKarlar
@@ -392,7 +396,7 @@
                   </ng-container>
                 </tr>
                 <tr>
-                  <td class="ps-4">643- Komisyon Gelirleri</td>
+                  <td class="ps-4">643- KOMİSYON GELİRLERİ</td>
                   <ng-container
                     *ngFor="
                       let digerFaalOlaganGiderVeKar of digerFaalOlaganGiderVeKarlar
@@ -407,7 +411,7 @@
                   </ng-container>
                 </tr>
                 <tr>
-                  <td class="ps-4">644- Konusu Kalmayan Karşılıklar</td>
+                  <td class="ps-4">644- KONUSU KALMAYAN KARŞILIKLAR</td>
                   <ng-container
                     *ngFor="
                       let digerFaalOlaganGiderVeKar of digerFaalOlaganGiderVeKarlar
@@ -422,7 +426,7 @@
                   </ng-container>
                 </tr>
                 <tr>
-                  <td class="ps-4">645- Menkul Kıymetler Satış Karları</td>
+                  <td class="ps-4">645- MENKUL KIYMETLER SATIŞ KARLARI</td>
                   <ng-container
                     *ngFor="
                       let digerFaalOlaganGiderVeKar of digerFaalOlaganGiderVeKarlar
@@ -437,7 +441,7 @@
                   </ng-container>
                 </tr>
                 <tr>
-                  <td class="ps-4">646- Kambiyo Karları</td>
+                  <td class="ps-4">646- KAMBİYO KARLARI</td>
                   <ng-container
                     *ngFor="
                       let digerFaalOlaganGiderVeKar of digerFaalOlaganGiderVeKarlar
@@ -452,7 +456,7 @@
                   </ng-container>
                 </tr>
                 <tr>
-                  <td class="ps-4">647- Reeskont Faiz Gelirleri</td>
+                  <td class="ps-4">647- REESKONT FAİZ GELİRLERİ</td>
                   <ng-container
                     *ngFor="
                       let digerFaalOlaganGiderVeKar of digerFaalOlaganGiderVeKarlar
@@ -467,7 +471,7 @@
                   </ng-container>
                 </tr>
                 <tr>
-                  <td class="ps-4">648- Enflasyon Düzeltmesi Karları</td>
+                  <td class="ps-4">648- ENFLASYON DÜZELTMESİ KARLARI</td>
                   <ng-container
                     *ngFor="
                       let digerFaalOlaganGiderVeKar of digerFaalOlaganGiderVeKarlar
@@ -482,7 +486,7 @@
                   </ng-container>
                 </tr>
                 <tr>
-                  <td class="ps-4">649- Diğer Olağan Gelir Ve Karlar</td>
+                  <td class="ps-4">649- DİĞER OLAĞAN GELİR VE KARLAR</td>
                   <ng-container
                     *ngFor="
                       let digerFaalOlaganGiderVeKar of digerFaalOlaganGiderVeKarlar
@@ -540,7 +544,7 @@
               </tr>
               <ng-container *ngIf="toggleDigerFaalGiderVeZararlar.show">
                 <tr>
-                  <td class="ps-4">653- Komisyon Giderleri (-)</td>
+                  <td class="ps-4">653- KOMİSYON GİDERLERİ (-)</td>
                   <ng-container
                     *ngFor="
                       let digerFaalGiderVeZarar of digerFaalGiderVeZararlar
@@ -555,7 +559,7 @@
                   </ng-container>
                 </tr>
                 <tr>
-                  <td class="ps-4">654- Karşılık Giderleri (-)</td>
+                  <td class="ps-4">654- KARŞILIK GİDERLERİ (-)</td>
                   <ng-container
                     *ngFor="
                       let digerFaalGiderVeZarar of digerFaalGiderVeZararlar
@@ -570,7 +574,7 @@
                   </ng-container>
                 </tr>
                 <tr>
-                  <td class="ps-4">655- Menkul Kıymet Satış Zararı (-)</td>
+                  <td class="ps-4">655- MENKUL KIYMET SATIŞ ZARARI</td>
                   <ng-container
                     *ngFor="
                       let digerFaalGiderVeZarar of digerFaalGiderVeZararlar
@@ -585,7 +589,7 @@
                   </ng-container>
                 </tr>
                 <tr>
-                  <td class="ps-4">656- Kambiyo Zararları</td>
+                  <td class="ps-4">656- KAMBİYO ZARARLARI</td>
                   <ng-container
                     *ngFor="
                       let digerFaalGiderVeZarar of digerFaalGiderVeZararlar
@@ -600,7 +604,7 @@
                   </ng-container>
                 </tr>
                 <tr>
-                  <td class="ps-4">657- Reeskont Faiz Giderleri (-)</td>
+                  <td class="ps-4">657- REESKONT FAİZ GİDERLERİ</td>
                   <ng-container
                     *ngFor="
                       let digerFaalGiderVeZarar of digerFaalGiderVeZararlar
@@ -615,7 +619,7 @@
                   </ng-container>
                 </tr>
                 <tr>
-                  <td class="ps-4">658- Enflasyon Düzeltmesi Zararları (-)</td>
+                  <td class="ps-4">658- ENFLASYON DÜZELTMESİ ZARARLARI</td>
                   <ng-container
                     *ngFor="
                       let digerFaalGiderVeZarar of digerFaalGiderVeZararlar
@@ -630,7 +634,7 @@
                   </ng-container>
                 </tr>
                 <tr>
-                  <td class="ps-4">659- Diğer Gider Ve Zararlar (-)</td>
+                  <td class="ps-4">659- DİĞER GİDER VE ZARARLAR (-)</td>
                   <ng-container
                     *ngFor="
                       let digerFaalGiderVeZarar of digerFaalGiderVeZararlar
@@ -683,7 +687,7 @@
               </tr>
               <ng-container *ngIf="toggleFinansmanGiderleri.show">
                 <tr>
-                  <td class="ps-4">660- Kısa Vadeli Borçlanma Gid. (-)</td>
+                  <td class="ps-4">660- KISA VADELİ BORÇLANMA GİD. (-)</td>
                   <ng-container
                     *ngFor="let finansmanGideri of finansmanGiderleri"
                   >
@@ -696,7 +700,7 @@
                   </ng-container>
                 </tr>
                 <tr>
-                  <td class="ps-4">661- Uzun Vadeli Borçlanma Gid. (-)</td>
+                  <td class="ps-4">661-UZUN VADELİ BORÇLANMA GİD. (-)</td>
                   <ng-container
                     *ngFor="let finansmanGideri of finansmanGiderleri"
                   >
@@ -770,7 +774,7 @@
               </tr>
               <ng-container *ngIf="toggleOlaganDisiGelirVeKarlar.show">
                 <tr>
-                  <td class="ps-4">671- Önceki Dönem Gelir Ve Karları</td>
+                  <td class="ps-4">671- ÖNCEKİ DÖNEM GELİR VE KARLARI</td>
                   <ng-container
                     *ngFor="let olagandisiGelirVeKar of olagandisiGelirVeKarlar"
                   >
@@ -783,7 +787,7 @@
                   </ng-container>
                 </tr>
                 <tr>
-                  <td class="ps-4">679- Diğer Olağandışı Gelir Ve Karlar</td>
+                  <td class="ps-4">679- DİĞER OLAĞAN DIŞI GELİR VE KARLAR</td>
                   <ng-container
                     *ngFor="let olagandisiGelirVeKar of olagandisiGelirVeKarlar"
                   >
@@ -842,7 +846,7 @@
               <ng-container *ngIf="toggleOlaganDisiGiderVeZararlar.show">
                 <tr>
                   <td class="ps-4">
-                    680- Çalışmayan Kısım Gider ve Zararları (-)
+                    680- ÇALIŞMAYAN KISIM GİDER VE ZARARLARI (-)
                   </td>
                   <ng-container
                     *ngFor="
@@ -858,7 +862,7 @@
                   </ng-container>
                 </tr>
                 <tr>
-                  <td class="ps-4">681- Önceki Dönem Gider ve Zararları (-)</td>
+                  <td class="ps-4">681- ÖNCEKİ DÖNEM GİDER VE ZARARLARI (-)</td>
                   <ng-container
                     *ngFor="
                       let olagandisiGiderVeZarar of olagandisiGiderVeZararlar
@@ -874,7 +878,7 @@
                 </tr>
                 <tr>
                   <td class="ps-4">
-                    689- Diğer Olağandışı Gider ve Zararlar (-)
+                    689- DİĞER OLAĞAN DIŞI GİDER VE ZARARLAR (-)
                   </td>
                   <ng-container
                     *ngFor="
@@ -906,7 +910,7 @@
                 <mat-icon class="align-self-center me-3" *ngIf="!toggle.show"
                   >expand_less</mat-icon
                 >
-                <span class="align-self-center">Dönem Kar veya Zarar</span>
+                <span class="align-self-center">DÖNEM KAR VEYA ZARAR</span>
               </div>
             </td>
             <ng-container
@@ -920,7 +924,9 @@
                   [value]="totalOfDonemKariVeyaZarar"
                 ></app-currency>
               </td>
-              <td>{{ percentageOfDonemKariVeyaZarari[i] }}%</td>
+              <td>
+                {{ percentageOfDonemKariVeyaZarari[i] | number: "2.2-2" }}%
+              </td>
             </ng-container>
           </tr>
           <tr *ngIf="toggle.show">
@@ -954,7 +960,7 @@
                 <mat-icon class="align-self-center me-3" *ngIf="!toggle.show"
                   >expand_less</mat-icon
                 >
-                <span class="align-self-center">Dönem Net Kar veya Zarar</span>
+                <span class="align-self-center">DÖNEM NET KAR VEYA ZARAR</span>
               </div>
             </td>
             <ng-container
@@ -968,7 +974,9 @@
                   [value]="totalOfDonemNetKariVeyaZarar"
                 ></app-currency>
               </td>
-              <td>{{ percentageOfDonemNetKariVeyaZarari[i] }}%</td>
+              <td>
+                {{ percentageOfDonemNetKariVeyaZarari[i] | number: "2.2-2" }}%
+              </td>
             </ng-container>
           </tr>
           <tr *ngIf="toggle.show">

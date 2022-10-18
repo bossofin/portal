@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://bossofin.dev.nanobase.tech:8081/bossofin',
+  apiUrl: 'http://46.196.126.241:8082/bossofin',
 };
 
 /*

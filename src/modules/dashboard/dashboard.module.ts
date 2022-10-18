@@ -19,6 +19,7 @@ import { SelectMonthModule } from '@shared-components/select-month/select-month.
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { DashboardApexChartComponent } from './components/dashboard-apex-chart/dashboard-apex-chart.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { NgxGaugeModule } from 'ngx-gauge';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     SelectMonthModule,
     NgApexchartsModule,
     MatTooltipModule,
+    NgxGaugeModule,
   ],
 })
 export class DashboardModule {}

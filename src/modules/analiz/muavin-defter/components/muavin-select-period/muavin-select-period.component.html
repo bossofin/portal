@@ -1,25 +1,27 @@
-<div class="d-flex">
-  <div>
+<div class="row">
+  <div class="col">
     <h5>Başlangıç</h5>
     <app-select-year (onChange)="onStartYearChange($event)"></app-select-year>
     <app-select-month
-      class="ms-2"
+      class="ms-lg-2"
       (onChange)="onStartMonthChange($event)"
     ></app-select-month>
   </div>
-  <div class="ms-3" *ngIf="selectedStartYear && selectedStartMonth">
-    <h5>Bitiş</h5>
-    <app-select-year
-      [startYear]="selectedStartYear"
-      (onChange)="onEndYearChange($event)"
-    ></app-select-year>
-    <app-select-month
-      class="ms-2"
-      [startMonth]="selectedStartMonth"
-      (onChange)="onEndMonthChange($event)"
-    ></app-select-month>
-    <button mat-mini-fab (click)="onSearchHandle()" class="ms-3">
-      <mat-icon>search</mat-icon>
-    </button>
+  <div class="col">
+    <div *ngIf="selectedStartYear && selectedStartMonth">
+      <h5>Bitiş</h5>
+      <app-select-year
+        [startYear]="selectedStartYear"
+        (onChange)="onEndYearChange($event)"
+      ></app-select-year>
+      <app-select-month
+        class="ms-lg-2"
+        [startMonth]="selectedStartMonth"
+        (onChange)="onEndMonthChange($event)"
+      ></app-select-month>
+      <button mat-mini-fab (click)="onSearchHandle()" class="ms-3 mb-3">
+        <mat-icon>search</mat-icon>
+      </button>
+    </div>
   </div>
 </div>

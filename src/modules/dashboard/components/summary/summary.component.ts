@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Company } from '@firmalar/mdoels/company.interface';
 import { GlobalStore } from '@store/global.store';
+import { NgxGaugeType } from 'ngx-gauge/gauge/gauge';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -16,6 +17,11 @@ export class SummaryComponent implements OnInit {
   score: number;
   profitAndDebit: number;
   company$: Observable<Company>;
+  gaugeType: NgxGaugeType = 'arch';
+  thresholdConfig = {
+    '0': { color: 'red' },
+    '50': { color: 'green' },
+  };
   constructor(globalStore: GlobalStore) {
     this.company$ = globalStore.selectedCompany$;
   }

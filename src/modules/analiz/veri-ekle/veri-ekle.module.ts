@@ -12,6 +12,8 @@ import { MatTableModule } from '@angular/material/table';
 import { NgxMaskModule } from 'ngx-mask';
 import { MatIconModule } from '@angular/material/icon';
 import { CurrencyModule } from '@shared-components/currency/currency.module';
+import { SelectYearModule } from '@shared-components/select-year/select-year.module';
+import { SelectMonthModule } from '@shared-components/select-month/select-month.module';
 
 @NgModule({
   declarations: [VeriEkleComponent],
@@ -26,6 +28,8 @@ import { CurrencyModule } from '@shared-components/currency/currency.module';
     MatTableModule,
     MatIconModule,
     CurrencyModule,
+    SelectYearModule,
+    SelectMonthModule,
     NgxMaskModule.forRoot(),
   ],
 })

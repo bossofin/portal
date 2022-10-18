@@ -22,20 +22,20 @@ export class DashboardComponent extends SelectCompany implements OnInit {
   public set chartsData(value: RaporApiResponse) {
     this._chartsData = value;
     if (this.chartsData) {
-      this.cariOran = [makeImmutable(this.chartsData.cariOran)];
       this.borcOdemeSuresi = [makeImmutable(this.chartsData.borcOdemeSuresi)];
-      this.aktifKarlilik = [makeImmutable(this.chartsData.aktifKarlilik)];
-      this.faaliyetGiderlerininNetSatislaraOrani = [
-        makeImmutable(this.chartsData.faaliyetGiderlerininNetSatislaraOrani),
+      this.stokDevirHizi = [makeImmutable(this.chartsData.stokDevirHizi)];
+      this.stokDevirSuresi = [makeImmutable(this.chartsData.stokDevirSuresi)];
+      this.netIsletmeSermayesi = [
+        makeImmutable(this.chartsData.netIsletmeSermayesi),
       ];
     }
   }
   profitAndDebitData: number;
   score: number;
-  cariOran: RaporItem[];
   borcOdemeSuresi: RaporItem[];
-  aktifKarlilik: RaporItem[];
-  faaliyetGiderlerininNetSatislaraOrani: RaporItem[];
+  stokDevirHizi: RaporItem[];
+  stokDevirSuresi: RaporItem[];
+  netIsletmeSermayesi: RaporItem[];
   constructor(
     private dashboardService: DashboardService,
     globalStore: GlobalStore
@@ -97,7 +97,7 @@ export class DashboardComponent extends SelectCompany implements OnInit {
   private setScore() {
     const values = Object.values(this.chartsData);
     let totalItem = 0;
-    const totalScore: number = values.reduce((prev, cur, index) => {
+    const totalStarCount: number = values.reduce((prev, cur, index) => {
       if (typeof cur === 'string') {
         return 0;
       } else {
@@ -105,6 +105,6 @@ export class DashboardComponent extends SelectCompany implements OnInit {
         return prev + cur.starRate;
       }
     }, 0);
-    this.score = totalScore / totalItem;
+    this.score = Math.round((100 * totalStarCount) / 115);
   }
 }
